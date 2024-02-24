@@ -99,7 +99,7 @@
                                                         </svg>
                                                     </button>
                                                 </div>
-                                                <div class="tooltip tooltip-top p-0" data-tip="Acessos">
+                                                {{-- <div class="tooltip tooltip-top p-0" data-tip="Acessos">
                                                     <a href="{{ route('user.access',$user->id) }}"
                                                         class="py-2 px-3 transition-colors flex
                                                     dark:hover:bg-teal-500 hover:hover:bg-teal-500
@@ -117,7 +117,7 @@
                                                         </g>
                                                     </svg>
                                                     </a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </td>
@@ -220,17 +220,17 @@
                         @enderror
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="user_groups_id" class="block text-sm font-medium text-gray-900 dark:text-white">
+                        <label for="group" class="block text-sm font-medium text-gray-900 dark:text-white">
                             Nível de acesso
                         </label>
-                        <select wire:model="user_groups_id"
+                        <select wire:model="group"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <option value="">Selecione uma opção</option>
-                            @foreach ($groups as $item)
-                                <option value="{{ $item->id }}">{{ $item->title }}</option>
-                            @endforeach
+                            <option value="super-admin">Super Admin</option>
+                            <option value="admin">Admin</option>
+                            <option value="user">Usuário</option>
                         </select>
-                        @error('user_groups_id')
+                        @error('group')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
@@ -286,17 +286,17 @@
                         @enderror
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="user_groups_id" class="block text-sm font-medium text-gray-900 dark:text-white">
+                        <label for="group" class="block text-sm font-medium text-gray-900 dark:text-white">
                             Nível de acesso
                         </label>
-                        <select wire:model="user_groups_id"
+                        <select wire:model="group"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <option value="">Selecione uma opção</option>
-                            @foreach ($groups as $item)
-                                <option value="{{ $item->id }}">{{ $item->title }}</option>
-                            @endforeach
+                            <option value="super-admin">Super Admin</option>
+                            <option value="admin">Admin</option>
+                            <option value="user">Usuário</option>
                         </select>
-                        @error('user_groups_id')
+                        @error('group')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>

@@ -1,18 +1,22 @@
 <?php
 
+use App\Livewire\Admin\Question\Filter\Filters;
 use App\Livewire\Admin\Configuration;
 use App\Livewire\Admin\ListUser;
 use App\Livewire\Admin\Panel;
 use App\Livewire\Admin\Dashboard\Master;
-use App\Livewire\Admin\Marketing\PageEmails;
-use App\Livewire\Admin\Marketing\SocialMedia;
-use App\Livewire\Admin\Marketing\Subscribers;
-use App\Livewire\Admin\Properties\Properties;
-use App\Livewire\Admin\PropertyConfigs\Features;
-use App\Livewire\Admin\PropertyConfigs\Finalities;
-use App\Livewire\Admin\PropertyConfigs\Types;
-use App\Livewire\Admin\Registers\Generals;
-use App\Livewire\Admin\UserAccesses;
+use App\Livewire\Admin\Question\Filter\Disciplines;
+use App\Livewire\Admin\Question\Filter\EducationAreas;
+use App\Livewire\Admin\Question\Filter\ExaminingBoards;
+use App\Livewire\Admin\Question\Filter\Institutions;
+use App\Livewire\Admin\Question\Filter\Levels;
+use App\Livewire\Admin\Question\Filter\Matters;
+use App\Livewire\Admin\Question\Filter\Modalities;
+use App\Livewire\Admin\Question\Filter\OccupationAreas;
+use App\Livewire\Admin\Question\Filter\Offices;
+use App\Livewire\Admin\Question\Filter\SubMatters;
+use App\Livewire\Admin\Voucher\Plan;
+use App\Livewire\Admin\Voucher\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +32,6 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-// Configurations pageAccess 11
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -58,71 +61,41 @@ Route::middleware([
     })->name('upload-editor');
 });
 
-// Configurations pageAccess 1
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
     'registerLogging',
-    'pagesAccess:1'
-])->group(function () {
-    Route::get('/configurações-da-página', Configuration::class)
-        ->name('configuration')
-        ->middleware('admin.access');
-    Route::get('/opções-finalidade', Finalities::class)
-        ->name('finality');
-    Route::get('/opções-tipo-do-imóvel', Types::class)
-        ->name('type');
-    Route::get('/opções-características-extras', Features::class)
-        ->name('features');
-});
-// Usuários pageAccess 2
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-    'registerLogging',
-    'pagesAccess:2'
 ])->group(function () {
     Route::get('/usuários', ListUser::class)
         ->name('list-users');
-    Route::get('/acessos-do-usuários/{user}', UserAccesses::class)
-        ->name('user.access');
-});
-// Cadastros pageAccess 3
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-    'registerLogging',
-    'pagesAccess:3'
-])->group(function () {
-    Route::get('/cadastros-geral', Generals::class)
-        ->name('general');
-});
-// Cadastros pageAccess 4
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-    'registerLogging',
-    'pagesAccess:4'
-])->group(function () {
-    Route::get('/imoveis', Properties::class)
-        ->name('property');
-});
-// Cadastros pageAccess 6
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-    'registerLogging',
-    'pagesAccess:6'
-])->group(function () {
-    Route::get('/mídias-sociais', SocialMedia::class)
-        ->name('social-media');
-    Route::get('/inscritos', Subscribers::class)
-        ->name('subscribers');
-    Route::get('/emails-recebidos', PageEmails::class)
-        ->name('emails');
+    Route::get('/planos', Plan::class)
+        ->name('plans');
+    Route::get('/vouchers', Voucher::class)
+        ->name('vouchers');
+    //Questions
+
+    //Filters
+    Route::get('/filtros', Filters::class)
+    ->name('filters');
+    Route::get('/filtros/áreas-de-atuação', OccupationAreas::class)
+    ->name('occupationArea');
+    Route::get('/filtros/áreas-de-formação', EducationAreas::class)
+    ->name('educationArea');
+    Route::get('/filtros/bancas', ExaminingBoards::class)
+    ->name('examiningBoard');
+    Route::get('/filtros/cargos', Offices::class)
+    ->name('office');
+    Route::get('/filtros/disciplinas', Disciplines::class)
+    ->name('discipline');
+    Route::get('/filtros/instituições', Institutions::class)
+    ->name('institution');
+    Route::get('/filtros/níveis-de-formação', Levels::class)
+    ->name('level');
+    Route::get('/filtros/matérias', Matters::class)
+    ->name('matter');
+    Route::get('/filtros/modalidades', Modalities::class)
+    ->name('modality');
+    Route::get('/filtros/sub-topicos-das-matérias', SubMatters::class)
+    ->name('subMatter');
 });

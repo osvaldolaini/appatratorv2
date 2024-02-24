@@ -9,7 +9,7 @@ class Panel extends Component
 {
     public function mount()
     {
-        if (Auth::user()->group->level < 10) {
+        if (Auth::user()->group == 'admin') {
             return redirect()->route('master-panel');
         }
     }

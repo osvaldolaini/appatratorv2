@@ -1,5 +1,5 @@
-<picture class="h-24" {{ $attributes }}>
-    <source srcset="{{ url('storage/crm/logo_small_text.png') }}" />
-    <source srcset="{{ url('storage/crm/logo_small_text.webp') }}" />
-    <img class="h-24" src="{{ url('storage/crm/logo_small_text.png') }}" alt="crm-imoveis">
+<picture class="h-24 " {{ $attributes }}>
+    <source srcset="{{ url('storage/atrator/atrator-apps-logo-principal-light.png') }}" />
+    <source srcset="{{ url('storage/atrator/atrator-apps-logo-principal-light.webp') }}" />
+    <img class="h-24 " src="{{ url('storage/atrator/atrator-apps-logo-principal-light.png') }}" alt="atrator">
 </picture>

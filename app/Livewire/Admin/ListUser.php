@@ -31,7 +31,7 @@ class ListUser extends Component
     public $name;
     public $email;
     public $password;
-    public $user_groups_id;
+    public $group;
     public $groups;
 
     protected $listeners =
@@ -41,15 +41,15 @@ class ListUser extends Component
         'showModalDelete'
     ];
 
-    public function mount()
-    {
-        $this->groups = UserGroups::get();
-    }
+    // public function mount()
+    // {
+    //     $this->groups = UserGroups::get();
+    // }
     public function render()
     {
-        if (Gate::allows('profile-user')) {
-            abort(403);
-        }
+        // if (Gate::allows('profile-user')) {
+        //     abort(403);
+        // }
         return view('livewire.admin.list-user', [
             'users' => User::paginate($this->paginate),
         ]);
@@ -60,7 +60,7 @@ class ListUser extends Component
             'name',
             'email',
             'password',
-            'user_groups_id',
+            'group',
         );
     }
     //CREATE
@@ -75,14 +75,14 @@ class ListUser extends Component
             'name'      => 'required',
             'email'     => 'required|email|unique:users',
             'password'  => 'required|string',
-            'user_groups_id'  => 'required',
+            'group'  => 'required',
         ];
         $this->validate();
         User::create([
             'name'      => $this->name,
             'email'     => $this->email,
             'password'  => Hash::make($this->password),
-            'user_groups_id'  => $this->user_groups_id,
+            'group'  => $this->group,
         ]);
 
         $this->openAlert('success', 'Registro criado com sucesso.');
@@ -117,7 +117,7 @@ class ListUser extends Component
         $this->model_id      = $user->id;
         $this->name          = $user->name;
         $this->email         = $user->email;
-        $this->user_groups_id      = $user->user_groups_id;
+        $this->group      = $user->group;
         $this->showModalEdit = true;
     }
     public function update()
@@ -125,7 +125,7 @@ class ListUser extends Component
         $this->rules = [
             'name'      => 'required',
             'email'     => 'required|email|'.Rule::unique('users')->ignore($this->model_id),
-            'user_groups_id'  => 'required',
+            'group'  => 'required',
         ];
 
         if ($this->password) {
@@ -141,7 +141,7 @@ class ListUser extends Component
         ], [
             'name'      => $this->name,
             'email'     => $this->email,
-            'user_groups_id'  => $this->user_groups_id,
+            'group'  => $this->group,
         ]);
 
         if ($this->password) {
