@@ -1,6 +1,6 @@
 @props(['url', 'active'])
 <div>
-    <a href="{{ route($url) }}"
+    <a href="{{route($url)}}"
         class="flex items-center justify-start w-full px-4 py-0 my-0
                     font-thin uppercase transition-colors duration-200
                     {{ Request::is($active)

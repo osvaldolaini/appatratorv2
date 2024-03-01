@@ -27,6 +27,7 @@ class Vouchers extends Model
         return LogOptions::defaults()
             ->logOnly($this->fillable);
     }
+
     /**
      * The attributes that should be cast.
      *
@@ -39,7 +40,7 @@ class Vouchers extends Model
     public function setActiveAttribute($value)
     {
         if ($this->user_id) {
-            $this->attributes['active']=mb_strtoupper($value);
+            $this->attributes['active']=$value;
             if ($value == 1) {
                 $this->limit_access = date('Y-m-d H:i:s',
                 strtotime('+'.$this->plan->qtd_days.' days',

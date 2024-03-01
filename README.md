@@ -5,7 +5,19 @@
 </p>
 
 # ATRATOR APP V2
-## V2 0.6
+## V2 0.8 ADMIN
+    Treinament
+    Essay
+    
+## V2 0.7 ADMIN
+    Questions
+        Lista
+        Nova
+        Editar
+        Alternativa
+        Resposta Correta (explicação)
+        
+## V2 0.6 ADMIN
     Usuários
     Voucher
         Vouchers

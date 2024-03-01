@@ -16,7 +16,7 @@ class Alternatives extends Model
     protected $table = 'alternatives';
 
     protected $fillable = [
-        'text', 'correct', 'status','question_id','qtd_clicks','code'
+        'text', 'correct', 'active','question_id','qtd_clicks','code'
     ];
     public function getActivitylogOptions(): LogOptions
     {

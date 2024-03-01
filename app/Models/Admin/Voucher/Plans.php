@@ -17,6 +17,10 @@ class Plans extends Model
     protected $fillable = [
         'title', 'unity', 'active','qtd','qtd_days','code','updated_by','created_by',
     ];
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title']=mb_strtoupper($value);
+    }
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

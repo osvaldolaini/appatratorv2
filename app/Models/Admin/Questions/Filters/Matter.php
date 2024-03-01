@@ -21,13 +21,14 @@ class Matter extends Model
     */
     public function setTitleAttribute($value)
     {
-        $this->attributes['title']=$value;
+        $this->attributes['title']=mb_strtoupper($value);
         $this->attributes['slug']=Str::slug($value);
     }
 
     protected $fillable = [
         'id','title', 'nick', 'slug','updated_by','created_by','active','order','discipline_id','code'
     ];
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

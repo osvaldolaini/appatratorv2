@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class Plan extends Component
 {
     use WithPagination;
-    public Plans $Plans;
+    public Plans $plans;
     public $breadcrumb = 'Planos';
 
     public $showJetModal = false;
