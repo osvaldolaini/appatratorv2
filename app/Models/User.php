@@ -4,8 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Models\Admin\UserAccess;
-use App\Models\Admin\UserGroups;
+use App\Models\Admin\Questions\Responses;
+use App\Models\Admin\Voucher\Vouchers;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -80,13 +80,28 @@ class User extends Authenticatable
             ->format('d/m/Y H:i:s');
     }
 
-    public function group():BelongsTo
+    public function responses(): HasMany
     {
-        return $this->belongsTo(UserGroups::class,'user_groups_id','id');
+        return $this->hasMany(Responses::class);
     }
 
-    public function access():HasMany
+    public function vouchers(): HasMany
     {
-        return $this->hasMany(UserAccess::class,'user_id','id');
+        return $this->hasMany(Vouchers::class);
     }
+
+    // public function contest(): HasOne
+    // {
+    //     return $this->hasOne(ContestUser::class,'user_id','id');
+    // }
+
+    // public function planning(): HasMany
+    // {
+    //     return $this->HasMany(ContestPlanningUser::class,'user_id','id');
+    // }
+    // public function cycle(): HasMany
+    // {
+    //     return $this->HasMany(ContestPlanningCyclesUser::class,'user_id','id');
+    // }
+
 }

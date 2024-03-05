@@ -135,5 +135,18 @@ class EssayUser extends Model
                 break;
         }
     }
+    public function getPointsAttribute()
+    {
+        $essayRatings = Rating::where('essay_user_id', $this->id)->get();
+        if ($essayRatings) {
+            $points = 0;
+            $pp = 0;
+            foreach ($essayRatings as $key) {
+                $points += $key->points;
+                $pp += $key->pivotEssay->points;
+            }
+            return $points . ' pts / max: ' . $pp . ' pts';
+        }
+    }
 
 }

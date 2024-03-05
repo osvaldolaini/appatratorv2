@@ -13,6 +13,7 @@ use App\Livewire\Admin\Essay\Skills;
 use App\Livewire\Admin\Essay\Topics;
 use App\Livewire\Admin\Essay\TopicsBase;
 use App\Livewire\Admin\Essay\TopicsProposal;
+use App\Livewire\User\Lobby;
 use App\Livewire\Admin\Mentoring\ContestDisciplines;
 use App\Livewire\Admin\Mentoring\ContestMatters;
 use App\Livewire\Admin\Mentoring\Contests;
@@ -35,6 +36,10 @@ use App\Livewire\Admin\Question\QuestionUpdate;
 use App\Livewire\Admin\Treinament\Exercises;
 use App\Livewire\Admin\Voucher\Plan;
 use App\Livewire\Admin\Voucher\Voucher;
+use App\Livewire\User\Apps\Essay\HomeEssay;
+use App\Livewire\User\Apps\Essay\MyEssays;
+use App\Livewire\User\Apps\Essay\ProposalTopic;
+use App\Livewire\User\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -135,4 +140,51 @@ Route::middleware([
     Route::get('/mentoria', Contests::class)->name('contests');
     Route::get('/mentoria/disciplinas/{contest}', ContestDisciplines::class)->name('contestDiscipline');
     Route::get('/mentoria/disciplinas/matérias/{contestDiscipline}', ContestMatters::class)->name('contestMatters');
+});
+
+//App
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'registerLogging'
+])->group(function () {
+    Route::get('/lobby', Lobby::class)->name('lobby');
+    Route::get('/meus-dados', UserProfile::class)->name('profile.user');
+
+    Route::get('/questões', Lobby::class)->name('apps.questions');
+    Route::get('/treinamento-físico', Lobby::class)->name('apps.treinaments');
+    Route::get('/mentoria', Lobby::class)->name('apps.mentorings');
+
+    Route::get('/app-de-redação', HomeEssay::class)->name('apps.essays');
+    Route::get('/app-de-redação/minhas-redações', MyEssays::class)->name('apps.user-essay');
+    Route::get('/app-de-redação/temas-propostos', ProposalTopic::class)->name('apps.proposal-topics');
+
+    // Route::get('/app-de-questoes', HomeQuestions::class)->name('apps.questions');
+    // Route::get('/app-de-questoes/home', Stats::class)->name('apps.stats');
+
+    // Route::get('/app-de-treinamento', SeasonController::class)->name('apps.treinaments');
+    // Route::get('/app-de-treinamento/concursos', SeasonController::class)->name('apps.season');
+    // Route::get('/app-de-treinamento/concursos/exercicios/{season}', SeasonExercises::class)->name('apps.season.exercises');
+    // Route::get('/app-de-treinamento/concursos/treino/{season}', SeasonTreinaments::class)->name('apps.season.treinaments');
+    // Route::get('/app-de-treinamento/concursos/novo-treino/{season}', Trainings::class)->name('apps.season.treining');
+    // Route::get('/app-de-treinamento/concursos/editar-treino/{seasonTreinament}', TrainingUpdate::class)->name('apps.season.treiningUpdate');
+    // Route::get('/app-de-treinamento/concursos/estatisticas/{season}', StatsTreinaments::class)->name('apps.season.stats');
+
+    // //mentoria
+    // Route::get('/app-de-mentoria', MentoringController::class)->name('apps.mentorings');
+    // Route::get('/meu-concurso', MentoringContestUser::class)->name('apps.contest.user');
+    // Route::get('/app-de-mentoria/redações', MentoringEssaysUser::class)->name('apps.contestEssays.user');
+    // Route::get('/app-de-mentoria/simulados', MentoringSimulatedsUser::class)->name('apps.contestSimulateds.user');
+    // Route::get('/app-de-mentoria/questões', MentoringQuestionsChart::class)->name('apps.contestQuestionsChart.user');
+    // Route::get('/app-de-mentoria/revisões', MentoringReviewsUser::class)->name('apps.contestReviews.user');
+    // Route::get('/app-de-mentoria/meu-planejamento', MentoringPlanningUser::class)->name('apps.contestPlanningUser.user');
+    // Route::get('/app-de-mentoria/meu-planejamento/{contestPlanningUser:code}', MentoringPlanningDailyUser::class)->name('apps.contestPlanningDailyUser.user');
+
+    // Route::get('/app-de-mentoria/planejamento-da-semana', MentoringPlanningWeekUser::class)->name('apps.contestPlanningWeekUser.user');
+    // Route::get('/app-de-mentoria/tarefas-diárias', MentoringPlanningTasksUser::class)->name('apps.contestPlanningTasksUser.user');
+    // Route::get('/app-de-mentoria/tarefas-diárias/{contestPlanningUser:code}', MentoringPlanningTasksUser::class)->name('apps.contestPlanningTaskUser.user');
+
+    // Route::get('/app-de-mentoria/planejamento-por-ciclo', MentoringPlanningCyclesUser::class)->name('apps.contestPlanningCyclesUser.user');
+    // Route::get('/app-de-mentoria/ciclo', MentoringControllerCycleUser::class)->name('apps.contestControllerCycleUser.user');
 });
