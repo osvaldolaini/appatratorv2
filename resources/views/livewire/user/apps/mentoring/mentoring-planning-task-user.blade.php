@@ -1,6 +1,5 @@
 <div >
-    <x-message-session></x-message-session>
-    @livewire('app.mentoring.mentoring-contest-user-bar', ['title' => $title, 'subTitle' => $day])
+    @livewire('user.apps.mentoring.mentoring-contest-user-bar', ['title' => $title, 'subTitle' => $day])
 
     <div class="bg-white dark:bg-gray-800 pt-3 ">
         <div class="flex flex-col items-center justify-between px-2 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
@@ -322,7 +321,7 @@
         </x-slot>
         <x-slot name="content">
             @if ($contentMatter)
-                @livewire('app.mentoring.mentoring-questions-user', ['matter' => $contentMatter, 'user' => $user_id, key($contentMatter->id)])
+                @livewire('user.apps.mentoring.mentoring-questions-user', ['matter' => $contentMatter, 'user' => $user_id, key($contentMatter->id)])
             @endif
         </x-slot>
         <x-slot name="footer">

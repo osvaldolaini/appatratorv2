@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
 use App\Models\Admin\Mentoring\Contest;
 use App\Models\Admin\Mentoring\ContestMatter;
-use App\Models\User\Mentoring\ContestReviews;
-use App\Models\User\Mentoring\ContestStatusMatter;
-use App\Models\User\Mentoring\ContestUser;
-
-use Illuminate\Support\Facades\Gate;
+use App\Models\Apps\Mentoring\ContestReviews;
+use App\Models\Apps\Mentoring\ContestStatusMatter;
+use App\Models\Apps\Mentoring\ContestUser;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Str;
@@ -34,15 +32,16 @@ class MentoringContestUser extends Component
     {
         $this->mentoringContestUser = ContestUser::with('contest')->where('user_id', Auth::user()->id)->first();
         if (!isset($this->mentoringContestUser)) {
-            $this->allContests = Contest::where('status',1)->get();
+            $this->allContests = Contest::where('active',1)->get();
         } else {
             $this->allContests = '';
         }
+
         $this->user_id = Auth::user()->id;
     }
     public function render()
     {
-        return view('livewire.app.mentoring.mentoring-contest-user')
+        return view('livewire.user.apps.mentoring.mentoring-contest-user')
             ->layout('layouts.' . $this->layout);
     }
     public function store()
@@ -85,11 +84,6 @@ class MentoringContestUser extends Component
             'day' => 'required',
         ];
         $this->validate();
-        $this->day = implode(
-            "-",
-            array_reverse(explode("/", $this->day))
-        );
-        // dd(Auth::user()->contest->contest_id);
         ContestReviews::create([
             'user_id'           => $this->user_id,
             'contest_matter_id' => $this->matter_id,

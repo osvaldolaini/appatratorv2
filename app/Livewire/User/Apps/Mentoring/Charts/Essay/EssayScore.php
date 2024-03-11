@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring\Charts\Essay;
+namespace App\Livewire\User\Apps\Mentoring\Charts\Essay;
 
-use App\Models\User\Mentoring\ContestEssays;
+use App\Models\Apps\Mentoring\ContestEssays;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -23,7 +23,7 @@ class EssayScore extends Component
 
         $this->labels = $myContestEssays->map(
             fn($rtn) => [
-                'day' => $rtn->dayMonth(),
+                'day' => $rtn->day,
             ]
         )->pluck('day')->toArray();
 
@@ -33,7 +33,7 @@ class EssayScore extends Component
 
     public function render()
     {
-        return view('livewire.app.mentoring.charts.essay.essay-score');
+        return view('livewire.user.apps.mentoring.charts.essay.essay-score');
 
     }
 }

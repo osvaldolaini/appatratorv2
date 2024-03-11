@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
-use App\Models\User\Mentoring\ContestUser;
+use App\Models\Apps\Mentoring\ContestUser;
 use Livewire\Component;
 
 use Illuminate\Support\Facades\Auth;
@@ -22,11 +22,14 @@ class MentoringKindStudyUser extends Component
     public function mount()
     {
         $this->contestUser = Auth::user()->contest;
-        $this->kindOfStudy = Auth::user()->contest->cycles;
+        if (Auth::user()->contest) {
+            $this->kindOfStudy = Auth::user()->contest->cycles;
+        }
+
     }
     public function render()
     {
-        return view('livewire.app.mentoring.mentoring-kind-study-user');
+        return view('livewire.user.apps.mentoring.mentoring-kind-study-user');
     }
 
     public function weekStudy()

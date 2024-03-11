@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\App\Treinaments;
+namespace App\Livewire\User\Apps\Treinaments;
 
 use Livewire\Component;
-use App\Models\Admin\Treinament\Training;
+use App\Models\Apps\Treinament\Training;
 
 class TrainingsComponent extends Component
 {
@@ -25,7 +25,7 @@ class TrainingsComponent extends Component
 
     public function render()
     {
-        return view('livewire.app.treinaments.trainings-component');
+        return view('livewire.user.apps.treinaments.trainings-component');
     }
 
     public function update()

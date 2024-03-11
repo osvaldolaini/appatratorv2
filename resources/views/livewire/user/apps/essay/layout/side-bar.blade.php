@@ -5,12 +5,11 @@
             <div class="min-h-80 bg-white rounded-2xl dark:bg-gray-700 py-2">
                 <nav class="mt-3">
                     <div>
-
                         <span
                             class="text-gray-600
                                 flex items-center justify-start w-full px-4 py-0 my-0 mb-1
                                 text-sm transition-colors duration-200 font-bold">
-                            App de Redações
+                            Redações
                         </span>
                         <div class="flex mx-2 items-center pt-1 flex-nowrap border-t border-gray-200"></div>
                         <div class="py-1">
@@ -28,18 +27,17 @@
                             </x-link-simple>
                         </div>
                         <div class="py-1">
-                            <x-link-simple url="vouchers" active="*vouchers*">
+                            <x-link-simple url="apps.essays" active="*app-de-redação">
                                 <span class="text-left">
-                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"
+                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 2048 1792"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
-                                            d="M12 16H12.01M12 12H12.01M12 8H12.01M21 14V17C21 18.1046 20.1046 19 19 19H5C3.89543 19 3 18.1046 3 17V14C4.10457 14 5 13.1046 5 12C5 10.8954 4.10457 10 3 10V7C3 5.89543 3.89543 5 5 5H19C20.1046 5 21 5.89543 21 7V10C19.8954 10 19 10.8954 19 12C19 13.1046 19.8954 14 21 14Z"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" />
+                                            d="M1070 1178l306-564h-654l-306 564h654zm722-282q0 182-71 348t-191 286-286 191-348 71-348-71-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z">
+                                        </path>
                                     </svg>
                                 </span>
                                 <span class="mx-4 text-sm font-normal">
-                                    Meus Vouchers
+                                    Dashboard
                                 </span>
                             </x-link-simple>
                         </div>
@@ -114,7 +112,7 @@
                             font-thin uppercase transition-colors duration-200
                             {{ Request::is('*profile*')
                                 ? 'bg-gradient-to-r from-white to-blue-100
-                                                                                                                                                                                                                                                                                                                                                                                dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
+                                                                                                                                                                                                                                                                                                                                                                                                            dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
                                 : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }} sm:hidden">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -135,7 +133,7 @@
                             font-thin uppercase transition-colors duration-200
                             {{ Request::is('profile*')
                                 ? 'bg-gradient-to-r from-white to-blue-100
-                                                                                                                                                                                                                                                                                                                                                                                                                                    dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
                                 : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}
                             sm:hidden">
                                 <span class="text-left">

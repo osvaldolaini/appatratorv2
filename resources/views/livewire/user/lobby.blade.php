@@ -1,10 +1,10 @@
 <div class="w-100 pt-3 sm:rounded-lg">
 
-    <div  class="flex flex-wrap sm:justify-around">
+    <div class="flex flex-wrap sm:justify-around">
         <div class="max-w-full">
-            <h1 class="text-5xl font-extrabold dark:text-white text-center" >
+            <h1 class="text-5xl font-extrabold dark:text-white text-center">
                 <small class="ml-2 font-semibold text-gray-500 dark:text-gray-400">
-                Plataformas </small>
+                    Plataformas </small>
             </h1>
             <x-app-carousel-cards qtd="{{ $vouchers->count() }}">
                 {{-- <x-app-carousel-cards qtd="4"> --}}
@@ -25,10 +25,12 @@
                 @endforeach
             </x-app-carousel-cards>
         </div>
+    </div>
+    <div class="flex flex-wrap sm:justify-around">
         <div class="max-w-full">
             <h1 class="text-5xl font-extrabold dark:text-white text-center">
                 <small class="ml-2 font-semibold text-gray-500 dark:text-gray-400">
-                Cursos</small>
+                    Cursos</small>
             </h1>
             <x-app-carousel-cards qtd="1">
                 <x-app-card-comming item="1"></x-app-card-comming>

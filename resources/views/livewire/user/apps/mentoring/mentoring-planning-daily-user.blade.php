@@ -1,6 +1,5 @@
 <div>
-    <x-message-session></x-message-session>
-    @livewire('app.mentoring.mentoring-contest-user-bar', ['title' => 'Meu planejamento','subTitle'=>$contestPlanningUser->dayWeek()])
+    @livewire('user.apps.mentoring.mentoring-contest-user-bar', ['title' => 'Meu planejamento','subTitle'=>$contestPlanningUser->dayWeek()])
     <div class="bg-white  dark:bg-gray-900 pt-3 ">
         <div class="flex flex-col items-center justify-between px-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
             <div

@@ -1,6 +1,5 @@
 <div >
-    <x-message-session></x-message-session>
-    @livewire('app.mentoring.mentoring-contest-user-bar', ['title' => $title, 'subTitle' => $day])
+    @livewire('user.apps.mentoring.mentoring-contest-user-bar', ['title' => $title, 'subTitle' => $day])
 
     <div class="bg-white dark:bg-gray-800 pt-3 ">
         <div class="flex flex-col items-center justify-between px-2 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
@@ -9,7 +8,7 @@
                     <details tabindex="0"
                         class="{{ $planning->dayweek() == $day ? 'collapse collapse-open' : 'collapse ' }} text-gray-600 bg-gray-100
                             rounded-md col-span-1 shadow-md pb-0 mb-0
-                            dark:bg-gray-900 dark:bg-gray-200 ">
+                             dark:bg-gray-200 ">
                         <summary class="collapse-title rounded-t-md text-xl font-medium p-4 text-[#fddb11] dark:text-gray-200 dark:bg-gray-900
                         bg-gradient-to-r from-[#210c75] from-30% via-blue-500 via-80% to-sky-600 to-90%
                         ">
@@ -322,7 +321,7 @@
         </x-slot>
         <x-slot name="content">
             @if ($contentMatter)
-                @livewire('app.mentoring.mentoring-questions-user', ['matter' => $contentMatter, 'user' => $user_id, key($contentMatter->id)])
+                @livewire('user.apps.mentoring.mentoring-questions-user', ['matter' => $contentMatter, 'user' => $user_id, key($contentMatter->id)])
             @endif
         </x-slot>
         <x-slot name="footer">

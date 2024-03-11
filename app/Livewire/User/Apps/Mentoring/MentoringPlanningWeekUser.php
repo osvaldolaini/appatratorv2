@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
-use App\Models\User\Mentoring\ContestPlanningDailyUser;
-use App\Models\User\Mentoring\ContestPlanningUser;
+use App\Models\Apps\Mentoring\ContestPlanningDailyUser;
+use App\Models\Apps\Mentoring\ContestPlanningUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -53,7 +53,7 @@ class MentoringPlanningWeekUser extends Component
 
     public function render()
     {
-        return view('livewire.app.mentoring.mentoring-planning-week-user')
+        return view('livewire.user.apps.mentoring.mentoring-planning-week-user')
             ->layout('layouts.' . $this->layout);
     }
     //CREATE

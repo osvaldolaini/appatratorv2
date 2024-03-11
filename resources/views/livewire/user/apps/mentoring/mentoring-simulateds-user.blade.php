@@ -1,6 +1,5 @@
 <div class="dark:text-white dark:bg-gray-900">
-    <x-message-session></x-message-session>
-    @livewire('app.mentoring.mentoring-contest-user-bar', ['title' => 'Simulados'])
+    @livewire('user.apps.mentoring.mentoring-contest-user-bar', ['title' => 'Simulados'])
     <div class="bg-white  pt-3 ">
         <div class="flex flex-col items-center justify-between px-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
             <div
@@ -26,7 +25,7 @@
             <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="grid grid-cols-6 gap-1 mx-5">
                     <div class="col-span-6 mb-2">
-                        @livewire('app.mentoring.charts.simulated.simulated-score')
+                        @livewire('user.apps.mentoring.charts.simulated.simulated-score')
                     </div>
                     <div class="col-span-6 inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="card w-full  shadow-xl  mb-20">

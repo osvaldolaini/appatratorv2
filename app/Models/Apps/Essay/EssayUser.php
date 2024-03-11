@@ -11,9 +11,13 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 class EssayUser extends Model
 {
     use HasFactory;
+    use LogsActivity;
 
     protected $table = 'essay_users';
 
@@ -25,6 +29,11 @@ class EssayUser extends Model
         'send_at' => 'datetime:Y-m-d H:i:s',
         'upload_rating_at' => 'datetime:Y-m-d H:i:s',
     ];
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly($this->fillable);
+    }
 
     public function setPerformedAtAttribute($value)
     {

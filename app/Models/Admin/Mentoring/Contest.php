@@ -60,6 +60,10 @@ class Contest extends Model
                 ->format('d/m/Y');
         }
     }
+    public function getLimitAttribute()
+    {
+            return implode("-", array_reverse(explode("/", $this->day)));
+    }
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

@@ -1,5 +1,4 @@
 <div class="w-100">
-    <x-message-session></x-message-session>
     <div class="bg-white dark:bg-gray-800 pt-3 ">
         <div class="flex flex-col items-center justify-between px-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
             <div
@@ -64,7 +63,7 @@
                                         <td scope="col"
                                             class="py-0 pl-5 text-sm
                                                     font-normal text-gray-700 text-left">
-                                            {{ convertOnlyDate($item->day) }}
+                                                    {{ convertOnlyDate($item->day) }}
                                         </td>
 
                                         <td scope="col"

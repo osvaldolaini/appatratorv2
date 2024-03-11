@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
 use App\Models\Admin\Mentoring\Contest;
-use App\Models\User\Mentoring\ContestReviews;
-use App\Models\User\Mentoring\ContestUser;
+use App\Models\Apps\Mentoring\ContestReviews;
+use App\Models\Apps\Mentoring\ContestUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
@@ -40,7 +40,7 @@ class MentoringReviewsUser extends Component
     }
     public function render()
     {
-        return view('livewire.app.mentoring.mentoring-reviews-user')
+        return view('livewire.user.apps.mentoring.mentoring-reviews-user')
         ->layout('layouts.' . $this->layout);
     }
     public function showModal($id)

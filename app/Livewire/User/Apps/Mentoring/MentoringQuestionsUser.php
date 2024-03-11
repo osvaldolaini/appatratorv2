@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
-use App\Models\User\Mentoring\ContestQuestions;
+use App\Models\Apps\Mentoring\ContestQuestions;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -53,7 +53,7 @@ class MentoringQuestionsUser extends Component
         ->where('contest_matter_id',$this->matter_id)
         ->orderBy('day', 'desc')->paginate(5);
 
-        return view('livewire.app.mentoring.mentoring-questions-user',
+        return view('livewire.user.apps.mentoring.mentoring-questions-user',
         [
                 'questions'      => $questions,
             ]);

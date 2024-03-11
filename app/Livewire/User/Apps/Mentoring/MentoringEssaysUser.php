@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
-use App\Models\User\Mentoring\ContestEssays;
+use App\Models\Apps\Mentoring\ContestEssays;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -47,8 +47,7 @@ class MentoringEssaysUser extends Component
             ->where('user_id', $this->user_id)
             ->orderBy('day', 'desc')->orderBy('id', 'desc')->paginate(5);
 
-        return view(
-            'livewire.app.mentoring.mentoring-essays-user',
+        return view('livewire.user.apps.mentoring.mentoring-essays-user',
             [
                 'data'      => $data,
             ]
@@ -78,10 +77,7 @@ class MentoringEssaysUser extends Component
             'mark' => 'required|max:5',
             'day' => 'required',
         ];
-        $this->day = implode(
-            "-",
-            array_reverse(explode("/", $this->day))
-        );
+
         ContestEssays::create([
             'day'       => $this->day,
             'full_mark' => $this->full_mark,
@@ -101,7 +97,7 @@ class MentoringEssaysUser extends Component
     public function showModalEdit(ContestEssays $contestEssays)
     {
         $this->model_id     = $contestEssays->id;
-        $this->day          = convertOnlyDate($contestEssays->day);
+        $this->day          = $contestEssays->day;
         $this->full_mark    = $contestEssays->full_mark;
         $this->mark         = $contestEssays->mark;
         $this->showModalEdit = true;

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
-use App\Models\User\Mentoring\ContestPlanningDailyUser;
-use App\Models\User\Mentoring\ContestPlanningUser;
+use App\Models\Apps\Mentoring\ContestPlanningDailyUser;
+use App\Models\Apps\Mentoring\ContestPlanningUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -50,7 +50,7 @@ class MentoringPlanningDailyUser extends Component
     }
     public function render()
     {
-        return view('livewire.app.mentoring.mentoring-planning-daily-user')
+        return view('livewire.user.apps.mentoring.mentoring-planning-daily-user')
             ->layout('layouts.' . $this->layout);
     }
     public function time_left($times)

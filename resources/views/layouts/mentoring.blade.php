@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <x-favicons></x-favicons>
-    <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    <x-favicons-atrator></x-favicons-atrator>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -15,45 +15,58 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    @yield('styles')
-    <style>
-        [x-cloak] {
-            display: none !important;
-        }
-    </style>
-
     <!-- Styles -->
     @livewireStyles
+    @yield('styles')
+    <style>
+        .ck-editor__editable_inline {
+            min-height: 400px;
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-white dark:text-gray-200 dark:bg-gray-900 ">
-        <x-app-header></x-app-header>
-        <div>
-            <main class="pt-24 max-h-screen overflow-auto">
-                @if (Auth::user()->contest)
-                    @if (Auth::user()->contest->cycles == 0)
-                        <x-app-side-bar-mentoring-week>
-                            {{ $slot }}
-                        </x-app-side-bar-mentoring-week>
-                    @else
-                        <x-app-side-bar-mentoring-cycle>
-                            {{ $slot }}
-                        </x-app-side-bar-mentoring-cycle>
-                    @endif
-                @else
-                    <x-app-side-bar-mentoring-week>
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        @livewire('user.navbar')
+
+        @livewire('message-alert')
+
+        <!-- Page Content -->
+        <main>
+            <div class="drawer lg:drawer-open">
+                <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+                <div class="drawer-content">
+                    <!-- Page content here -->
+                    <div class=" m-3 sm:m-4 sm:p-5
+                        bg-white rounded-2xl dark:bg-gray-700">
                         {{ $slot }}
-                    </x-app-side-bar-mentoring-week>
-                @endif
+                    </div>
+                </div>
+                <div class="drawer-side">
+                    <label for="my-drawer-3" class="drawer-overlay"></label>
+                    @if (Auth::user()->contest)
+                        @if (Auth::user()->contest->cycles == 0)
+                        @livewire('user.apps.mentoring.layout.side-bar-week')
+                        @else
+                        @livewire('user.apps.mentoring.layout.side-bar-cycle')
 
-            </main>
-        </div>
+                        @endif
+                    @else
+                    @livewire('user.apps.mentoring.layout.side-bar-week')
+                    @endif
+
+                </div>
+            </div>
+        </main>
     </div>
-    @stack('modals')
-    @livewireScripts
 
+    @stack('modals')
+
+
+    @livewireScripts
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
     @yield('scripts')
+    @yield('push')
 </body>
 
 </html>

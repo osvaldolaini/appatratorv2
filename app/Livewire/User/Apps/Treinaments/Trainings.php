@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Livewire\App\Treinaments;
+namespace App\Livewire\User\Apps\Treinaments;
 
-use App\Models\Admin\Treinament\Season;
-use App\Models\Admin\Treinament\SeasonExercise;
-use App\Models\Admin\Treinament\SeasonTreinament;
+use App\Models\Apps\Treinament\Season;
+use App\Models\Apps\Treinament\SeasonExercise;
+use App\Models\Apps\Treinament\SeasonTreinament;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-use App\Models\Admin\Treinament\Training;
+use App\Models\Apps\Treinament\Training;
 use Illuminate\Support\Facades\Auth;
 
 class Trainings extends Component

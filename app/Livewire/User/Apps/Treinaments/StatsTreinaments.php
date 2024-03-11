@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\App\Treinaments;
+namespace App\Livewire\User\Apps\Treinaments;
 
+use App\Models\Apps\Treinament\Season;
+use App\Models\Apps\Treinament\SeasonTreinament;
+use App\Models\Apps\Treinament\Training;
 use App\Models\Admin\Treinament\Exercise;
-use App\Models\Admin\Treinament\Season;
-use App\Models\Admin\Treinament\SeasonTreinament;
-use App\Models\Admin\Treinament\Training;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -93,6 +93,6 @@ class StatsTreinaments extends Component
 
     public function render()
     {
-        return view('livewire.app.treinaments.stats')->layout('layouts.' . $this->layout);
+        return view('livewire.user.apps.treinaments.stats')->layout('layouts.' . $this->layout);
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\App\Treinaments;
+namespace App\Livewire\User\Apps\Treinaments;
 
-use App\Models\Admin\Treinament\Season;
-use App\Models\Admin\Treinament\SeasonTreinament;
-use App\Models\Admin\Treinament\SeasonExercise;
-use App\Models\Admin\Treinament\Training;
+use App\Models\Apps\Treinament\Season;
+use App\Models\Apps\Treinament\SeasonTreinament;
+use App\Models\Apps\Treinament\SeasonExercise;
+use App\Models\Apps\Treinament\Training;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -28,6 +28,7 @@ class SeasonTreinaments extends Component
      public $registerId;
      public $alertSession = false;
      public $selectFilter = 'id';
+     public $season_title;
 
      public $detail;
         public $heads;
@@ -49,13 +50,14 @@ class SeasonTreinaments extends Component
     public function mount(Season $season)
     {
         $this->season_id = $season->id;
+        $this->season_title = $season->title;
         $this->seasonTreinaments = SeasonTreinament::where('status',1)
         ->where('season_id',$this->season_id)
         ->where('user_id',Auth::user()->id)
         ->get();
 
         $this->vouchers = Auth::user()->vouchers
-                        ->where('status',1)
+                        ->where('active',1)
                         ->where('limit_access','>=', date('Y-m-d h:i:s'));
         foreach ($this->vouchers as $voucher) {
             if ($voucher->application == 'treinament'){
@@ -71,7 +73,7 @@ class SeasonTreinaments extends Component
         ->where('user_id',Auth::user()->id)
         ->get();
         // Gate::authorize('user');
-        return view('livewire.app.treinaments.season-treinament')->layout('layouts.' . $this->layout);
+        return view('livewire.user.apps.treinaments.season-treinament')->layout('layouts.' . $this->layout);
     }
     //CREATE
     public function showModalCreate()
@@ -116,7 +118,7 @@ class SeasonTreinaments extends Component
            $data = SeasonTreinament::where('id',$id)->first();
            // dd($data);
            $this->detail = [
-               'Data'     => convertOnlyDate($data->day),
+               'Data'     => $data->day,
            ];
            $seasonExercises = Training::where('season_treinament_id',$data->id)
            ->get();

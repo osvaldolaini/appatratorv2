@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
 use App\Models\Admin\Mentoring\ContestMatter;
-use App\Models\User\Mentoring\ContestPlanningTasksUser;
-use App\Models\User\Mentoring\ContestUser;
-use App\Models\User\Mentoring\ContestReviews;
-use App\Models\User\Mentoring\ContestStatusMatter;
+use App\Models\Apps\Mentoring\ContestPlanningTasksUser;
+use App\Models\Apps\Mentoring\ContestUser;
+use App\Models\Apps\Mentoring\ContestReviews;
+use App\Models\Apps\Mentoring\ContestStatusMatter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -63,10 +63,10 @@ class MentoringPlanningTasksUser extends Component
     public function render()
     {
         if (isset($this->contestPlanningUser)) {
-            return view('livewire.app.mentoring.mentoring-planning-task-user')
+            return view('livewire.user.apps.mentoring.mentoring-planning-task-user')
             ->layout('layouts.' . $this->layout);
         }else{
-            return view('livewire.app.mentoring.mentoring-planning-tasks-user')
+            return view('livewire.user.apps.mentoring.mentoring-planning-tasks-user')
             ->layout('layouts.' . $this->layout);
         }
 

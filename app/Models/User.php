@@ -6,6 +6,9 @@ namespace App\Models;
 
 use App\Models\Admin\Questions\Responses;
 use App\Models\Admin\Voucher\Vouchers;
+use App\Models\Apps\Mentoring\ContestPlanningCyclesUser;
+use App\Models\Apps\Mentoring\ContestPlanningUser;
+use App\Models\Apps\Mentoring\ContestUser;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -90,18 +93,18 @@ class User extends Authenticatable
         return $this->hasMany(Vouchers::class);
     }
 
-    // public function contest(): HasOne
-    // {
-    //     return $this->hasOne(ContestUser::class,'user_id','id');
-    // }
+    public function contest(): HasOne
+    {
+        return $this->hasOne(ContestUser::class,'user_id','id');
+    }
 
-    // public function planning(): HasMany
-    // {
-    //     return $this->HasMany(ContestPlanningUser::class,'user_id','id');
-    // }
-    // public function cycle(): HasMany
-    // {
-    //     return $this->HasMany(ContestPlanningCyclesUser::class,'user_id','id');
-    // }
+    public function planning(): HasMany
+    {
+        return $this->HasMany(ContestPlanningUser::class,'user_id','id');
+    }
+    public function cycle(): HasMany
+    {
+        return $this->HasMany(ContestPlanningCyclesUser::class,'user_id','id');
+    }
 
 }

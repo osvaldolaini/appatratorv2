@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
 use App\Models\Admin\Mentoring\ContestDiscipline;
-use App\Models\User\Mentoring\ContestQuestions;
+use App\Models\Apps\Mentoring\ContestQuestions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
@@ -58,7 +58,7 @@ class MentoringQuestionsChart extends Component
             $this->hits[] = $h;
             $this->qtds[] = $q;
         }
-        return view('livewire.app.mentoring.mentoring-questions-chart')
+        return view('livewire.user.apps.mentoring.mentoring-questions-chart')
         ->layout('layouts.' . $this->layout);
     }
 }

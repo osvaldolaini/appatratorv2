@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
-use App\Models\User\Mentoring\ContestSimulated;
+use App\Models\Apps\Mentoring\ContestSimulated;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -50,8 +50,7 @@ class MentoringSimulatedsUser extends Component
         $data = DB::table('contest_simulateds')
             ->where('user_id', $this->user_id)
             ->orderBy('day', 'desc')->paginate(5);
-        return view('livewire.app.mentoring.mentoring-simulateds-user',
-        [
+        return view('livewire.user.apps.mentoring.mentoring-simulateds-user',[
             'data'      => $data,
         ])
             ->layout('layouts.' . $this->layout);
@@ -84,10 +83,7 @@ class MentoringSimulatedsUser extends Component
             'grade'     => 'required|max:5',
             'day'       => 'required',
         ];
-        $this->day = implode(
-            "-",
-            array_reverse(explode("/", $this->day))
-        );
+
         ContestSimulated::create([
             'day'       => $this->day,
             'qtd'       => $this->qtd,
@@ -111,7 +107,7 @@ class MentoringSimulatedsUser extends Component
     public function showModalEdit(ContestSimulated $contestSimulated)
     {
         $this->model_id = $contestSimulated->id;
-        $this->day      = convertOnlyDate($contestSimulated->day);
+        $this->day      = $contestSimulated->day;
         $this->qtd      = $contestSimulated->qtd;
         $this->hits     = $contestSimulated->hits;
         $this->blanks   = $contestSimulated->blanks;
@@ -132,10 +128,7 @@ class MentoringSimulatedsUser extends Component
             'day'       => 'required',
         ];
         $this->validate();
-        $this->day = implode(
-            "-",
-            array_reverse(explode("/", $this->day))
-        );
+
         ContestSimulated::updateOrCreate([
             'id' => $this->model_id,
         ], [

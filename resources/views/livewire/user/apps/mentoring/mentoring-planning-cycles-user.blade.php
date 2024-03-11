@@ -1,6 +1,5 @@
 <div>
-    <x-message-session></x-message-session>
-    @livewire('app.mentoring.mentoring-contest-user-bar', ['title' => 'Meu planejamento'])
+    @livewire('user.apps.mentoring.mentoring-contest-user-bar', ['title' => 'Meu planejamento'])
     <div class="bg-white dark:bg-gray-800 pt-3 ">
         <div class="flex flex-col items-center justify-between px-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
             <div
@@ -112,7 +111,7 @@
     </x-confirmation-modal>
 
     {{-- MODAL CREATE --}}
-    <x-dialog-modal wire:model="showModalCreate" class="mt-0">
+    <x-dialog-modal wire:model="modalCreate" class="mt-0">
         <x-slot name="title">Criar novo</x-slot>
         <x-slot name="content">
             <form action="#" wire:submit.prevent="store()" wire.loading.attr='disable'>
@@ -177,13 +176,13 @@
 
         </x-slot>
         <x-slot name="footer">
-            <x-secondary-button wire:click="$toggle('showModalCreate')" class="mx-2">
+            <x-secondary-button wire:click="$toggle('modalCreate')" class="mx-2">
                 Fechar
             </x-secondary-button>
         </x-slot>
     </x-dialog-modal>
     {{-- MODAL UPDATE --}}
-    <x-dialog-modal wire:model="showModalEdit">
+    <x-dialog-modal wire:model="modalEdit">
         <x-slot name="title">Editar</x-slot>
         <x-slot name="content">
             <form wire:submit.prevent="update">
@@ -247,7 +246,7 @@
             </form>
         </x-slot>
         <x-slot name="footer">
-            <x-primary-button wire:click="$toggle('showModalEdit')" class="mx-2">
+            <x-primary-button wire:click="$toggle('modalEdit')" class="mx-2">
                 Fechar
                 </x-secondary-button>
         </x-slot>

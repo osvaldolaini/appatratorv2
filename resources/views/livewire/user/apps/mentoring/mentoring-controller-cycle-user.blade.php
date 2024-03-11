@@ -1,19 +1,17 @@
 <div>
-    <x-message-session></x-message-session>
-    @livewire('app.mentoring.mentoring-contest-user-bar', ['title' => 'Meu ciclo'])
+    @livewire('user.apps.mentoring.mentoring-contest-user-bar', ['title' => 'Meu ciclo'])
     <div class=" bg-white dark:bg-gray-800 my-6 px-4">
         <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
             @if ($planningCycleUser->count() > 0)
                 <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 mx-5 px-2 pb-48" wire:model="{{ $planningCycleUser }}">
                     @foreach ($planningCycleUser->sortBy('order') as $item)
                         <div class="col-span-1 ">
-                            <div
-                                class="w-full border-inherit bg-neutral-100
+                            <div class="w-full border-inherit bg-neutral-100
                             text-base-100 dark:text-gray-300 dark:bg-base-100 text-sm rounded-md pb-0.5">
                                 <div class="card-body p-1.5 gap-0 w-full">
-                                    <h2 class="card-title ">{{ $item->discipline->title }}</h2>
+                                    <h2 class="card-title text-gray-900 ">{{ $item->discipline->title }}</h2>
                                     <div class="flex">
-                                        <p class="py-0 flex">
+                                        <p class="py-0 flex text-gray-900 ">
                                             <svg class="h-4 w-4 mr-1" viewBox="0 0 20 20"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path fill="currentColor" fill-rule="evenodd"
@@ -23,7 +21,7 @@
                                         </p>
                                         <div class="tooltip tooltip-top p-0" data-tip="Inserir">
                                             <button wire:click="createCycle({{ $item->id }})"
-                                                class="flex items-center justify-center w-1/2 px-5
+                                                class="flex items-center justify-center w-1/2
                                             py-1 px-2 text-sm tracking-wide text-white transition-colors
                                             duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2
                                             hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">

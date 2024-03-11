@@ -1,6 +1,5 @@
 <div >
-    <x-message-session></x-message-session>
-    @livewire('app.mentoring.mentoring-contest-user-bar', ['title' => 'Revisões'])
+    @livewire('user.apps.mentoring.mentoring-contest-user-bar', ['title' => 'Revisões'])
     @if (empty($allContests))
         <div class="max-w-7xl mx-auto pb-10 pt-5 sm:px-6 lg:px-8 rounded-md" wire:model="{{ $mentoringContestUser }}">
             <div class="mt-10 sm:mt-0 rounded-md">
@@ -46,7 +45,7 @@
                                                 <div class="flex flex-row ml-2">
                                                     @foreach ($mentoringContestUser->reviews($matter->id,$mentoringContestUser->id) as $item)
                                                         <div class="badge badge-outline badge-error gap-1" >
-                                                            {{ $item->dayMonth() }}
+                                                            {{ $item->day }}
                                                             <svg wire:click="showModal({{ $item->id }})" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-4 h-4 stroke-current cursor-pointer"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                                                         </div>
                                                     @endforeach

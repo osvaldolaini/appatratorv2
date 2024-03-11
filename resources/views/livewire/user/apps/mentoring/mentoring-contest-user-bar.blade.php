@@ -12,7 +12,7 @@
                             <h2 class="flex text-lg font-bold py-1">
                                 {{-- <button wire:click="cycleStudy" class="btn btn-outline btn-accent"> --}}
                                 <button class="btn btn-outline btn-accent">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-75 opacity-100 group-hover:opacity-0"
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 opacity-75  group-hover:opacity-0"
                                         fill="currentColor" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <g id="Layer_1" />
@@ -48,7 +48,7 @@
                     </div>
                     <div class="mt-5 md:mt-0 col-span-2 mx-2 sm:mx-0 w-full">
                         <div
-                            class="w-full px-4 py-2.5 shadow-xl sm:p-6 bg-[#210c75]  shadow rounded-lg">
+                            class="w-full px-4 py-2.5 shadow-xl sm:p-6 bg-[#210c75] rounded-lg">
                             <div class="col-span-1 flex justify-between ">
                                 <div class="px-4 sm:px-0 w-full">
 

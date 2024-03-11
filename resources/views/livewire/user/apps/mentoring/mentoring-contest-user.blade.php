@@ -1,5 +1,5 @@
 <div >
-    <x-message-session></x-message-session>
+
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
         <div class="mt-10 sm:mt-0">
             <div class='md:grid md:grid-cols-3 md:gap-6'>
@@ -8,7 +8,7 @@
                         <h3 class="text-lg font-medium text-gray-900 dark:text-white">Meu curso</h3>
 
                         @if (empty($allContests))
-                        <p>@livewire('app.mentoring.mentoring-kind-study-user')</p>
+                        <p>@livewire('user.apps.mentoring.mentoring-kind-study-user')</p>
                         @endif
                         @if (!empty($allContests))
                             <p class="mt-1 text-sm text-gray-600 dark:text-white">

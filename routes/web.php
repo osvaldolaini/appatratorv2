@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Livewire\Admin\Question\Filter\Filters;
 use App\Livewire\Admin\Configuration;
 use App\Livewire\Admin\ListUser;
@@ -39,6 +38,26 @@ use App\Livewire\Admin\Voucher\Voucher;
 use App\Livewire\User\Apps\Essay\HomeEssay;
 use App\Livewire\User\Apps\Essay\MyEssays;
 use App\Livewire\User\Apps\Essay\ProposalTopic;
+use App\Livewire\User\Apps\Mentoring\MentoringContestUser;
+use App\Livewire\User\Apps\Treinaments\ListExercises;
+use App\Livewire\User\Apps\Treinaments\SeasonExercises;
+use App\Livewire\User\Apps\Treinaments\SeasonTreinaments;
+use App\Livewire\User\Apps\Treinaments\SeasonUser;
+use App\Livewire\User\Apps\Treinaments\StatsTreinaments;
+use App\Livewire\User\Apps\Treinaments\Trainings;
+use App\Livewire\User\Apps\Treinaments\TrainingUpdate;
+use App\Livewire\User\Apps\Mentoring\MentoringController;
+use App\Livewire\User\Apps\Mentoring\MentoringControllerCycleUser;
+use App\Livewire\User\Apps\Mentoring\MentoringEssaysUser;
+use App\Livewire\User\Apps\Mentoring\MentoringPlanningCyclesUser;
+use App\Livewire\User\Apps\Mentoring\MentoringPlanningDailyUser;
+use App\Livewire\User\Apps\Mentoring\MentoringPlanningTasksUser;
+use App\Livewire\User\Apps\Mentoring\MentoringPlanningUser;
+use App\Livewire\User\Apps\Mentoring\MentoringPlanningWeekUser;
+use App\Livewire\User\Apps\Mentoring\MentoringQuestionsChart;
+use App\Livewire\User\Apps\Mentoring\MentoringReviewsUser;
+use App\Livewire\User\Apps\Mentoring\MentoringSimulatedsUser;
+use App\Livewire\User\MyVouchers;
 use App\Livewire\User\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -149,42 +168,45 @@ Route::middleware([
     'verified',
     'registerLogging'
 ])->group(function () {
+    //lobby
     Route::get('/lobby', Lobby::class)->name('lobby');
     Route::get('/meus-dados', UserProfile::class)->name('profile.user');
+    Route::get('/meus-vouchers', MyVouchers::class)->name('user.vouchers');
 
     Route::get('/questões', Lobby::class)->name('apps.questions');
     Route::get('/treinamento-físico', Lobby::class)->name('apps.treinaments');
     Route::get('/mentoria', Lobby::class)->name('apps.mentorings');
-
+    //redação
     Route::get('/app-de-redação', HomeEssay::class)->name('apps.essays');
     Route::get('/app-de-redação/minhas-redações', MyEssays::class)->name('apps.user-essay');
     Route::get('/app-de-redação/temas-propostos', ProposalTopic::class)->name('apps.proposal-topics');
-
+    //questões
     // Route::get('/app-de-questoes', HomeQuestions::class)->name('apps.questions');
     // Route::get('/app-de-questoes/home', Stats::class)->name('apps.stats');
+    //treinamento físico
+    Route::get('/app-de-treinamento', SeasonUser::class)->name('apps.treinaments');
+    Route::get('/app-de-treinamento/concursos', SeasonUser::class)->name('apps.season');
+    Route::get('/app-de-treinamento/concursos/exercicios/{season}', SeasonExercises::class)->name('apps.season.exercises');
+    Route::get('/app-de-treinamento/meus-exercícios-propostos', ListExercises::class)->name('apps.user.exercises');
+    Route::get('/app-de-treinamento/concursos/treino/{season}', SeasonTreinaments::class)->name('apps.season.treinaments');
+    Route::get('/app-de-treinamento/concursos/novo-treino/{season}', Trainings::class)->name('apps.season.treining');
+    Route::get('/app-de-treinamento/concursos/editar-treino/{seasonTreinament}', TrainingUpdate::class)->name('apps.season.treiningUpdate');
+    Route::get('/app-de-treinamento/concursos/estatisticas/{season}', StatsTreinaments::class)->name('apps.season.stats');
 
-    // Route::get('/app-de-treinamento', SeasonController::class)->name('apps.treinaments');
-    // Route::get('/app-de-treinamento/concursos', SeasonController::class)->name('apps.season');
-    // Route::get('/app-de-treinamento/concursos/exercicios/{season}', SeasonExercises::class)->name('apps.season.exercises');
-    // Route::get('/app-de-treinamento/concursos/treino/{season}', SeasonTreinaments::class)->name('apps.season.treinaments');
-    // Route::get('/app-de-treinamento/concursos/novo-treino/{season}', Trainings::class)->name('apps.season.treining');
-    // Route::get('/app-de-treinamento/concursos/editar-treino/{seasonTreinament}', TrainingUpdate::class)->name('apps.season.treiningUpdate');
-    // Route::get('/app-de-treinamento/concursos/estatisticas/{season}', StatsTreinaments::class)->name('apps.season.stats');
+    //mentoria
+    Route::get('/app-de-mentoria', MentoringController::class)->name('apps.mentorings');
+    Route::get('/meu-concurso', MentoringContestUser::class)->name('apps.contest.user');
+    Route::get('/app-de-mentoria/redações', MentoringEssaysUser::class)->name('apps.contestEssays.user');
+    Route::get('/app-de-mentoria/simulados', MentoringSimulatedsUser::class)->name('apps.contestSimulateds.user');
+    Route::get('/app-de-mentoria/questões', MentoringQuestionsChart::class)->name('apps.contestQuestionsChart.user');
+    Route::get('/app-de-mentoria/revisões', MentoringReviewsUser::class)->name('apps.contestReviews.user');
+    Route::get('/app-de-mentoria/meu-planejamento', MentoringPlanningUser::class)->name('apps.contestPlanningUser.user');
+    Route::get('/app-de-mentoria/meu-planejamento/{contestPlanningUser:code}', MentoringPlanningDailyUser::class)->name('apps.contestPlanningDailyUser.user');
 
-    // //mentoria
-    // Route::get('/app-de-mentoria', MentoringController::class)->name('apps.mentorings');
-    // Route::get('/meu-concurso', MentoringContestUser::class)->name('apps.contest.user');
-    // Route::get('/app-de-mentoria/redações', MentoringEssaysUser::class)->name('apps.contestEssays.user');
-    // Route::get('/app-de-mentoria/simulados', MentoringSimulatedsUser::class)->name('apps.contestSimulateds.user');
-    // Route::get('/app-de-mentoria/questões', MentoringQuestionsChart::class)->name('apps.contestQuestionsChart.user');
-    // Route::get('/app-de-mentoria/revisões', MentoringReviewsUser::class)->name('apps.contestReviews.user');
-    // Route::get('/app-de-mentoria/meu-planejamento', MentoringPlanningUser::class)->name('apps.contestPlanningUser.user');
-    // Route::get('/app-de-mentoria/meu-planejamento/{contestPlanningUser:code}', MentoringPlanningDailyUser::class)->name('apps.contestPlanningDailyUser.user');
+    Route::get('/app-de-mentoria/planejamento-da-semana', MentoringPlanningWeekUser::class)->name('apps.contestPlanningWeekUser.user');
+    Route::get('/app-de-mentoria/tarefas-diárias', MentoringPlanningTasksUser::class)->name('apps.contestPlanningTasksUser.user');
+    Route::get('/app-de-mentoria/tarefas-diárias/{contestPlanningUser:code}', MentoringPlanningTasksUser::class)->name('apps.contestPlanningTaskUser.user');
 
-    // Route::get('/app-de-mentoria/planejamento-da-semana', MentoringPlanningWeekUser::class)->name('apps.contestPlanningWeekUser.user');
-    // Route::get('/app-de-mentoria/tarefas-diárias', MentoringPlanningTasksUser::class)->name('apps.contestPlanningTasksUser.user');
-    // Route::get('/app-de-mentoria/tarefas-diárias/{contestPlanningUser:code}', MentoringPlanningTasksUser::class)->name('apps.contestPlanningTaskUser.user');
-
-    // Route::get('/app-de-mentoria/planejamento-por-ciclo', MentoringPlanningCyclesUser::class)->name('apps.contestPlanningCyclesUser.user');
-    // Route::get('/app-de-mentoria/ciclo', MentoringControllerCycleUser::class)->name('apps.contestControllerCycleUser.user');
+    Route::get('/app-de-mentoria/planejamento-por-ciclo', MentoringPlanningCyclesUser::class)->name('apps.contestPlanningCyclesUser.user');
+    Route::get('/app-de-mentoria/ciclo', MentoringControllerCycleUser::class)->name('apps.contestControllerCycleUser.user');
 });

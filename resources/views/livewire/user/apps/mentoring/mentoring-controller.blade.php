@@ -55,5 +55,5 @@
             </div>
         </div>
     </div>
+    @livewire('user.apps.mentoring.charts.controller.controller-score')
 </div>
-@livewire('app.mentoring.charts.controller.controller-score')

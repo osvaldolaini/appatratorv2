@@ -1,6 +1,5 @@
 <div >
-    <x-message-session></x-message-session>
-    @livewire('app.mentoring.mentoring-contest-user-bar', ['title' => 'Redações'])
+    @livewire('user.apps.mentoring.mentoring-contest-user-bar', ['title' => 'Redações'])
     <div class="bg-white dark:bg-gray-800 pt-3 ">
         <div class="flex flex-col items-center justify-between px-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
             <div
@@ -25,7 +24,7 @@
             <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="grid grid-cols-6 gap-2 mx-5 px-2">
                         <div class="col-span-6 mb-2">
-                            @livewire('app.mentoring.charts.essay.essay-score')
+                            @livewire('user.apps.mentoring.charts.essay.essay-score')
                         </div>
                         <div class="col-span-6 inline-block min-w-full align-middle md:px-6 lg:px-8">
                             <div class="card w-full dark:bg-gray-900 shadow-xl  mb-20">
@@ -73,7 +72,7 @@
                                                         <td scope="col"
                                                             class="py-0 pl-5 text-sm
                                                                     font-normal text-gray-700 text-left">
-                                                            {{ convertOnlyDate($item->day) }}
+                                                                    {{ convertOnlyDate($item->day) }}
                                                         </td>
 
                                                         <td scope="col"

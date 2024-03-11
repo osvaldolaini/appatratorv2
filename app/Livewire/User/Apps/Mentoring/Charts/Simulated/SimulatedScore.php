@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring\Charts\Simulated;
+namespace App\Livewire\User\Apps\Mentoring\Charts\Simulated;
 
-use App\Models\User\Mentoring\ContestSimulated;
+
+use App\Models\Apps\Mentoring\ContestSimulated;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -26,7 +27,7 @@ class SimulatedScore extends Component
             ->orderBy('day', 'desc')->get();
         $this->labels = $myContestSimulated->map(
             fn ($rtn) => [
-                'day' => $rtn->dayMonth(),
+                'day' => $rtn->day,
             ]
         )->pluck('day')->toArray();
         $this->hitss = $myContestSimulated->pluck('hits')->toArray();
@@ -37,6 +38,6 @@ class SimulatedScore extends Component
 
     public function render()
     {
-        return view('livewire.app.mentoring.charts.simulated.simulated-score');
+        return view('livewire.user.apps.mentoring.charts.simulated.simulated-score');
     }
 }

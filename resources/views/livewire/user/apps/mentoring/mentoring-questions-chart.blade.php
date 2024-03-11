@@ -1,5 +1,5 @@
 <div>
-    @livewire('app.mentoring.mentoring-contest-user-bar', ['title' => 'Questões'])
+    @livewire('user.apps.mentoring.mentoring-contest-user-bar', ['title' => 'Questões'])
     <div class=" bg-white dark:bg-gray-800 my-6 px-4">
         <div class="grid grid-cols-6 gap-1 mx-5 mb-48">
             <div class="col-span-6 rounded-md px-2"

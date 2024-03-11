@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\App\Treinaments;
+namespace App\Livewire\User\Apps\Treinaments;
 
-use App\Models\Admin\Treinament\SeasonTreinament;
+use App\Models\Apps\Treinament\SeasonTreinament;
 use Livewire\Component;
 
-use App\Models\Admin\Treinament\Training;
+use App\Models\Apps\Treinament\Training;
 
 class TrainingUpdate extends Component
 {
@@ -17,19 +17,21 @@ class TrainingUpdate extends Component
     public $repeat;
     public $distance;
     public $trainings;
+    public $season_title;
 
     // Define o layout a ser usado
     protected $layout = 'treinaments';
     public function mount(SeasonTreinament $seasonTreinament)
     {
         $this->season_id = $seasonTreinament->season_id;
-        $this->day = convertOnlyDate($seasonTreinament->day);
+        $this->season_title = $seasonTreinament->season->title;
+        $this->day = $seasonTreinament->day;
         $this->season_treinament_id = $seasonTreinament->id;
         $this->trainings = Training::where('season_treinament_id',$this->season_treinament_id)->get();
     }
     public function render()
     {
-        return view('livewire.app.treinaments.training-update')->layout('layouts.' . $this->layout);
+        return view('livewire.user.apps.treinaments.training-update')->layout('layouts.' . $this->layout);
     }
 
     public function updateDate()

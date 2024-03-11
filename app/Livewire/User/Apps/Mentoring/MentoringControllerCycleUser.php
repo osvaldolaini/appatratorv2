@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
-use App\Models\User\Mentoring\ContestControllerCycleUser;
-use App\Models\User\Mentoring\ContestPlanningCyclesUser;
-use App\Models\User\Mentoring\ContestUser;
+use App\Models\Apps\Mentoring\ContestControllerCycleUser;
+use App\Models\Apps\Mentoring\ContestPlanningCyclesUser;
+use App\Models\Apps\Mentoring\ContestUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -39,7 +39,7 @@ class MentoringControllerCycleUser extends Component
     public function render()
     {
         $this->planningCycleUser = Auth::user()->cycle;
-        return view('livewire.app.mentoring.mentoring-controller-cycle-user')
+        return view('livewire.user.apps.mentoring.mentoring-controller-cycle-user')
             ->layout('layouts.' . $this->layout);
     }
     public function createCycle($id)

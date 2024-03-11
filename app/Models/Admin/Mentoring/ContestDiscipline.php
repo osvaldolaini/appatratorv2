@@ -2,7 +2,7 @@
 
 namespace App\Models\Admin\Mentoring;
 
-use App\Models\User\Mentoring\ContestQuestions;
+use App\Models\Apps\Mentoring\ContestQuestions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;

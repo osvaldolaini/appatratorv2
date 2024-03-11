@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
-use App\Models\User\Mentoring\ContestUser;
+use App\Models\Apps\Mentoring\ContestUser;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -61,7 +61,7 @@ class MentoringController extends Component
                 $this->tconcluded = 0;
             }
 
-            $this->counter = (new DateTime())->diff(new DateTime($mentoringContestUser->contest->day))->days;
+            $this->counter = (new DateTime())->diff(new DateTime($mentoringContestUser->contest->limit))->days;
             if (count(array_slice($valueAverageSimulated, -3))) {
                 $this->simulateds = number_format(array_sum(array_slice($valueAverageSimulated, -3)) / count(array_slice($valueAverageSimulated, -3)), 0, ',', '');
             }
@@ -69,7 +69,7 @@ class MentoringController extends Component
                 $this->essays = number_format(array_sum(array_slice($valueAverageEssays, -3)) / count(array_slice($valueAverageEssays, -3)), 0, ',', '');
             }
             $this->questions = $this->contestUser->questions();
-        return view('livewire.app.mentoring.mentoring-controller')
+        return view('livewire.user.apps.mentoring.mentoring-controller')
             ->layout('layouts.' . $this->layout);
     }
 }

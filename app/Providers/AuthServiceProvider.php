@@ -28,5 +28,10 @@ class AuthServiceProvider extends ServiceProvider
                 redirect()->route('dashboard');
             }
         });
+        Gate::define('contest-user', function (User $user) {
+            if ($user->contest == null) {
+                redirect()->route('apps.contest.user');
+            }
+        });
     }
 }

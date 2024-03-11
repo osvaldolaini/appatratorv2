@@ -72,4 +72,161 @@ function valueDB($value)
         }
     }
 }
+if (!function_exists('minutesToHours')) {
+    function minutesToHours($time)
+    {
+        $horas = floor($time / 60);
+        $minutos = $time % 60;
+        if($horas >=1 ){
+            return sprintf('%02d:%02d', $horas,$minutos);
+        }else{
+            $horas = 0;
+            return sprintf('%02d:%02d', $horas,$minutos);
+        }
+    }
+}
+if (!function_exists('hoursToMinutes')) {
+    function hoursToMinutes($time)
+    {
+        $t = explode(':',$time);
+        if($t[0] == 0){
+            return $t[1];
+        }else{
+            return ($t[0]*60)+$t[1];
+        }
+    }
+}
+if (!function_exists('dayWeek')) {
+    function dayWeek($day)
+    {
+        switch ($day) {
+            case 1: return 'Segunda-feira'; break;
+            case 2: return 'Terça-feira'; break;
+            case 3: return 'Quarta-feira'; break;
+            case 4: return 'Quinta-feira'; break;
+            case 5: return 'Sexta-feira'; break;
+            case 6: return 'Sabado'; break;
+            case 7: return 'Domingo'; break;
+        }
+    }
+}
+if (!function_exists('convertDate')) {
+    function convertDate($date)
+    {
+        if ($date) {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $date)
+                ->format('d/m/Y H:i:s');
+        } else {
+            return '';
+        }
+    }
+}
+if (!function_exists('convertOnlyDate')) {
+    function convertOnlyDate($date)
+    {
+        if ($date) {
 
+            return Carbon::createFromFormat('Y-m-d H:i:s', $date)
+                ->format('d/m/Y');
+        } else {
+            return '';
+        }
+    }
+}
+if (!function_exists('convertOnlyTime')) {
+    function convertOnlyTime($time, $unity)
+    {
+        if ($time) {
+            if ($unity == 'min') {
+                return Carbon::createFromFormat('Y-m-d H:i:s', $time)
+                    ->format('i:s');
+            } else {
+                return Carbon::createFromFormat('Y-m-d H:i:s', $time)
+                    ->format('H:i:s');
+            }
+        } else {
+            return '';
+        }
+    }
+}
+if (!function_exists('convertTerm')) {
+    function convertTerm($date)
+    {
+        $now = new DateTime(date('Y-m-d H:i:s'));
+        $after = new DateTime($date);
+        $dateInterval = $now->diff($after);
+
+        if ($date) {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $date)
+                ->format('d/m/Y H:i:s') . ' ( ' . $dateInterval->format('%R%a dias') . ' )';
+        } else {
+            return '';
+        }
+    }
+}
+if (!function_exists('application')) {
+    function application($variable)
+    {
+        switch ($variable) {
+            case 'questions':
+                return 'Questões';
+                break;
+            case 'treinament':
+                return 'Treinamento';
+                break;
+            case 'essay':
+                return 'Redação';
+                break;
+            case 'mentoring':
+                return 'Mentoria';
+                break;
+
+            default:
+                # code...
+                break;
+        }
+    }
+}
+if (!function_exists('statusEssay')) {
+    function statusEssay($variable)
+    {
+        switch ($variable) {
+            case 1:
+                return 'Enviar';
+                break;
+            case 2:
+                return 'Corrigindo...';
+                break;
+            case 3:
+                return 'Corrigida';
+                break;
+
+            default:
+                return 'Enviar';
+                break;
+        }
+    }
+}
+if (!function_exists('statusEssayAdmin')) {
+    function statusEssayAdmin($variable)
+    {
+        switch ($variable) {
+            case 0:
+                return 'Excluido';
+                break;
+            case 1:
+                return 'Não enviado';
+                break;
+            case 2:
+                return 'Corrigir';
+                break;
+            case 3:
+                return 'Corrigida';
+                break;
+
+            default:
+                return 'Não enviado';
+                break;
+        }
+    }
+}

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
-use App\Models\User\Mentoring\ContestControllerCycleUser;
-use App\Models\User\Mentoring\ContestPlanningCyclesUser;
+use App\Models\Apps\Mentoring\ContestControllerCycleUser;
+use App\Models\Apps\Mentoring\ContestPlanningCyclesUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -15,8 +15,8 @@ class MentoringPlanningCyclesUser extends Component
     // Define o layout a ser usado
     protected $layout = 'mentoring';
     public $showJetModal = false;
-    public $showModalCreate = false;
-    public $showModalEdit = false;
+    public $modalCreate = false;
+    public $modalEdit = false;
     public $alertSession = false;
 
     public $rules;
@@ -42,19 +42,19 @@ class MentoringPlanningCyclesUser extends Component
         $this->user_id = Auth::user()->id;
         $this->planningCycleUser = Auth::user()->cycle;
         $this->cycle = Auth::user()->cycle->pluck('contest_discipline_id');
-        $this->disciplines = Auth::user()->contest->contest->discipline->where('status',1);
+        $this->disciplines = Auth::user()->contest->contest->discipline->where('active',1);
     }
     public function render()
     {
         $this->planningCycleUser = Auth::user()->cycle;
         $this->cycle = Auth::user()->cycle->pluck('contest_discipline_id');
-        return view('livewire.app.mentoring.mentoring-planning-cycles-user')
+        return view('livewire.user.apps.mentoring.mentoring-planning-cycles-user')
             ->layout('layouts.' . $this->layout);
     }
     //CREATE
     public function showModalCreate()
     {
-        $this->showModalCreate = true;
+        $this->modalCreate = true;
         $this->resetAll();
     }
     public function store()
@@ -89,7 +89,7 @@ class MentoringPlanningCyclesUser extends Component
         session()->flash('success', 'Ciclo criado com sucesso');
 
         $this->alertSession = true;
-        $this->showModalCreate = false;
+        $this->modalCreate = false;
         $this->resetAll();
     }
 
@@ -100,7 +100,7 @@ class MentoringPlanningCyclesUser extends Component
         $this->minutes      = $contestPlanningCyclesUser->minutes;
         $this->order        = $contestPlanningCyclesUser->order;
         $this->contest_discipline_id        = $contestPlanningCyclesUser->contest_discipline_id;
-        $this->showModalEdit = true;
+        $this->modalEdit = true;
     }
     public function update()
     {
@@ -146,7 +146,7 @@ class MentoringPlanningCyclesUser extends Component
         session()->flash('success', 'Ciclo atualizado com sucesso');
 
         $this->alertSession = true;
-        $this->showModalEdit = false;
+        $this->modalEdit = false;
         $this->resetAll();
     }
     //DELETE

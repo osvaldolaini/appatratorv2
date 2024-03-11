@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\App\Mentoring;
+namespace App\Livewire\User\Apps\Mentoring;
 
-use App\Models\User\Mentoring\ContestUser;
+use App\Models\Apps\Mentoring\ContestUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
@@ -26,6 +26,6 @@ class MentoringContestUserBar extends Component
     }
     public function render()
     {
-        return view('livewire.app.mentoring.mentoring-contest-user-bar');
+        return view('livewire.user.apps.mentoring.mentoring-contest-user-bar');
     }
 }
