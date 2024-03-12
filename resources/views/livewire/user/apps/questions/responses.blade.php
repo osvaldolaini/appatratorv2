@@ -14,9 +14,9 @@
             box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.281);
         }
     </style>
-    <div class="mt-5 shadow-md">
+    <div class="mt-5 shadow-md" wire:key="question-{{ $question->id }}">
         <div class="bg-cyan-200 dark:bg-cyan-800 flex justify-start text-xs shadow-md">
-            <div class="px-2 py-2 font-extrabold flex items-center text-sm">
+            <div class="p-2 font-extrabold flex items-center text-sm">
                 <a href="#" class="text-cyan-800 dark:text-slate-200  font-extrabold hover:underline">
                     AQ{{ str_pad($question->id, 4, '0', STR_PAD_LEFT) }}
                 </a>
@@ -56,14 +56,19 @@
                 <span class="font-semibold  pr-1">
                     Cargo:
                 </span>
+                @if ($question->office)
                 {{ $question->offices->title }}
+                @endif
+
                 <span class="hidden lg:block pl-2">/</span>
             </div>
             <div class="px-3 pt-1 sm:py-2 flex flex-nowrap">
                 <span class="font-semibold  pr-1">
                     Instituição:
                 </span>
+                @if ($question->intitution)
                 {{ $question->intitution->title }}
+                @endif
                 <span class="hidden lg:block pl-2">/</span>
             </div>
             <div class="px-3 pt-1 sm:py-2 flex flex-nowrap">
@@ -77,7 +82,9 @@
                 <span class="font-semibold pr-1">
                     Banca:
                 </span>
+                @if ($question->examining_boards)
                 {{ $question->examining_boards->title }}
+                @endif
             </div>
         </div>
         <form wire:submit.prevent="submit">
@@ -105,7 +112,7 @@
                                                     hover:outline hover:outline-cyan-500 hover:outline-offset-2
                                                     uppercase rounded-2xl bg-cyan-400 mr-2" >{{ $alternativas[$i] }} </span>
                                             <span
-                                                class="alternative-text items-center text-xl font-bold">{{ $alternative->text }}</span>
+                                                class="alternative-text items-center text-xl font-bold">{!! $alternative->text !!} </span>
                                         </label>
                                     </div>
                                 </li>
@@ -115,7 +122,7 @@
                             @endforeach
                             @error('alternative_id') <span class="error text-red-500">{{ $message }}</span> @enderror
                         </form>
-                        <li><x-message-session-questions ></x-message-session-questions></li>
+                        <li></li>
                         </ul>
                 </div>
                 @if ($question->alternatives->count() > 0)

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Livewire\App\Questions;
+namespace App\Livewire\User\Apps\Questions;
 
-use App\Models\Admin\Alternatives;
-use App\Models\Admin\Questions;
-use App\Models\Admin\Responses;
+use App\Models\Admin\Questions\Alternatives;
+use App\Models\Admin\Questions\Questions;
+use App\Models\Admin\Questions\Responses;
 use Livewire\Component;
 use Illuminate\Support\Str;
 
@@ -54,7 +54,7 @@ class Response extends Component
             }
         }
         $this->vouchers = Auth::user()->vouchers
-                        ->where('status',1)
+                        ->where('active',1)
                         ->where('limit_access','>=', date('Y-m-d h:i:s'));
         foreach ($this->vouchers as $voucher) {
             if ($voucher->application == 'questions'){
@@ -62,6 +62,10 @@ class Response extends Component
             }
         }
 
+    }
+    public function render()
+    {
+        return view('livewire.user.apps.questions.responses');
     }
     public function refresh($status)
     {
@@ -93,24 +97,26 @@ class Response extends Component
         shuffle($msgcorrect);
         shuffle($msgcerror);
         if($response->alternatives->correct == true){
-            session()->flash('success',$msgcorrect[0]);
+            $this->openAlert('success', $msgcorrect[0]);
             $this->refresh(true);
         }else{
-            session()->flash('error',$msgcerror[0]);
-
             $this->right_answer = $alternative->question->right_answer;
             if ($this->right_answer){
                 $this->showCorrectResponse = true;
                 $this->right_answer = $alternative->question->right_answer;
             }
+
+            $this->openAlert('error', $msgcerror[0]);
             $this->refresh(false);
         }
 
     }
-
-    public function render()
+    //MESSAGE
+    public function openAlert($status, $msg)
     {
-        return view('livewire.app.questions.responses');
+        $this->dispatch('openAlert', $status, $msg);
     }
+
+
 
 }

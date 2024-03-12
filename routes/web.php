@@ -57,6 +57,8 @@ use App\Livewire\User\Apps\Mentoring\MentoringPlanningWeekUser;
 use App\Livewire\User\Apps\Mentoring\MentoringQuestionsChart;
 use App\Livewire\User\Apps\Mentoring\MentoringReviewsUser;
 use App\Livewire\User\Apps\Mentoring\MentoringSimulatedsUser;
+use App\Livewire\User\Apps\Questions\HomeQuestions;
+use App\Livewire\User\Apps\Questions\Stats;
 use App\Livewire\User\MyVouchers;
 use App\Livewire\User\UserProfile;
 use Illuminate\Http\Request;
@@ -181,8 +183,9 @@ Route::middleware([
     Route::get('/app-de-redação/minhas-redações', MyEssays::class)->name('apps.user-essay');
     Route::get('/app-de-redação/temas-propostos', ProposalTopic::class)->name('apps.proposal-topics');
     //questões
-    // Route::get('/app-de-questoes', HomeQuestions::class)->name('apps.questions');
-    // Route::get('/app-de-questoes/home', Stats::class)->name('apps.stats');
+    Route::get('/app-de-questões', HomeQuestions::class)->name('apps.questions');
+    Route::get('/app-de-questões/home', Stats::class)->name('apps.stats');
+
     //treinamento físico
     Route::get('/app-de-treinamento', SeasonUser::class)->name('apps.treinaments');
     Route::get('/app-de-treinamento/concursos', SeasonUser::class)->name('apps.season');

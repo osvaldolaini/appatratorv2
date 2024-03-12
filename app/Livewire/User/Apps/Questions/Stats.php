@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\App\Questions;
+namespace App\Livewire\User\Apps\Questions;
 
-use App\Models\Admin\Responses;
+use App\Models\Admin\Questions\Responses;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -15,7 +15,14 @@ class Stats extends Component
     public $foults= [];
     public $day=[];
     public $total=[];
-    protected $layout = 'questions-stats';
+    protected $layout = 'questions';
+
+    public function render()
+    {
+        // dd($this->labels);
+        return view('livewire.user.apps.questions.stats')
+        ->layout('layouts.' . $this->layout);
+    }
 
     public function convert($date,$v)
     {
@@ -68,10 +75,5 @@ class Stats extends Component
         $this->labels = $this->day;
     }
 
-    public function render()
-    {
-        // dd($this->labels);
-        return view('livewire.app.questions.stats')
-        ->layout('layouts.' . $this->layout);
-    }
+
 }

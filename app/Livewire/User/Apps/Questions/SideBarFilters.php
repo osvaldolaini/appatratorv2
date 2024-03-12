@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\App\Questions;
+namespace App\Livewire\User\Apps\Questions;
 
-use App\Models\Admin\Filters\{
+use App\Models\Admin\Questions\Filters\{
     Discipline,
     EducationArea,
     ExaminingBoard,
@@ -14,7 +14,7 @@ use App\Models\Admin\Filters\{
     Office,
     SubMatter
 };
-use App\Models\Admin\Questions;
+use App\Models\Admin\Questions\Questions;
 use Illuminate\Support\Facades\Auth;
 
 use Livewire\Component;

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\App\Questions;
+namespace App\Livewire\User\Apps\Questions;
 
-use App\Models\Admin\Alternatives;
-use App\Models\Admin\Filters\{
+use App\Models\Admin\Questions\Alternatives;
+use App\Models\Admin\Questions\Filters\{
     Discipline,
     EducationArea,
     ExaminingBoard,
@@ -15,13 +15,11 @@ use App\Models\Admin\Filters\{
     Office,
     SubMatter
 };
-use App\Models\Admin\Questions;
-use App\Models\Admin\Responses;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Admin\Questions\Questions;
+use App\Models\Admin\Questions\Responses;
 
 use Livewire\Component;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
 
@@ -67,18 +65,28 @@ class HomeQuestions extends Component
     public $dropdownOpen = false;
     public function mount()
     {
-        $this->educationArea = EducationArea::select('id', 'title')->where('status', 1)->get();
-        $this->examiningBoard = ExaminingBoard::select('id', 'title')->where('status', 1)->get();
-        $this->institution = Institution::select('id', 'title')->where('status', 1)->get();
-        $this->level = Level::select('id', 'title')->where('status', 1)->get();
-        $this->modality = Modality::select('id', 'title')->where('status', 1)->get();
-        $this->occupationArea = OccupationArea::select('id', 'title')->where('status', 1)->get();
-        $this->office = Office::select('id', 'title')->where('status', 1)->get();
-        $this->discipline = Discipline::select('id', 'title')->where('status', 1)->get();
-        $this->questions = Questions::where('status',1)->where('text','!=','')->inRandomOrder()->get();
+        $this->educationArea = EducationArea::select('id', 'title')->where('active', 1)->get();
+        $this->examiningBoard = ExaminingBoard::select('id', 'title')->where('active', 1)->get();
+        $this->institution = Institution::select('id', 'title')->where('active', 1)->get();
+        $this->level = Level::select('id', 'title')->where('active', 1)->get();
+        $this->modality = Modality::select('id', 'title')->where('active', 1)->get();
+        $this->occupationArea = OccupationArea::select('id', 'title')->where('active', 1)->get();
+        $this->office = Office::select('id', 'title')->where('active', 1)->get();
+        $this->discipline = Discipline::select('id', 'title')->where('active', 1)->get();
+        $this->questions = Questions::where('active',1)->where('text','!=','')->inRandomOrder()->get();
+    }
+    public function render()
+    {
+        $this->filters=count($this->selectedFilters);
+
+        // $this->resetFilters();
+        $this->search();
+        return view('livewire.user.apps.questions.home-questions')
+            ->layout('layouts.' . $this->layout);
     }
     public function updateSelectedFilters($id, $title, $table)
     {
+
         $insert=true;
         $i=0;
         if (count($this->selectedFiltersMask) > 0) {
@@ -108,18 +116,18 @@ class HomeQuestions extends Component
                 'table' => $table
             ];
         }
-        // dd($this->selectedFiltersMask);
+
 
         if($table=='disciplines'){
-            $this->filterdiscipline = Discipline::select('id', 'title')->where('status', 1)->get();
+            $this->filterdiscipline = Discipline::select('id', 'title')->where('active', 1)->get();
             $this->filtermatters = $this->filterdiscipline->find($id)->matter;
         }
         if($table=='matters'){
-            $this->filtermatters = Matter::select('id', 'title')->where('status', 1)->get();
+            $this->filtermatters = Matter::select('id', 'title')->where('active', 1)->get();
             $this->filtersubMatters = $this->filtermatters->find($id)->subMatter;
         }
         $this->search();
-        $this->emit('updateSelectedFilters', $this->selectedFiltersMask);
+        // $this->dispatch('updateSelectedFilters', $this->selectedFiltersMask);
 
     }
 
@@ -238,7 +246,7 @@ class HomeQuestions extends Component
                 'modalities',
                 'occupation_areas',
         ])
-        ->where('status', 1)
+        ->where('active', 1)
         ->inRandomOrder()
         ->get();
     }
@@ -259,13 +267,5 @@ class HomeQuestions extends Component
         $this->sub_matter_ids= [];
     }
 
-    public function render()
-    {
-        $this->filters=count($this->selectedFilters);
 
-        $this->resetFilters();
-
-        return view('livewire.app.questions.home-questions')
-            ->layout('layouts.' . $this->layout);
-    }
 }
