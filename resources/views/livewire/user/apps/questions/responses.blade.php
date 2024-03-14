@@ -125,7 +125,6 @@
                         <li></li>
                         </ul>
                 </div>
-                @if ($question->alternatives->count() > 0)
                     <div class="mx-auto mb-5 text-sm">
                         <div>
                             <!-- component -->
@@ -194,7 +193,6 @@
 
                     </div>
 
-                @endif
             </div>
         </form>
     </div>

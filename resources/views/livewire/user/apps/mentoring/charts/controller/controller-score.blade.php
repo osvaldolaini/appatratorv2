@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 mx-4 -my-0">
+<div class="grid grid-cols-1  -my-0">
     <div class="col-span-1">
         <div class="rounded-2xl dark:bg-gray-900 shadow-xl h-30 min-h-full">
             <div class="rounded-2xl px-4 py-2 flex flex-col">

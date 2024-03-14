@@ -18,9 +18,7 @@ class ControllerScore extends Component
     public function mount()
     {
         $this->mentoringContestUser = ContestUser::with('contest')->where('user_id', Auth::user()->id)->first();
-        $diciplines = ContestDiscipline::where('contest_id', Auth::user()
-            ->contest
-            ->contest_id)
+        $diciplines = ContestDiscipline::where('contest_id', Auth::user()->contest->contest_id)
             ->orderBy('order')
             ->get();
 

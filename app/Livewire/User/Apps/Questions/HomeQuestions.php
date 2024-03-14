@@ -17,7 +17,7 @@ use App\Models\Admin\Questions\Filters\{
 };
 use App\Models\Admin\Questions\Questions;
 use App\Models\Admin\Questions\Responses;
-
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 use Illuminate\Support\Str;
@@ -58,11 +58,24 @@ class HomeQuestions extends Component
     protected $layout = 'questions';
     public $questions;
     public $filters;
+    public $vouchers;
+    public $access;
+    public $right_answer;
+    public $showCorrectResponse = false;
+
+    public $alternative_id;
+
 
     public $selectedFilters = [];
     public $selectedFiltersMask = [];
 
     public $dropdownOpen = false;
+
+    public $rules;
+    protected $messages = [
+        'alternative_id.required' => 'Escolha uma alternativa.',
+    ];
+
     public function mount()
     {
         $this->educationArea = EducationArea::select('id', 'title')->where('active', 1)->get();
@@ -79,14 +92,21 @@ class HomeQuestions extends Component
     {
         $this->filters=count($this->selectedFilters);
 
-        // $this->resetFilters();
-        $this->search();
+        // $this->search();
+
+        $this->vouchers = Auth::user()->vouchers
+                        ->where('active',1)
+                        ->where('limit_access','>=', date('Y-m-d h:i:s'));
+        foreach ($this->vouchers as $voucher) {
+            if ($voucher->application == 'questions'){
+                $this->access = true;
+            }
+        }
         return view('livewire.user.apps.questions.home-questions')
             ->layout('layouts.' . $this->layout);
     }
     public function updateSelectedFilters($id, $title, $table)
     {
-
         $insert=true;
         $i=0;
         if (count($this->selectedFiltersMask) > 0) {
@@ -127,12 +147,13 @@ class HomeQuestions extends Component
             $this->filtersubMatters = $this->filtermatters->find($id)->subMatter;
         }
         $this->search();
-        // $this->dispatch('updateSelectedFilters', $this->selectedFiltersMask);
+        $this->dispatch('updateSelectedFilters', $this->selectedFiltersMask);
 
     }
 
     public function search()
     {
+        $this->questions = null;
         $this->resetFilters();
         $query = Questions::query();
 
@@ -142,7 +163,7 @@ class HomeQuestions extends Component
                         $this->year[] = $key['id'];
                     }
                     if ($key['table']  == 'dificult_init') {
-                        $this->dificult_init[] = $key['id'];
+                        $this->dificult_init = $key['id'];
                     }
                     if ($key['table']  == 'intitution') {
                         $this->institution_ids[] = $key['id'];
@@ -267,5 +288,46 @@ class HomeQuestions extends Component
         $this->sub_matter_ids= [];
     }
 
+    public function submit()
+    {
+        $this->rules = [
+            'alternative_id' => 'required',
+        ];
+
+        $this->validate();
+        $alternative = Alternatives::select('question_id')->where('id',$this->alternative_id)->first();
+
+        $response =  Responses::create([
+            'user_id'           =>Auth::user()->id,
+            'alternative_id'    =>$this->alternative_id,
+            'question_id'       =>$alternative->question_id,
+            'code'              =>Str::uuid(),
+        ]);
+
+        $msgcorrect = array(
+            'Acertou mizeravi','Boa 06','Excelente'
+        );
+        $msgcerror = array(
+            'Errooouuuu','Não foi dessa vez','Tente novamente'
+        );
+        shuffle($msgcorrect);
+        shuffle($msgcerror);
+        if($response->alternatives->correct == true){
+            $this->openAlert('success', $msgcorrect[0]);
+            // $this->refresh(true);
+        }else{
+            $this->right_answer = $alternative->question->right_answer;
+            if ($this->right_answer){
+                $this->showCorrectResponse = true;
+                $this->right_answer = $alternative->question->right_answer;
+            }
+            $this->openAlert('error', $msgcerror[0]);
+        }
+    }
+    //MESSAGE
+    public function openAlert($status, $msg)
+    {
+        $this->dispatch('openAlert', $status, $msg);
+    }
 
 }

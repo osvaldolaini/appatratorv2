@@ -14,6 +14,7 @@ use App\Models\Admin\Questions\Filters\SubMatter;
 use App\Models\Admin\Questions\Filters\Matter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
@@ -84,6 +85,51 @@ class Questions extends Model
     public function responses()
     {
         return $this->hasMany(Responses::class,'question_id','id');
+    }
+
+    public function getMyHitAttribute()
+    {
+        $myHit = 0;
+        $myResponses = Responses::where('user_id',Auth::user()->id)->where('question_id',$this->id)->get();
+        foreach ($myResponses as $response) {
+            if($response->alternatives->correct == true){
+                $myHit += 1;
+            }
+        }
+        return $myHit;
+    }
+    public function getMyFaultAttribute()
+    {
+        $myFault = 0;
+        $myResponses = Responses::where('user_id',Auth::user()->id)->where('question_id',$this->id)->get();
+        foreach ($myResponses as $response) {
+            if($response->alternatives->correct == false){
+                $myFault +=1;
+            }
+        }
+        return $myFault;
+    }
+    public function getAllHitAttribute()
+    {
+        $allHit = 0;
+        $allResponses = Responses::where('question_id',$this->id)->get();
+        foreach ($allResponses as $response) {
+            if($response->alternatives->correct == true){
+                $allHit +=1;
+            }
+        }
+        return $allHit;
+    }
+    public function getAllFaultAttribute()
+    {
+        $allFault = 0;
+        $allResponses = Responses::where('question_id',$this->id)->get();
+        foreach ($allResponses as $response) {
+            if($response->alternatives->correct == false){
+                $allFault +=1;
+            }
+        }
+        return $allFault;
     }
 }
 

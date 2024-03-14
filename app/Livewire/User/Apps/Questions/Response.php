@@ -27,7 +27,6 @@ class Response extends Component
 
     public $showCorrectResponse = false;
 
-
     protected $rules = [
         'alternative_id' => 'required',
     ];
@@ -61,7 +60,6 @@ class Response extends Component
                 $this->access = true;
             }
         }
-
     }
     public function render()
     {

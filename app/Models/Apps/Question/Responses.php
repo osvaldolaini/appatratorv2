@@ -39,4 +39,5 @@ class Responses extends Model
         return LogOptions::defaults()
             ->logOnly($this->fillable);
     }
+
 }
