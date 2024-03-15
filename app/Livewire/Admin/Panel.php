@@ -16,9 +16,9 @@ class Panel extends Component
             return redirect()->route('lobby');
         }
         if (Auth::user()->group == 'admin') {
-            return redirect()->route('master-panel');
+            return redirect()->route('dashboard');
             // $this->responses = Responses::with(['user','question','alternatives'])->orderBy('created_at','desc')->limit(10)->get();
-        $this->essays = EssayUser::with(['user','voucher','essay'])->orderBy('send_at','desc')->where('status',2)->limit(10)->get();
+            $this->essays = EssayUser::with(['user','voucher','essay'])->orderBy('send_at','desc')->where('status',2)->limit(10)->get();
         }
 
 
