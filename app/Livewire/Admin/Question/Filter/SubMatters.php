@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Admin\Question\Filter;
 
-use App\Models\Admin\Questions\Filters\matter;
+use App\Models\Admin\Questions\Filters\Matter;
 use App\Models\Admin\Questions\Filters\SubMatter;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
