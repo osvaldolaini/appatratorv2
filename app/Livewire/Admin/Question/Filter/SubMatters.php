@@ -47,7 +47,7 @@ class SubMatters extends Component
     public function render()
     {
         $this->matters = Matter::where('active', 1)->get();
-        return view('livewire.admin.questions.filters.SubMatter', [
+        return view('livewire.admin.questions.filters.subMatter', [
             'dataTable' => $this->getData(),
         ]);
     }
@@ -107,14 +107,14 @@ class SubMatters extends Component
         }
     }
     //UPDATE
-    public function showModalUpdate(SubMatter $SubMatter)
+    public function showModalUpdate(SubMatter $subMatter)
     {
         $this->resetAll();
 
-        $this->model_id         = $SubMatter->id;
-        $this->title            = $SubMatter->title;
-        $this->nick             = $SubMatter->nick;
-        $this->matter_id    = $SubMatter->matter_id;
+        $this->model_id         = $subMatter->id;
+        $this->title            = $subMatter->title;
+        $this->nick             = $subMatter->nick;
+        $this->matter_id    = $subMatter->matter_id;
         $this->showModalEdit    = true;
     }
     public function update()
