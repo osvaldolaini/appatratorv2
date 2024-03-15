@@ -8,7 +8,7 @@ use App\Models\Admin\Questions\Questions;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 
-class Quest extends Component
+class Question extends Component
 {
     use WithPagination;
     public Questions $questions;

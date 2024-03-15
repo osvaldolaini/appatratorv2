@@ -26,7 +26,7 @@ use App\Livewire\Admin\Question\Filter\Modalities;
 use App\Livewire\Admin\Question\Filter\OccupationAreas;
 use App\Livewire\Admin\Question\Filter\Offices;
 use App\Livewire\Admin\Question\Filter\SubMatters;
-use App\Livewire\Admin\Question\Quest;
+use App\Livewire\Admin\Question\Question;
 use App\Livewire\Admin\Question\QuestionAlternative;
 use App\Livewire\Admin\Question\QuestionConfigs;
 use App\Livewire\Admin\Question\QuestionCorrect;
@@ -117,7 +117,7 @@ Route::middleware([
         ->name('vouchers');
     //Questions
 
-    Route::get('/questoes', Filters::class)->name('quest');
+    Route::get('/questões', Question::class)->name('question');
     Route::get('/questões/nova', QuestionCreate::class)->name('new-question');
     Route::get('/questões/{questions}', QuestionUpdate::class)->name('edit-question');
     Route::get('/questões/configurações/{questions}', QuestionConfigs::class)->name('config-question');
@@ -176,9 +176,9 @@ Route::middleware([
     Route::get('/meus-dados', UserProfile::class)->name('profile.user');
     Route::get('/meus-vouchers', MyVouchers::class)->name('user.vouchers');
 
-    Route::get('/questões', Lobby::class)->name('apps.questions');
-    Route::get('/treinamento-físico', Lobby::class)->name('apps.treinaments');
-    Route::get('/mentoria', Lobby::class)->name('apps.mentorings');
+    // Route::get('/questões', Lobby::class)->name('apps.questions');
+    // Route::get('/treinamento-físico', Lobby::class)->name('apps.treinaments');
+    // Route::get('/mentoria', Lobby::class)->name('apps.mentorings');
     //redação
     Route::get('/app-de-redação', HomeEssay::class)->name('apps.essays');
     Route::get('/app-de-redação/minhas-redações', MyEssays::class)->name('apps.user-essay');
