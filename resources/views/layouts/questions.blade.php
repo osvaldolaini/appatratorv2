@@ -21,7 +21,7 @@
     </head>
     <body class="font-sans antialiased" >
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @livewire('user.navbar')
+            @livewire('user.nav-bar')
 
             @livewire('message-alert')
 
