@@ -117,7 +117,7 @@ Route::middleware([
         ->name('vouchers');
     //Questions
 
-    Route::get('/questões', Quest::class)->name('quest');
+    Route::get('/questões', Filters::class)->name('quest');
     Route::get('/questões/nova', QuestionCreate::class)->name('new-question');
     Route::get('/questões/{questions}', QuestionUpdate::class)->name('edit-question');
     Route::get('/questões/configurações/{questions}', QuestionConfigs::class)->name('config-question');
