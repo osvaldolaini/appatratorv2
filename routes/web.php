@@ -16,7 +16,7 @@ use App\Livewire\User\Lobby;
 use App\Livewire\Admin\Mentoring\ContestDisciplines;
 use App\Livewire\Admin\Mentoring\ContestMatters;
 use App\Livewire\Admin\Mentoring\Contests;
-use App\Livewire\Admin\Question\Question;
+use App\Livewire\Admin\Question\Quest;
 use App\Livewire\Admin\Question\Filter\Disciplines;
 use App\Livewire\Admin\Question\Filter\EducationAreas;
 use App\Livewire\Admin\Question\Filter\ExaminingBoards;
@@ -116,7 +116,7 @@ Route::middleware([
     Route::get('/vouchers', Voucher::class)
         ->name('vouchers');
     //Questions
-    Route::get('/questões', Question::class)->name('quest');
+    Route::get('/questões', Quest::class)->name('quest');
     Route::get('/questões/nova', QuestionCreate::class)->name('new-question');
     Route::get('/questões/{questions}', QuestionUpdate::class)->name('edit-question');
     Route::get('/questões/configurações/{questions}', QuestionConfigs::class)->name('config-question');
