@@ -93,7 +93,7 @@
                                 text-sm transition-colors duration-200 font-bold">
                             Mentoria
                         </span>
-                        <x-link-simple url="contests" active="*mentoria*">
+                        {{-- <x-link-simple url="contests" active="*mentoria*">
                             <span class="text-left">
                                 <span class="text-left">
                                     <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -104,7 +104,7 @@
                             <span class="mx-4 text-sm font-normal">
                                 Concursos
                             </span>
-                        </x-link-simple>
+                        </x-link-simple> --}}
                         <div class="flex mx-2 items-center pt-1 flex-nowrap border-t border-gray-200"></div>
                         <span
                             class="text-gray-600
