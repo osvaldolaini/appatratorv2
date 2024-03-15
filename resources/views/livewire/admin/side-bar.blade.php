@@ -78,6 +78,7 @@
                                 Questões
                             </span>
                         </x-link-simple>
+
                         <x-link-simple url="filters" active="*filtros*">
                             <span class="text-left">
                                 <svg class="w-6 h-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a1 1 0 011-1h14a1 1 0 110 2H3a1 1 0 01-1-1zm3 4a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm3 3a1 1 0 100 2h4a1 1 0 100-2H8z" fill="currentColor"/></svg>
