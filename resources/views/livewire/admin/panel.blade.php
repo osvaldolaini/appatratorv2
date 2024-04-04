@@ -2,7 +2,8 @@
     <div class="grid grid-cols-4 gap-2 w-full h-full">
 
         @if ($essays)
-            <div class="row-span-2 col-span-full sm:col-span-2 h-full relative
+            <div
+                class="row-span-2 col-span-full sm:col-span-2 h-full relative
             overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
                 <div class="flex items-center justify-between p-3">
                     <div class="flex items-center space-x-1">
@@ -48,7 +49,8 @@
                                                 </div>
                                             </td>
                                             <td class="text-xs flex flex-row items-center">
-                                                <div class="flex tooltip tooltip-bottom p-0 items-center" data-tip="Baixar">
+                                                <div class="flex tooltip tooltip-bottom p-0 items-center"
+                                                    data-tip="Baixar">
                                                     <button class="flex flex-row items-center"
                                                         wire:click="export({{ $item->id }})">
                                                         {{ $item->essay->title }}
@@ -125,7 +127,24 @@
             </div>
         @endif
 
+        @foreach (json_decode($data) as $course)
+            <div class="col-span-1 ">
+                <div class="card card-compact image-full shadow-xl bg-cover">
+                    <figure ><img class="w-full "
+                            src="{{ 'https://atratorconcursos.com.br/storage/images/courses/' . $course->id . '/thumb.jpg' }}"
+                            alt="{{ $course->slug }}">
+                    </figure>
+                    <div class="card-body">
+                        <p class="font-extrabold">{{ $course->title }}</p>
+                        <div class="card-actions justify-end">
+                            <a href="{{ $course->slug }}" class="btn btn-primary">Editar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
 
     </div>
+
 
 </div>

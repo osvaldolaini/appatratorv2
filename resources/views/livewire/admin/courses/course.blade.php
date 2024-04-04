@@ -3,7 +3,7 @@
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
                 <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
-                    TÍTULOS DE PONTOS
+                    {{ mb_strtoupper($breadcrumb) }}
                 </h3>
             </div>
         </div>
@@ -26,13 +26,13 @@
                                             class="py-3.5 px-4 text-sm font-normal
                                                     text-left text-gray-500
                                                     dark:text-gray-400">
-                                            ID
+                                            Curso
                                         </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
-                                                text-center text-gray-500
-                                                dark:text-gray-400">
-                                            Título
+                                                    text-center text-gray-500
+                                                    dark:text-gray-400">
+                                            Módulos
                                         </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
@@ -55,11 +55,33 @@
                                             <tr>
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
-                                                    {{ $data->id }}
-                                                </td>
-                                                <td
-                                                    class="py-1.5 px-4 text-sm font-normal  text-center text-gray-500 dark:text-gray-400">
                                                     {{ $data->title }}
+                                                    @if ($data->active == 2)
+                                                        <div class="badge badge-error gap-2 mx-1">
+                                                            Excluido
+                                                        </div>
+                                                    @endif
+                                                </td>
+                                                <td class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
+                                                    <div class="tooltip tooltip-top p-0" data-tip="Módulos">
+                                                        <a href="{{route('module',$data->id)}}"
+                                                            class="py-2 px-3 flex
+                                                                hover:text-white dark:hover:bg-gray-300 transition-colors hover:hover:bg-gray-300
+                                                                duration-200 whitespace-nowrap">
+                                                            <svg class="h-6 w-6" viewBox="0 -1.5 20.412 20.412" xmlns="http://www.w3.org/2000/svg">
+                                                                <g id="check-lists" transform="translate(-1.588 -2.588)">
+                                                                    <path id="primary" d="M7,4,4.33,7,3,5.5" fill="none" stroke="currentColor"
+                                                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                                    <path id="primary-2" data-name="primary" d="M3,11.5,4.33,13,7,10" fill="none"
+                                                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                                    <path id="primary-3" data-name="primary" d="M3,17.5,4.33,19,7,16" fill="none"
+                                                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                                    <path id="primary-4" data-name="primary" d="M11,6H21M11,12H21M11,18H21" fill="none"
+                                                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                                </g>
+                                                            </svg>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
@@ -146,13 +168,14 @@
                 <div class="grid gap-4 mb-1 sm:grid-cols-2 sm:gap-6 sm:mb-5">
                     <div class="col-span-2 ">
                         <label for="title" class="block text-sm font-medium text-gray-900 dark:text-white">
-                            Título</label>
+                            *Título</label>
                         <input type="text" wire:model="title" placeholder="Título" required
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         @error('title')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
+
                 </div>
             </form>
         </x-slot>
@@ -179,13 +202,14 @@
                 <div class="grid gap-4 mb-1 sm:grid-cols-2 sm:gap-6 sm:mb-5">
                     <div class="col-span-2 ">
                         <label for="title" class="block text-sm font-medium text-gray-900 dark:text-white">
-                            Título</label>
+                            *Título</label>
                         <input type="text" wire:model="title" placeholder="Título" required
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         @error('title')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
+
                 </div>
             </form>
         </x-slot>

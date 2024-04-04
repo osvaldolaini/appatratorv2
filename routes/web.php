@@ -2,6 +2,10 @@
 
 use App\Livewire\Admin\Question\Filter\Filters;
 use App\Livewire\Admin\Configuration;
+use App\Livewire\Admin\Course\Courses;
+use App\Livewire\Admin\Course\Modules\ModuleEdit;
+use App\Livewire\Admin\Course\Modules\ModuleNew;
+use App\Livewire\Admin\Course\Modules\ModulesList;
 use App\Livewire\Admin\ListUser;
 use App\Livewire\Admin\Panel;
 use App\Livewire\Admin\Dashboard\Master;
@@ -115,8 +119,13 @@ Route::middleware([
         ->name('plans');
     Route::get('/vouchers', Voucher::class)
         ->name('vouchers');
-    //Questions
+    //Courses
+    Route::get('/cursos', Courses::class)->name('course');
+    Route::get('/cursos/modulo/{course}', ModulesList::class)->name('module');
+    Route::get('/cursos/modulo-novo/{course}', ModuleNew::class)->name('new-module');
+    Route::get('/cursos/modulo-editar/{module}', ModuleEdit::class)->name('edit-module');
 
+    //Questions
     Route::get('/questões', Question::class)->name('question');
     Route::get('/questões/nova', QuestionCreate::class)->name('new-question');
     Route::get('/questões/{questions}', QuestionUpdate::class)->name('edit-question');

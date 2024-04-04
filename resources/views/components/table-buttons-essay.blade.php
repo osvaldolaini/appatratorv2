@@ -7,7 +7,7 @@
         @endif
 
         <div class="tooltip tooltip-top p-0" data-tip="Competências">
-            <a href="{{ route('essays-skills',$id) }} }}"
+            <a href="{{ route('essays-skills',$id) }}"
                 class="py-2 px-3 flex
                     hover:text-white dark:hover:bg-gray-300 transition-colors hover:hover:bg-gray-300
                     duration-200 whitespace-nowrap">
