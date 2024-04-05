@@ -12,7 +12,7 @@ class ControllerScore extends Component
     public $mentoringContestUser;
     public $dicipProgress;
     public $labels;
-    public $dconcluded = 0;
+    public $dconcluded;
     public $perform;
 
     public function mount()
@@ -30,8 +30,7 @@ class ControllerScore extends Component
             }
             if ($discipline->perform) {
             $this->perform[] = number_format($discipline->perform, 0, '.', ' ');
-            }
-            else{
+            }else{
             $this->perform[] = 0;
             }
         }
@@ -42,7 +41,7 @@ class ControllerScore extends Component
             array_multisort($this->perform, SORT_DESC, $this->dconcluded, $this->labels);
         }
 
-        // dd($this->dconcluded);
+        dd($this->dconcluded);
     }
     public function render()
     {
