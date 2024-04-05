@@ -21,12 +21,11 @@ class ControllerScore extends Component
         $diciplines = ContestDiscipline::where('contest_id', Auth::user()->contest->contest_id)
             ->orderBy('order')
             ->get();
-            $this->dconcluded[] = 0;
+
         foreach ($diciplines as $discipline) {
             if ($this->mentoringContestUser->progress($discipline)['max']) {
             $this->dconcluded[] = number_format($this->mentoringContestUser->progress($discipline)['value'] * 100 / $this->mentoringContestUser->progress($discipline)['max'], 0, '.', ' ');
-            }
-            else {
+            }else {
                 $this->dconcluded[] = 0;
             }
             if ($discipline->perform) {
@@ -43,7 +42,7 @@ class ControllerScore extends Component
             array_multisort($this->perform, SORT_DESC, $this->dconcluded, $this->labels);
         }
 
-
+        dd($this->dconcluded);
     }
     public function render()
     {
