@@ -42,7 +42,7 @@ class ControllerScore extends Component
             array_multisort($this->perform, SORT_DESC, $this->dconcluded, $this->labels);
         }
 
-        dd($this->dconcluded);
+        // dd($this->dconcluded);
     }
     public function render()
     {
