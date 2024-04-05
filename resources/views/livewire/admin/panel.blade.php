@@ -127,7 +127,7 @@
             </div>
         @endif
 
-        @foreach (json_decode($data) as $course)
+        {{-- @foreach (json_decode($data) as $course)
             <div class="col-span-1 ">
                 <div class="card card-compact image-full shadow-xl bg-cover">
                     <figure ><img class="w-full "
@@ -142,7 +142,7 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @endforeach --}}
 
     </div>
 

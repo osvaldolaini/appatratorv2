@@ -110,7 +110,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
     'registerLogging',
-    'adminAccess'
+    'admin.access'
 ])->group(function () {
     Route::get('/painel-de-controle-administrador', Master::class)
         ->name('master-panel');

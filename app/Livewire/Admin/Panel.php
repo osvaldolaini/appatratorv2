@@ -17,8 +17,8 @@ class Panel extends Component
         if (Auth::user()->group == 'user') {
             return redirect()->route('lobby');
         }
-        $courses = Http::get('https://atratorconcursos.com.br/api/dados-cursos');
-        $this->data = json_encode($courses->json()['data']);
+        // $courses = Http::get('https://atratorconcursos.com.br/api/dados-cursos');
+        // $this->data = json_encode($courses->json()['data']);
         // dd(json_encode($this->data));
 
     }

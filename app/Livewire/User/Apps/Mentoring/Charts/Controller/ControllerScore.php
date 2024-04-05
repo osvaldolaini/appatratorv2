@@ -24,14 +24,14 @@ class ControllerScore extends Component
 
         foreach ($diciplines as $discipline) {
             if ($this->mentoringContestUser->progress($discipline)['max']) {
-            $this->dconcluded[] = number_format($this->mentoringContestUser->progress($discipline)['value'] * 100 / $this->mentoringContestUser->progress($discipline)['max'], 0, '.', ' ');
+                $this->dconcluded[] = number_format($this->mentoringContestUser->progress($discipline)['value'] * 100 / $this->mentoringContestUser->progress($discipline)['max'], 0, '.', ' ');
             }else {
                 $this->dconcluded[] = 0;
             }
             if ($discipline->perform) {
-            $this->perform[] = number_format($discipline->perform, 0, '.', ' ');
+                $this->perform[] = number_format($discipline->perform, 0, '.', ' ');
             }else{
-            $this->perform[] = 0;
+                $this->perform[] = 0;
             }
         }
 
@@ -41,7 +41,7 @@ class ControllerScore extends Component
             array_multisort($this->perform, SORT_DESC, $this->dconcluded, $this->labels);
         }
 
-        dd($this->dconcluded);
+        // dd($this->dconcluded);
     }
     public function render()
     {
