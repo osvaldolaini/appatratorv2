@@ -87,8 +87,6 @@ Route::middleware([
     'registerLogging'
 ])->group(function () {
     Route::get('/dashboard', Panel::class)->name('dashboard');
-    Route::get('/painel-de-controle-administrador', Master::class)
-        ->name('master-panel');
     Route::get('/', Panel::class)->name('dashboard');
     Route::get('', Panel::class)->name('dashboard');
 });
@@ -112,7 +110,10 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
     'registerLogging',
+    'adminAccess'
 ])->group(function () {
+    Route::get('/painel-de-controle-administrador', Master::class)
+        ->name('master-panel');
     Route::get('/usuários', ListUser::class)
         ->name('list-users');
     Route::get('/planos', Plan::class)
