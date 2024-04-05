@@ -12,7 +12,7 @@ class ControllerScore extends Component
     public $mentoringContestUser;
     public $dicipProgress;
     public $labels;
-    public $dconcluded;
+    public $dconcluded = 0;
     public $perform;
 
     public function mount()
@@ -21,7 +21,7 @@ class ControllerScore extends Component
         $diciplines = ContestDiscipline::where('contest_id', Auth::user()->contest->contest_id)
             ->orderBy('order')
             ->get();
-
+            $this->dconcluded[] = 0;
         foreach ($diciplines as $discipline) {
             if ($this->mentoringContestUser->progress($discipline)['max']) {
             $this->dconcluded[] = number_format($this->mentoringContestUser->progress($discipline)['value'] * 100 / $this->mentoringContestUser->progress($discipline)['max'], 0, '.', ' ');
