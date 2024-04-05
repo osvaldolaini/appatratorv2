@@ -38,8 +38,11 @@ class ControllerScore extends Component
         }
 
         $this->labels = $diciplines->pluck('nick')->toArray();
+        if($this->perform)
+        {
+            array_multisort($this->perform, SORT_DESC, $this->dconcluded, $this->labels);
+        }
 
-        array_multisort($this->perform, SORT_DESC, $this->dconcluded, $this->labels);
 
     }
     public function render()
