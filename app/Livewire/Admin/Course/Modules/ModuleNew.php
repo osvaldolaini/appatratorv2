@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class ModuleNew extends Component
 {
-    public $breadcrumb_title = 'NOVO MÓDULO';
+    public $breadcrumb = 'Módulos de: ';
     public $text;
     public $rules;
 
@@ -19,6 +19,14 @@ class ModuleNew extends Component
     public $description;
     public $type = 1;
     public $course_id;
+    public function mount(Course $course)
+    {
+        $this->course_id = $course->id;
+    }
+    public function back()
+    {
+        redirect()->route('module',$this->course_id);
+    }
 
     public function render()
     {
@@ -31,7 +39,8 @@ class ModuleNew extends Component
             'type'  =>'required',
         ];
         $this->validate();
-        $question =  Module::create([
+
+        Module::create([
             'title'         => $this->title,
             'type'          => $this->type,
             'description'   => $this->description,
@@ -42,7 +51,7 @@ class ModuleNew extends Component
         ]);
 
         return redirect()->to('/cursos/modulo/' . $this->course_id)
-            ->with('success', 'Modulo criada com sucesso.');
+            ->with('success', 'Módulo criada com sucesso.');
     }
     //MESSAGE
     public function openAlert($status, $msg)

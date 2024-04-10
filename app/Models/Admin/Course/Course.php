@@ -21,6 +21,10 @@ class Course extends Model
     {
         $this->attributes['title']=mb_strtoupper($value);
     }
+    public function modules()
+    {
+        return $this->hasMany(Module::class,'course_id','id');
+    }
 
     public function getActivitylogOptions(): LogOptions
     {

@@ -5,6 +5,12 @@
 </p>
 
 # ATRATOR APP V2
+## V2 0.12 CURSOS
+    Criação do curso automática
+    Criação de módulos
+    Criação de aulas
+        Inclusão de link de vídeo
+        Upload de arquivos
 ## V2 0.11 APPS - 2024-03-11
     Vouchers
     Questions

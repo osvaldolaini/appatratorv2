@@ -1,22 +1,16 @@
 <?php
 
-namespace App\Livewire\Admin\Course\Modules;
+namespace App\Livewire\Admin\Course\Contents;
 
-use App\Models\Admin\Course\Course;
 use App\Models\Admin\Course\Module;
 use App\Models\Admin\Course\ModuleContent;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Str;
 
-class ModulesList extends Component
+class ModulesContentList extends Component
 {
-    use WithPagination;
-    public Module $module;
-    public $breadcrumb;
-
     public $showJetModal = false;
     public $showModalView = false;
     public $showModalOrder = false;
@@ -31,27 +25,28 @@ class ModulesList extends Component
     public $qtdOrder;
     public $type_content;
 
+    public $content;
+    public $contents;
+    public $module;
+
     //Campos
     public $active = 1;
     public $order;
-    //API
-    public $course;
-    public $modules;
 
     protected $listeners =
     [
         'uploadingImage',
     ];
-    public function mount(Course $course)
+    public function mount(ModuleContent $content)
     {
-        $this->course = $course;
-        $this->modules = $course->modules->where('active', 1)->sortBy('order');
-        $this->breadcrumb .= $course->title;
+        $this->content = $content;
+        $this->module = $content->module;
+        $this->contents = ModuleContent::where('module_id',$this->content->module_id)->where('active', 1)->orderBy('order','asc')->get();
     }
 
     public function render()
     {
-        return view('livewire.admin.courses.modules.list');
+        return view('livewire.admin.courses.contents.modules-content-list');
     }
     public function resetAll()
     {
@@ -59,62 +54,29 @@ class ModulesList extends Component
             'title',
         );
     }
-    //NEW CONTENT
-    public function newContent(Module $module)
-    {
-        $this->model_id = $module->id;
-        $this->showModalNewContent = true;
-    }
-    //NEW CONTENT
-    public function goContent($type_content)
-    {
-        $tot = ModuleContent::where('module_id',$this->model_id)->where('active',1)->orderBy('order','desc')->first();
-        if($tot){
-            $order = $tot->order + 1;
-        }else{
-            $order = 1;
-        }
-        $content = ModuleContent::create([
-            'type_content'  => $type_content,
-            'module_id'     => $this->model_id,
-            'order'         => $order,
-            'active'        => 1,
-            'code'          => Str::uuid(),
-            'created_by'    => Auth::user()->name,
-        ]);
-
-        return redirect()->to('/cursos/modulo/conteúdo/' . $content->id)
-            ->with('success', 'Conteúdo criado com sucesso.');
-    }
-
-    //CREATE
-    public function modalCreate()
-    {
-        redirect()->route('new-module', $this->course->id);
-    }
     //ORDER
-    public function modalOrder(Module $module)
+    public function modalOrder()
     {
         // dd($module->order);
         $this->order = '';
         $this->showModalOrder = true;
-        $this->modules = $this->course->modules->where('active', 1)->sortBy('order');
-        $this->order = $module->order;
-        $this->model_id = $module->id;
+        $this->contents = $this->module->contents->where('active', 1)->sortBy('order');
+        $this->order = $this->content->order;
+        $this->model_id = $this->content->id;
     }
     public function rOrder()
     {
         // Obtenha todos os cards ordenados pela posição atual
-        $modules = $this->course->modules->where('active', 1)->sortBy('order');
+        $contents = $this->module->contents->where('active', 1)->sortBy('order');
 
         // Encontre a posição atual do card selecionado
-        $currentPosition = $modules->firstWhere('id', $this->model_id)->order;
+        $currentPosition = $contents->firstWhere('id', $this->model_id)->order;
 
         // Calcule a nova ordem dos cards
         $arrayOrder = [];
         $newPosition = $this->order; // Nova posição selecionada pelo usuário
 
-        foreach ($modules as $module) {
+        foreach ($contents as $module) {
             if ($module->id == $this->model_id) {
                 // Insira o card movido para a nova posição
                 $arrayOrder[] = $this->model_id;
@@ -135,11 +97,11 @@ class ModulesList extends Component
         }
 
         // Atualize a ordem do card selecionado
-        $card = Module::find($this->model_id);
+        $card = ModuleContent::find($this->model_id);
         $card->order = $newPosition;
         $card->save();
 
-        return redirect()->to('/cursos/modulo/' . $card->course_id)
+        return redirect()->to('/cursos/modulo/' . $card->module->course_id)
             ->with('success', 'Modulos reordenados com sucesso.');
     }
 

@@ -3,6 +3,7 @@
 use App\Livewire\Admin\Question\Filter\Filters;
 use App\Livewire\Admin\Configuration;
 use App\Livewire\Admin\Course\Courses;
+use App\Livewire\Admin\Course\Contents\ModuleContentEdit;
 use App\Livewire\Admin\Course\Modules\ModuleEdit;
 use App\Livewire\Admin\Course\Modules\ModuleNew;
 use App\Livewire\Admin\Course\Modules\ModulesList;
@@ -125,6 +126,9 @@ Route::middleware([
     Route::get('/cursos/modulo/{course}', ModulesList::class)->name('module');
     Route::get('/cursos/modulo-novo/{course}', ModuleNew::class)->name('new-module');
     Route::get('/cursos/modulo-editar/{module}', ModuleEdit::class)->name('edit-module');
+
+    Route::get('/cursos/modulo/conteúdo/{moduleContent}', ModuleContentEdit::class)->name('content-module');
+
 
     //Questions
     Route::get('/questões', Question::class)->name('question');

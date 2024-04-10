@@ -1,33 +1,32 @@
 <div>
-    <x-breadcrumb>
-        <div class="grid grid-cols-8 gap-4 text-gray-600 ">
-            <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
+    <div class="p-6 py-8 dark:bg-violet-400 dark:text-gray-900">
+        <div class="container mx-auto">
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <h2 class="text-left text-3xl tracki font-bold">
                     {{ mb_strtoupper($breadcrumb) }}
-                </h3>
-            </div>
-            <div class="col-span-2 justify-items-end text-right">
-                <div class="tooltip tooltip-top p-0" data-tip="Voltar">
-                    <button wire:click="back()"
-                        class="py-2 px-3
-                            hover:text-white dark:hover:bg-gray-300 transition-colors hover:hover:bg-gray-300
-                            duration-200 whitespace-nowrap">
-                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
-                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path
-                                d="M9.00002 15.3802H13.92C15.62 15.3802 17 14.0002 17 12.3002C17 10.6002 15.62 9.22021 13.92 9.22021H7.15002"
-                                stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M8.57 10.7701L7 9.19012L8.57 7.62012" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                </div>
+                    <p class="text-2xl tracki font-semibold">
+                        {{ $subTitle }}
+                    </p>
+                </h2>
+                <button wire:click="back()"
+                    class="flex px-5 items-center lg:mt-0 py-3 rounded-md
+                    border dark:bg-gray-50 dark:text-gray-900 dark:border-gray-400">
+                    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M9.00002 15.3802H13.92C15.62 15.3802 17 14.0002 17 12.3002C17 10.6002 15.62 9.22021 13.92 9.22021H7.15002"
+                            stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M8.57 10.7701L7 9.19012L8.57 7.62012" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span>Voltar </span>
+                </button>
+
             </div>
         </div>
-    </x-breadcrumb>
+    </div>
     <section class="px-4 dark:bg-gray-800 dark:text-gray-50 container flex flex-col mx-auto space-y-12">
         <form wire:submit="create">
             <fieldset class="grid grid-cols-12 gap-2 pb-6 rounded-md dark:bg-gray-900 items-start">
@@ -45,7 +44,6 @@
                         class=" col-span-full block text-sm font-medium text-gray-900 dark:text-white">
                         Tipo de módulo</label>
                     <div class="col-span-full sm:col-span-1">
-
                         <label for="type"
                             class="inline-flex items-center justify-between w-full p-5
                          bg-white border  rounded-lg cursor-pointer
@@ -61,6 +59,7 @@
                             </div>
                         </label>
                     </div>
+
                     <div class="col-span-full sm:col-span-1">
                         <label for="type"
                             class="inline-flex items-center justify-between w-full p-5
@@ -78,9 +77,25 @@
                         </label>
                     </div>
                 </div>
-                {{-- <div class="col-span-full">
-                    @livewire('admin.course.modules.upload-image', [''])
-                </div> --}}
+                @if ($type_content == 'video')
+                        <div class="col-span-full ">
+                            <label for="youtube_link" class="block text-sm font-medium text-gray-900 dark:text-white">
+                                *Link do vídeo do youtube</label>
+                            <input type="text" wire:model="youtube_link" placeholder="Link youtube" required
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            @error('youtube_link')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+
+                        </div>
+                    @endif
+                    @if ($type_content == 'download')
+                        <div class="col-span-full ">
+                            <label for="downloads" class="block text-sm font-medium text-gray-900 dark:text-white">
+                                *Documentos para download</label>
+                            @livewire('admin.course.contents.upload-document', [$id])
+                        </div>
+                    @endif
                 <div class="col-span-full" wire:ignore>
                     <label for="description" class="block text-sm font-medium text-gray-900 dark:text-white">
                         Descrição</label>

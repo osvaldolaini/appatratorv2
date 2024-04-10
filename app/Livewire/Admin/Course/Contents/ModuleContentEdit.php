@@ -1,33 +1,39 @@
 <?php
 
-namespace App\Livewire\Admin\Course\Modules;
+namespace App\Livewire\Admin\Course\Contents;
 
-use App\Models\Admin\Course\Course;
 use App\Models\Admin\Course\Module;
+use App\Models\Admin\Course\ModuleContent;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Str;
 
-class ModuleEdit extends Component
+class ModuleContentEdit extends Component
 {
-    public $breadcrumb = 'Módulos de: ';
+    public $breadcrumb;
+    public $subTitle;
     public $rules;
 
     public $title;
+    public $youtube_link;
     public $description;
     public $type = 1;
+    public $type_content;
     public $course_id;
     public $id;
 
-    public function mount(Module $module)
+    public function mount(ModuleContent $moduleContent)
     {
-        $this->course_id = $module->course_id;
-        $this->id = $module->id;
-        $this->title = $module->title;
-        $this->description = $module->description;
-        $this->type = $module->type;
-        $this->breadcrumb.= $module->title;
+        $this->id = $moduleContent->id;
+        $this->title = $moduleContent->title;
+        $this->youtube_link = $moduleContent->youtube_link;
+        $this->description = $moduleContent->description;
+        $this->type = $moduleContent->type;
+        $this->type_content = $moduleContent->type_content;
+        $this->breadcrumb= $moduleContent->module->course->title;
+        $this->subTitle = $moduleContent->module->title;
+        $this->course_id = $moduleContent->module->course->id;
     }
     public function back()
     {
@@ -35,7 +41,7 @@ class ModuleEdit extends Component
     }
     public function render()
     {
-        return view('livewire.admin.courses.modules.edit');
+        return view('livewire.admin.courses.contents.edit');
     }
     public function create()
     {
@@ -43,12 +49,16 @@ class ModuleEdit extends Component
             'title' => 'required',
             'type'  =>'required',
         ];
+        if ($this->type_content == 'video') {
+            $this->rules['youtube_link'] = 'required';
+        }
         $this->validate();
-        Module::updateOrCreate([
+        ModuleContent::updateOrCreate([
             'id' => $this->id,
                  ], [
             'title'         => $this->title,
             'type'          => $this->type,
+            'youtube_link'  => $this->youtube_link,
             'description'   => $this->description,
             'course_id'     => $this->course_id,
             'active'        => 1,
@@ -56,7 +66,7 @@ class ModuleEdit extends Component
         ]);
 
         return redirect()->to('/cursos/modulo/' . $this->course_id)
-            ->with('success', 'Modulo criada com sucesso.');
+            ->with('success', 'Modulo editado com sucesso.');
     }
     //MESSAGE
     public function openAlert($status, $msg)

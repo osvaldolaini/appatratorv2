@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
-class Module extends Model
+class ModuleContent extends Model
 {
     use HasFactory;
     use LogsActivity;
 
-    protected $table = 'modules';
+    protected $table = 'module_contents';
     protected $fillable = [
-        'id','active','title','type','order','description','course_id','image','code','updated_by','created_by'
+        'id','active','title','type','youtube_link','type_content','order','description','module_id','code','updated_by','created_by'
     ];
 
     public function setTitleAttribute($value)
@@ -27,13 +27,8 @@ class Module extends Model
         return LogOptions::defaults()
             ->logOnly($this->fillable);
     }
-    public function course()
+    public function module()
     {
-        return $this->belongsTo(Course::class,'course_id','id');
-    }
-
-    public function contents()
-    {
-        return $this->hasMany(ModuleContent::class,'module_id','id');
+        return $this->belongsTo(Module::class,'module_id','id');
     }
 }

@@ -12,16 +12,11 @@
                         class="py-2 px-3
                             hover:text-white dark:hover:bg-gray-300 transition-colors hover:hover:bg-gray-300
                             duration-200 whitespace-nowrap">
+
                         <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
-                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path
-                                d="M9.00002 15.3802H13.92C15.62 15.3802 17 14.0002 17 12.3002C17 10.6002 15.62 9.22021 13.92 9.22021H7.15002"
-                                stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M8.57 10.7701L7 9.19012L8.57 7.62012" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9.00002 15.3802H13.92C15.62 15.3802 17 14.0002 17 12.3002C17 10.6002 15.62 9.22021 13.92 9.22021H7.15002" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8.57 10.7701L7 9.19012L8.57 7.62012" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
                 </div>
@@ -41,22 +36,21 @@
                     @enderror
                 </div>
                 <div class="col-span-full grid grid-cols-2 gap-2">
-                    <label for="title"
-                        class=" col-span-full block text-sm font-medium text-gray-900 dark:text-white">
+                    <label for="title" class=" col-span-full block text-sm font-medium text-gray-900 dark:text-white">
                         Tipo de módulo</label>
                     <div class="col-span-full sm:col-span-1">
 
                         <label for="type"
-                            class="inline-flex items-center justify-between w-full p-5
+                        class="inline-flex items-center justify-between w-full p-5
                          bg-white border  rounded-lg cursor-pointer
                         dark:hover:text-gray-300 dark:border-gray-700 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700
-                        {{ $type == 1 ? 'dark:text-blue-500 border-blue-600 text-blue-600' : 'border-gray-200 text-gray-500' }}">
+                        {{ ($type == 1 ? 'dark:text-blue-500 border-blue-600 text-blue-600' : 'border-gray-200 text-gray-500') }}">
                             <div class="block">
                                 <div class="w-full text-lg font-semibold">
-                                    <input type="radio" @if ($type == '1') checked @endif
-                                        value="1" wire:model.live="type" class="radio checked:bg-red-500" />
-                                    Principal
-                                </div>
+                                    <input type="radio" @if ($type == '1')
+                                    checked
+                                @endif value="1" wire:model.live="type" class="radio checked:bg-red-500"  />
+                                    Principal </div>
                                 <div class="w-full">Faz parte do conteúdo do curso</div>
                             </div>
                         </label>
@@ -66,13 +60,14 @@
                             class="inline-flex items-center justify-between w-full p-5
                             bg-white border rounded-lg cursor-pointer
                             dark:hover:text-gray-300 dark:border-gray-700 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700
-                            {{ $type == 0 ? 'dark:text-blue-500 border-blue-600 text-blue-600' : 'border-gray-200 text-gray-500' }}">
+                            {{ ($type == 0 ? 'dark:text-blue-500 border-blue-600 text-blue-600' : 'border-gray-200 text-gray-500') }}">
                             <div class="block">
                                 <div class="w-full text-lg font-semibold">
-                                    <input type="radio" @if ($type == 0) checked @endif
-                                        value="0" wire:model.live="type" class="radio checked:bg-red-500" />
-                                    Adicional
-                                </div>
+                                    <input type="radio"
+                                    @if ($type == 0)
+                                    checked
+                                @endif value="0" wire:model.live="type" class="radio checked:bg-red-500" />
+                                    Adicional </div>
                                 <div class="w-full">Conteúdo adicional que não afeta a progressão do aluno</div>
                             </div>
                         </label>

@@ -11,19 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('modules', function (Blueprint $table) {
+        Schema::create('module_contents', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
+            $table->string('youtube_link')->nullable();
             $table->integer('order')->nullable();
             $table->boolean('active')->nullable();
+            $table->string('type_content')->nullable();
             $table->boolean('type')->nullable();
-            $table->foreignId('course_id')
+            $table->foreignId('module_id')
             ->nullable()
-            ->constrained('courses')
+            ->constrained('modules')
             ->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->string('video')->nullable();
             $table->longText('description')->nullable();
-            $table->string('image')->nullable();
             $table->string('code')->nullable();
             $table->timestamps();
             $table->string('created_by',50)->nullable();
@@ -36,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('modules');
+        Schema::dropIfExists('module_contents');
     }
 };
