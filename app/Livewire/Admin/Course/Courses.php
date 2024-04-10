@@ -44,16 +44,16 @@ class Courses extends Component
     public $courses;
     public function mount()
     {
-        // $courses = Http::get('https://atratorconcursos.com.br/api/dados-cursos');
-        // foreach ($courses->json()['data'] as $course) {
-        //     Course::updateOrCreate([
-        //         'api_course_id' => $course['id'],
-        //     ], [
-        //         'active'=>1,
-        //         'title'=> $course['title'],
-        //         'description'=> $course['description'],
-        //     ]);
-        // }
+        $courses = Http::get('https://atratorconcursos.com.br/api/dados-cursos');
+        foreach ($courses->json()['data'] as $course) {
+            Course::updateOrCreate([
+                'api_course_id' => $course['id'],
+            ], [
+                'active'=>1,
+                'title'=> $course['title'],
+                'description'=> $course['description'],
+            ]);
+        }
     }
 
     public function render()
