@@ -5,7 +5,7 @@
                 <h1 class="text-5xl font-bold leadi">
                     {{ $course->title }}
                 </h1>
-                <div class="w-full rounded-md border">
+                <div class="w-full rounded-md border my-10">
                     <div class="items-center justify-between p-3 border-b-1">
                         <h1 class="w-full flex text-3xl justify-between font-bold leadi border-b-2">
                             <span class="text-gray-500">Dados do curso</span>
@@ -33,7 +33,7 @@
                         </h1>
 
                     </div>
-                    <div class="p-3 grid grid-cols-2">
+                    <div class="p-3 grid grid-cols-2 ">
                         <div class="col-span-1">
                             <span class="text-wrap font-bold leadi text-gray-500">Alunos</span>
                             <p class="text-3xl font-bold leadi">{{ $course->vouchers->count() }}</p>
