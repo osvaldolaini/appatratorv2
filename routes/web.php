@@ -4,6 +4,7 @@ use App\Livewire\Admin\Question\Filter\Filters;
 use App\Livewire\Admin\Configuration;
 use App\Livewire\Admin\Course\Courses;
 use App\Livewire\Admin\Course\Contents\ModuleContentEdit;
+use App\Livewire\Admin\Course\CourseDashboard;
 use App\Livewire\Admin\Course\Modules\ModuleEdit;
 use App\Livewire\Admin\Course\Modules\ModuleNew;
 use App\Livewire\Admin\Course\Modules\ModulesList;
@@ -128,6 +129,7 @@ Route::middleware([
         ->name('vouchers');
     //Courses
     Route::get('/cursos', Courses::class)->name('course');
+    Route::get('/cursos/dashboard/{course}', CourseDashboard::class)->name('course-dashboard');
     Route::get('/cursos/modulo/{course}', ModulesList::class)->name('module');
     Route::get('/cursos/modulo-novo/{course}', ModuleNew::class)->name('new-module');
     Route::get('/cursos/modulo-editar/{module}', ModuleEdit::class)->name('edit-module');
