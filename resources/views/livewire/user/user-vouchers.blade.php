@@ -5,6 +5,11 @@
 
     <x-slot name="description">
         Gerencie suas aplicações, inclua novos vouchers clicando no botão.
+        <div class="flex items-center mt-5">
+            <x-button wire:click="showModalInsert" wire:loading.attr="disabled">
+                Inserir voucher
+            </x-button>
+        </div>
     </x-slot>
 
     <x-slot name="content">
@@ -19,7 +24,7 @@
                     <table class="table w-full text-sm ">
                         <thead>
                             <tr>
-                                <th>Aplicativo</th>
+                                <th>Aplicativo / Curso</th>
                                 <th>Voucher</th>
                                 <th>Validade</th>
                                 <th>Exluir / Ativar</th>
@@ -30,7 +35,7 @@
                                 <div class="flex items-center">
                                     <!-- row 1 -->
                                     <tr>
-                                        <th>{{ $voucher->application }}</th>
+                                        <th>{{ $voucher->app }}</th>
                                         <td>
                                             <div class="tooltip tooltip-right" data-tip="{{ $voucher->code }}">
                                                 <button>{{ mb_strimwidth($voucher->code, 0, 10, '...') }}</button>
@@ -126,11 +131,7 @@
             </div>
         @endif
 
-        <div class="flex items-center mt-5">
-            <x-button wire:click="showModalInsert" wire:loading.attr="disabled">
-                Inserir voucher
-            </x-button>
-        </div>
+
         {{-- MODAL CREATE --}}
         <x-dialog-modal wire:model="showJetModal">
             <x-slot name="title">Excluir registro</x-slot>

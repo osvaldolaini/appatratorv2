@@ -64,6 +64,10 @@ use App\Livewire\User\Apps\Mentoring\MentoringReviewsUser;
 use App\Livewire\User\Apps\Mentoring\MentoringSimulatedsUser;
 use App\Livewire\User\Apps\Questions\HomeQuestions;
 use App\Livewire\User\Apps\Questions\Stats;
+use App\Livewire\User\Courses\DashboardCourse;
+use App\Livewire\User\Courses\DashboardModule;
+use App\Livewire\User\MyApps;
+use App\Livewire\User\MyCourses;
 use App\Livewire\User\MyVouchers;
 use App\Livewire\User\UserProfile;
 use Illuminate\Http\Request;
@@ -92,20 +96,21 @@ Route::middleware([
     Route::get('', Panel::class)->name('dashboard');
 });
 
+//UPLOADS EDITOR DE TEXTO
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-    'registerLogging'
+    'registerLogging',
+    'admin.access'
 ])->group(function () {
-
     Route::post('/upload-editor', function (Request $request) {
         $file = $request->file('file');
         $url = $file->store('public/uploads');
         return Storage::url($url);
     })->name('upload-editor');
 });
-
+//ADMIN
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -188,11 +193,11 @@ Route::middleware([
     //lobby
     Route::get('/lobby', Lobby::class)->name('lobby');
     Route::get('/meus-dados', UserProfile::class)->name('profile.user');
+    Route::get('/meus-apps', MyApps::class)->name('user.apps');
+    Route::get('/meus-cursos', MyCourses::class)->name('user.courses');
     Route::get('/meus-vouchers', MyVouchers::class)->name('user.vouchers');
 
-    // Route::get('/questões', Lobby::class)->name('apps.questions');
-    // Route::get('/treinamento-físico', Lobby::class)->name('apps.treinaments');
-    // Route::get('/mentoria', Lobby::class)->name('apps.mentorings');
+
     //redação
     Route::get('/app-de-redação', HomeEssay::class)->name('apps.essays');
     Route::get('/app-de-redação/minhas-redações', MyEssays::class)->name('apps.user-essay');
@@ -227,4 +232,16 @@ Route::middleware([
 
     Route::get('/app-de-mentoria/planejamento-por-ciclo', MentoringPlanningCyclesUser::class)->name('apps.contestPlanningCyclesUser.user');
     Route::get('/app-de-mentoria/ciclo', MentoringControllerCycleUser::class)->name('apps.contestControllerCycleUser.user');
+});
+
+//Courses
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'registerLogging'
+])->group(function () {
+    //lobby
+    Route::get('/curso/{course:code}', DashboardCourse::class)->name('dashboard-course');
+    Route::get('/curso/{course:code}/modulo/{module:code}', DashboardModule::class)->name('dashboard-module');
 });

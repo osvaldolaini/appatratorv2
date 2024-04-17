@@ -251,27 +251,32 @@
                     </div>
                     <div class="col-span-2 ">
                         <label for="unity" class="block text-sm font-medium text-gray-900 dark:text-white">
-                            *Aplicativos</label>
+                            *Aplicativos / Cursos</label>
                             <div id="tabs" class="flex justify-between">
                                 <label class="w-full justify-center inline-block text-center pt-2 pb-1">
-                                    <input type="checkbox" value="questions" wire:model="applications"
+                                    <input type="checkbox" value="questions" wire:model.live="applications"
                                         name="applications[]"  class="checkbox checkbox-primary" />
                                     <span class="tab tab-explore block text-xs">Questões</span>
                                 </label>
                                 <label class="w-full justify-center inline-block text-center pt-2 pb-1">
-                                    <input type="checkbox" value="treinament" wire:model="applications"
+                                    <input type="checkbox" value="treinament" wire:model.live="applications"
                                         name="applications[]"  class="checkbox checkbox-primary" />
                                     <span class="tab tab-explore block text-xs">Treinamento</span>
                                 </label>
                                 <label class="w-full justify-center inline-block text-center pt-2 pb-1">
-                                    <input type="checkbox" value="essay" wire:model="applications"
+                                    <input type="checkbox" value="essay" wire:model.live="applications"
                                         name="applications[]"  class="checkbox checkbox-primary" />
                                     <span class="tab tab-explore block text-xs">Redação</span>
                                 </label>
                                 <label class="w-full justify-center inline-block text-center pt-2 pb-1">
-                                    <input type="checkbox" value="mentoring" wire:model="applications"
+                                    <input type="checkbox" value="mentoring" wire:model.live="applications"
                                         name="applications[]"  class="checkbox checkbox-primary" />
                                     <span class="tab tab-explore block text-xs">Mentoria</span>
+                                </label>
+                                <label class="w-full justify-center inline-block text-center pt-2 pb-1">
+                                    <input type="checkbox" value="courses" wire:model.live="applications"
+                                        name="applications[]"  class="checkbox checkbox-primary" />
+                                    <span class="tab tab-explore block text-xs">Cursos</span>
                                 </label>
                             </div>
 
@@ -279,6 +284,24 @@
                                 <span class="error">{{ $message }}</span>
                             @enderror
                     </div>
+                    @if (in_array('courses',$applications))
+                    <div class="col-span-2">
+                        <label for="course_id" class="block text-sm font-medium text-gray-900 dark:text-white">
+                            *Curso</label>
+                        <select wire:model="course_id" required="" name="course_id" id="course_id" placeholder="Plano"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option value="">Selecione uma opção</option>
+                            @foreach ($courses as $course)
+                                <option value="{{ $course->id }}">{{ $course->title }}</option>
+                            @endforeach
+                        </select>
+                        @error('course_id')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+
+                    </div>
+                    @endif
+
                 </div>
             </form>
         </x-slot>

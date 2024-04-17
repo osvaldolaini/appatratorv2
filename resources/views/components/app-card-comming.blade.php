@@ -1,7 +1,7 @@
 @props(['item','href'=>null])
 @if ($item)
     <div id="item{{ $item }}" class="carousel-item ">
-        <div class="w-48 h-48 sm:w-56 sm:h-56 p-2 bg-white drop-shadow-xl rounded-2xl rounded-box mr-4">
+        <div class="w-36 h-36 sm:w-48 sm:h-48 p-2 bg-white drop-shadow-xl rounded-2xl rounded-box mr-4">
             <div class='flex w-full items-center justify-between text-center mx-auto mb-3'>
                 <svg class="h-20 sm:h-20 " viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                     <path d="m 6.5 0 c -3.578125 0 -6.5 2.921875 -6.5 6.5 s 2.921875 6.5 6.5 6.5 c 0.171875 0 0.332031 -0.019531 0.5 -0.03125 v -2.03125 c -0.167969 0.019531 -0.328125 0.0625 -0.5 0.0625 c -2.496094 0 -4.5 -2.003906 -4.5 -4.5 s 2.003906 -4.5 4.5 -4.5 s 4.5 2.003906 4.5 4.5 c 0 0.171875 -0.042969 0.332031 -0.0625 0.5 h 2.03125 c 0.011719 -0.167969 0.03125 -0.328125 0.03125 -0.5 c 0 -3.578125 -2.921875 -6.5 -6.5 -6.5 z m 0 3 c -0.277344 0 -0.5 0.222656 -0.5 0.5 v 2.5 h -1.5 c -0.277344 0 -0.5 0.222656 -0.5 0.5 s 0.222656 0.5 0.5 0.5 h 2 c 0.277344 0 0.5 -0.222656 0.5 -0.5 v -3 c 0 -0.277344 -0.222656 -0.5 -0.5 -0.5 z m 0 0" fill="#2e3436"/>

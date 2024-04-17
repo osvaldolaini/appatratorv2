@@ -18,15 +18,15 @@ return new class extends Migration
             $table->integer('qtd')->nullable();
             $table->string('application')->nullable();
             $table->foreignId('user_id')
+            ->nullable()
             ->constrained('users')
             ->onUpdate('cascade')
-            ->onDelete('cascade')
-            ->nullable();
+            ->onDelete('cascade');
             $table->foreignId('plan_id')
+            ->nullable()
             ->constrained('plans')
             ->onUpdate('cascade')
-            ->onDelete('cascade')
-            ->nullable();
+            ->onDelete('cascade');
             $table->string('code')->nullable();
 
             $table->dateTime('send_date')->nullable();

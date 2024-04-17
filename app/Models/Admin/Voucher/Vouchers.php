@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin\Voucher;
 
+use App\Models\Admin\Course\Course;
 use App\Models\Admin\Essay\EssayUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +21,7 @@ class Vouchers extends Model
     protected $table = 'vouchers';
 
     protected $fillable = [
-        'user_id', 'plan_id', 'active', 'code', 'updated_by', 'created_by', 'application', 'limit_access', 'send_date', 'send_email', 'sended_by'
+        'user_id', 'plan_id', 'active', 'code', 'updated_by', 'created_by', 'application','course_id', 'limit_access', 'send_date', 'send_email', 'sended_by'
     ];
     public function getActivitylogOptions(): LogOptions
     {
@@ -59,6 +60,10 @@ class Vouchers extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id', 'id');
+    }
 
     public function getValityAttribute()
     {
@@ -83,6 +88,9 @@ class Vouchers extends Model
             case 'mentoring':
                 $convert = 'Mentoria';
                 break;
+            case 'courses':
+                $convert = $this->course->title;
+                    break;
             default:
                 $convert = '';
                 break;

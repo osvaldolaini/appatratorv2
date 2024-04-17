@@ -4,13 +4,21 @@
 </a>
 </p>
 
-# ATRATOR APP V2
+# ATRATOR ADMIN V2
+
+## V2 0.13 APPS - 2024-04-17
+    Visualização do aluno do curso
+    Aba módulo
+    Aba conteúdo
+    Download
+    Vídeo Youtube
 ## V2 0.12 CURSOS
     Criação do curso automática
     Criação de módulos
     Criação de aulas
         Inclusão de link de vídeo
         Upload de arquivos
+    Inclusão da opção de cursos nos vouchers
 ## V2 0.11 APPS - 2024-03-11
     Vouchers
     Questions

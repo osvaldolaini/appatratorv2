@@ -15,7 +15,6 @@ return new class extends Migration
             $table->boolean('cycles')
             ->after('contest_id')
             ->default(0);
-
             $table->integer('qtd_cycles')->after('cycles')->nullable();
         });
     }

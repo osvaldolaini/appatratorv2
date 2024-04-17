@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Voucher;
 
+use App\Models\Admin\Course\Course;
 use App\Models\Admin\Voucher\Plans;
 use App\Models\Admin\Voucher\Vouchers;
 use App\Models\User;
@@ -33,8 +34,8 @@ class Voucher extends Component
     public $search;
     public $relationTables = "users,users.id,vouchers.user_id"; //Relacionamentos ( table , key , foreingKey )
     public $customSearch = 'application|limit_access'; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'user_id,application,limit_access,users.name,users.email,vouchers.active';
-    public $searchable = 'application,users.name,users.email,limit_access'; //Colunas pesquisadas no banco de dados
+    public $columnsInclude = 'user_id,application,vouchers.course_id,limit_access,users.name,users.email,vouchers.active';
+    public $searchable = 'application,users.name,vouchers.course_id,users.email,limit_access'; //Colunas pesquisadas no banco de dados
     public $sort = "vouchers.id,desc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
 
@@ -53,9 +54,16 @@ class Voucher extends Component
     public $plan_id;
     public $code;
     public $application;
+    public $course_id;
     public $limit_access;
     public $applications = [];
 
+    public $courses;
+
+    public function mount()
+    {
+        $this->courses = Course::where('active',1)->get();
+    }
     public function render()
     {
         $this->plans = Plans::where('active', 1)->get();
@@ -97,6 +105,7 @@ class Voucher extends Component
             'active',
             'code',
             'application',
+            'course_id',
             'limit_access',
         );
     }
@@ -114,6 +123,9 @@ class Voucher extends Component
             // 'user_id'=>'required|min:1|max:10',
             'applications'=>'required',
         ];
+        if ($this->applications == 'courses') {
+            $this->rules['course_id'] ='required';
+        }
         $this->validate();
 
         $code = Str::uuid();
@@ -121,6 +133,7 @@ class Voucher extends Component
             Vouchers::create([
                 'plan_id'       =>$this->plan_id,
                 'user_id'       =>$this->user_id,
+                'course_id'      =>$this->course_id,
                 'application'   =>$this->applications[$i],
                 'active'        => 0,
                 'code'          =>$code,
@@ -160,10 +173,13 @@ class Voucher extends Component
         $this->model_id         = $vouchers->id;
         $this->plan_id          = $vouchers->plan_id;
         $this->user_id          = $vouchers->user_id;
+        $this->course_id          = $vouchers->course_id;
         $this->showModalEdit = true;
     }
     public function update()
     {
+
+        $this->validate();
         Vouchers::updateOrCreate([
             'id' => $this->model_id,
         ], [
