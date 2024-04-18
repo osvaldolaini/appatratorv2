@@ -39,7 +39,7 @@
                 {{-- <x-mentoring-app-status-bar :progress="$mentoringContestUser->progress($discipline)"></x-mentoring-app-status-bar> --}}
                 <div class="py-3 px-1 border border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                     @if ($discipline->contestMatter)
-                        <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8" >
                             <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                                 <div class="overflow-hidden dark:border-gray-700 ">
                                     <table style="width:100%"
@@ -106,23 +106,9 @@
                                                     </td>
                                                     <td scope="col"
                                                         class="text-sm text-gray-700 text-center w-2/12">
-                                                        @if ($mentoringContestUser->statusMatter($matter->id,$mentoringContestUser->id))
-                                                        <div class="tooltip tooltip-top p-0" data-tip="Clique para excluir">
-                                                            <button
-                                                                wire:click.prevent="deleteStatusMatter({{ $mentoringContestUser->statusMatter($matter->id,$mentoringContestUser->id) }})"
-                                                                class="btn btn-success btn-sm">
-                                                                Concluído
-                                                            </button>
-                                                        </div>
-                                                        @else
-                                                            <div class="tooltip tooltip-top p-0 " data-tip="Clique para concluir">
-                                                                <button
-                                                                    wire:click.prevent="storeStatus({{ $matter->id}})"
-                                                                    class="btn btn-outline btn-error btn-sm">
-                                                                    Em andamento <span class="loading loading-dots loading-sm"></span>
-                                                                </button>
-                                                            </div>
-                                                        @endif
+                                                        @livewire('user.apps.mentoring.mentoring-contest-status', [$matter->id])
+
+
                                                     </td>
                                                     <td class="text-sm p-2.5 text-center w-3/12">
                                                         <button

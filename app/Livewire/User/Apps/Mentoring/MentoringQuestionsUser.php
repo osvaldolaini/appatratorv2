@@ -14,8 +14,8 @@ class MentoringQuestionsUser extends Component
 {
     use WithPagination;
     public $showJetModal = false;
-    public $showModalCreate = false;
-    public $showModalEdit = false;
+    public $modalCreate = false;
+    public $modalEdit = false;
     public $alertSession = false;
 
     public $active = 1;
@@ -62,7 +62,7 @@ class MentoringQuestionsUser extends Component
     //CREATE
     public function showModalCreate()
     {
-        $this->showModalCreate = true;
+        $this->modalCreate = true;
     }
     public function store()
     {
@@ -88,7 +88,7 @@ class MentoringQuestionsUser extends Component
         session()->flash('success', 'Endereço criado com sucesso');
 
         $this->alertSession = true;
-        $this->showModalCreate = false;
+        $this->modalCreate = false;
         $this->reset('qtd','hits','day');
 
     }

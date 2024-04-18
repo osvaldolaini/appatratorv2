@@ -69,7 +69,7 @@
     </div>
     @if (empty($allContests))
 
-        <div class="max-w-7xl mx-auto pb-10 pt-5 sm:px-6 lg:px-8 rounded-md" wire:model="{{ $mentoringContestUser }}">
+        <div class="max-w-7xl mx-auto pb-10 pt-5 sm:px-6 lg:px-8 rounded-md" wire:ignore>
             <div class="mt-10 sm:mt-0 rounded-md">
 
                 <span>Progresso total</span>
@@ -85,7 +85,7 @@
             </x-slot>
             <x-slot name="content">
                 @if ($contentMatter)
-                    @livewire('app.mentoring.mentoring-questions-user', ['matter' => $contentMatter, 'user' => $user_id, key($contentMatter->id)])
+                    @livewire('user.apps.mentoring.mentoring-questions-user', ['matter' => $contentMatter, 'user' => $user_id, key($contentMatter->id)])
                 @endif
             </x-slot>
             <x-slot name="footer">

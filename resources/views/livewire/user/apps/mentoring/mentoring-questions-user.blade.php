@@ -126,7 +126,7 @@
     </x-confirmation-modal>
 
     {{-- MODAL CREATE --}}
-    <x-dialog-modal wire:model="showModalCreate" class="mt-0" mt="mt-0">
+    <x-dialog-modal wire:model="modalCreate" class="mt-0" mt="mt-0">
         <x-slot name="title">Criar novo</x-slot>
         <x-slot name="content">
             <form action="#" wire:submit.prevent="store()" wire.loading.attr='disable'>
@@ -179,7 +179,7 @@
 
         </x-slot>
         <x-slot name="footer">
-            <x-secondary-button wire:click="$toggle('showModalCreate')" class="mx-2">
+            <x-secondary-button wire:click="$toggle('modalCreate')" class="mx-2">
                 Fechar
             </x-secondary-button>
         </x-slot>
