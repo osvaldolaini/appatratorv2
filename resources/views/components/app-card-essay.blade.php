@@ -1,7 +1,7 @@
 @props(['item','href'=>null])
 @if ($item)
-    <div id="item{{ $item }}" class="carousel-item ">
-        <div class="w-48 h-48 sm:w-56 sm:h-56 p-2 bg-white drop-shadow-xl rounded-2xl rounded-box mr-4">
+    <div id="item{{ $item }}" class="carousel-item col-span-1 flex justify-center mt-4">
+        <div class="w-48 h-48 sm:w-56 sm:h-56 p-2 bg-white drop-shadow-xl rounded-box">
             <x-application-logo-essay class="m-auto h-16 sm:h-20"></x-application-logo-essay>
             <div class="p-2 sm:p-3 bg-slate-200 rounded-lg">
                 <p class="text-xl font-bold text-slate-500 ">

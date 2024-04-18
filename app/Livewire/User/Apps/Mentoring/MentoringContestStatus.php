@@ -20,7 +20,6 @@ class MentoringContestStatus extends Component
     public function mount($matter)
     {
         $this->matter = ContestMatter::find($matter);
-
         if ($matter) {
             $mentoringContestUser = ContestUser::with('contest')->where('user_id', Auth::user()->id)->first();
             if ($mentoringContestUser->statusMatter($this->matter->id, $mentoringContestUser->id)) {
@@ -47,7 +46,7 @@ class MentoringContestStatus extends Component
     }
     public function deleteStatusMatter()
     {
-        $data = ContestStatusMatter::find($this->matter->id);
+        $data = ContestStatusMatter::where('contest_matter_id',$this->matter->id)->where('user_id',Auth::user()->id)->first();
         $data->delete();
         $this->status = false;
     }

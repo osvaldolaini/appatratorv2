@@ -1,10 +1,11 @@
 <div class="w-100 pt-3 sm:rounded-lg">
 
     <div class="flex flex-wrap sm:justify-around">
-        <div class="max-w-full">
+        <div class="w-full">
             <h1 class="text-5xl font-extrabold dark:text-white text-center">
                 <small class="ml-2 font-semibold text-gray-500 dark:text-gray-400">
-                    Meus aplicativos </small>
+                    Meus aplicativos
+                </small>
             </h1>
             <x-app-carousel-cards qtd="{{ $vouchers->count() }}">
                 {{-- <x-app-carousel-cards qtd="4"> --}}
