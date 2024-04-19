@@ -8,6 +8,6 @@
     @if ($module->progress['max'] > 0 && $module->type == 1)
         <progress class="progress progress-info w-full" value="{{ $module->progress['value'] }}"
             max="{{ $module->progress['max'] }}"></progress>
-        {{ $percent }}%
+        {{ number_format($percent, 2) }}%
     @endif
 </div>
