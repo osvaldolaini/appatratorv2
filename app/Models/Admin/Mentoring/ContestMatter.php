@@ -34,23 +34,23 @@ class ContestMatter extends Model
     {
         return $this->belongsTo(ContestDiscipline::class);
     }
-    // public function getPerformanceAttribute()
-    // {
-    //     $contestQuestions = ContestQuestions::where('contest_matter_id',$this->id)->where('user_id',Auth::user()->id)->get();
-    //     if ($contestQuestions->count() > 0) {
-    //         $tot=0;
-    //         $hits=0;
-    //         foreach ($contestQuestions as $item) {
-    //             $tot += $item->qtd;
-    //             $hits += $item->hits;
-    //         }
-    //         $performance = ($hits * 100)/$tot;
-    //         $performance = number_format($performance, 2, ',', ' ');
-    //     } else {
-    //         $performance = '';
-    //     }
-    //     return $performance;
-    // }
+    public function getPerformanceAttribute()
+    {
+        $contestQuestions = ContestQuestions::where('contest_matter_id',$this->id)->where('user_id',Auth::user()->id)->get();
+        if ($contestQuestions->count() > 0) {
+            $tot=0;
+            $hits=0;
+            foreach ($contestQuestions as $item) {
+                $tot += $item->qtd;
+                $hits += $item->hits;
+            }
+            $performance = ($hits * 100)/$tot;
+            $performance = number_format($performance, 2, ',', ' ');
+        } else {
+            $performance = '';
+        }
+        return $performance;
+    }
     public function getRouteKeyName(): string
     {
         return 'slug';
