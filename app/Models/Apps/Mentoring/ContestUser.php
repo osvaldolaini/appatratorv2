@@ -6,6 +6,7 @@ use App\Models\Admin\Mentoring\Contest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 class ContestUser extends Model
 {
@@ -25,10 +26,10 @@ class ContestUser extends Model
     {
         return $this->hasMany(ContestPlanningCyclesUser::class);
     }
-    public function reviews($matter_id,$contest_user_id)
+    public function reviews($matter_id)
     {
         return ContestReviews::where('contest_matter_id',$matter_id)
-        ->where('contest_user_id',$contest_user_id)
+        ->where('contest_user_id',Auth::user()->contest->id)
         ->orderBy('day','desc')
         ->get();
     }

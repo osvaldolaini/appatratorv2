@@ -1,5 +1,4 @@
 <div class="w-100 pt-3 sm:rounded-lg">
-
     <div class="flex flex-wrap sm:justify-around">
         <div class="w-full">
             <h1 class="text-5xl font-extrabold dark:text-white text-center">

@@ -24,7 +24,9 @@
                     aria-expanded="true" aria-controls="accordion-collapse-body-{{ $discipline->id }}">
                     <span >{{ $discipline->title }}
                         <div class="hidden badge badge-md"></div>
-                        {!! $discipline->performances !!}
+                        {{-- {!! $discipline->performances !!} --}}
+                        @livewire('user.apps.mentoring.mentoring-questions-user-count', [$discipline])
+
                         <x-mentoring-app-status-bar :progress="$mentoringContestUser->progress($discipline)"></x-mentoring-app-status-bar>
                     </span>
                     <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="none" stroke="currentColor"
@@ -110,19 +112,11 @@
 
 
                                                     </td>
-                                                    <td class="text-sm p-2.5 text-center w-3/12">
-                                                        <button
-                                                            wire:click.prevent="showReviews({{ $matter->id }})"
-                                                            class="btn btn-outline {{ ($mentoringContestUser->reviews($matter->id, $mentoringContestUser->id)->count() > 0 ? 'btn-accent' : 'btn-error') }} btn-sm">
-                                                            Revisões
-                                                            <div class="badge {{ ($mentoringContestUser->reviews($matter->id, $mentoringContestUser->id)->count() > 0 ? 'badge-accent' : 'badge-error') }} text-white">
-                                                                {{ $mentoringContestUser->reviews($matter->id, $mentoringContestUser->id)->count() }}
-                                                            </div>
-                                                        </button>
-                                                        <button
-                                                            wire:click.prevent="showQuestions({{ $matter->id }})"
-                                                            class="btn btn-outline btn-accent btn-sm">Questões
-                                                        </button>
+                                                    <td class="flex text-sm p-2.5 text-center w-3/12">
+                                                        @livewire('user.apps.mentoring.mentoring-reviews-user-insert', [$matter->id])
+
+                                                        @livewire('user.apps.mentoring.mentoring-questions-user', [$matter->id])
+
                                                     </td>
                                                 </tr>
                                             @endforeach

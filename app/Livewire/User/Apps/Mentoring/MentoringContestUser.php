@@ -63,14 +63,14 @@ class MentoringContestUser extends Component
         $this->reset('contest_id');
         return redirect()->to('/meu-concurso');
     }
-    //Questions
-    public function showQuestions($id)
-    {
-        $this->showQuestionsModal = true;
-        if (isset($id)) {
-            $this->contentMatter = ContestMatter::find($id);
-        }
-    }
+    // //Questions
+    // public function showQuestions($id)
+    // {
+    //     $this->showQuestionsModal = true;
+    //     if (isset($id)) {
+    //         $this->contentMatter = ContestMatter::find($id);
+    //     }
+    // }
 
     //CREATE
     public function showReviews($matter)

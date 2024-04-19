@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User\Apps\Mentoring;
 
+use App\Models\Admin\Mentoring\ContestMatter;
 use App\Models\Apps\Mentoring\ContestQuestions;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,6 +18,7 @@ class MentoringQuestionsUser extends Component
     public $modalCreate = false;
     public $modalEdit = false;
     public $alertSession = false;
+    public $showQuestionsModal = false;
 
     public $active = 1;
     public $rules;
@@ -30,15 +32,18 @@ class MentoringQuestionsUser extends Component
     public $qtd;
     public $hits;
 
+    public $contentMatter;
 
-    public function mount($matter,$user)
+
+    public function mount($matter)
     {
         //Redireciona para a escolha do curso
         if (Gate::allows('contest-user')) {
             abort(403);
         }
-        $this->matter_id = $matter->id;
-        $this->user_id = $user;
+        $this->contentMatter = ContestMatter::find($matter)->first();
+        $this->matter_id = $matter;
+        $this->user_id = Auth::user()->id;
         $this->day = date("d/m/Y");
     }
 
@@ -57,6 +62,14 @@ class MentoringQuestionsUser extends Component
         [
                 'questions'      => $questions,
             ]);
+    }
+    //Questions
+    public function showQuestions($id)
+    {
+        $this->showQuestionsModal = true;
+        if (isset($id)) {
+            $this->contentMatter = ContestMatter::find($id);
+        }
     }
 
     //CREATE
@@ -90,7 +103,7 @@ class MentoringQuestionsUser extends Component
         $this->alertSession = true;
         $this->modalCreate = false;
         $this->reset('qtd','hits','day');
-
+        $this->dispatch('new-question');
     }
 
     // //UPDATE

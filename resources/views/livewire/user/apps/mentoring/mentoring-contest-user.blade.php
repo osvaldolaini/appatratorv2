@@ -79,22 +79,6 @@
             </div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.js"></script>
-        {{-- MODAL INVOLVED --}}
-        <x-dialog-modal wire:model="showQuestionsModal" maxWidth='5xl'>
-            <x-slot name="title">{{ $contentMatter ? $contentMatter->order . ') ' . $contentMatter->title : '' }}
-            </x-slot>
-            <x-slot name="content">
-                @if ($contentMatter)
-                    @livewire('user.apps.mentoring.mentoring-questions-user', ['matter' => $contentMatter, 'user' => $user_id, key($contentMatter->id)])
-                @endif
-            </x-slot>
-            <x-slot name="footer">
-                <x-secondary-button wire:click.prevent="$toggle('showQuestionsModal')" class="mx-2">
-                    Fechar
-                </x-secondary-button>
-            </x-slot>
-        </x-dialog-modal>
-
         {{-- MODAL CREATE --}}
         <x-dialog-modal wire:model="showReviewsModal" class="mt-0">
             <x-slot name="title">Inserir revisão</x-slot>
