@@ -1,4 +1,4 @@
-<div class="col-span-1">
+<div class="col-span-2 sm:col-span-1 mt-3">
     <div class="card w-full bg-neutral text-neutral-content hover:bg-slate-400 hover:text-gray-800 cursor-pointer">
         <div class="card-body items-center text-center">
             <div class="w-full flex justify-end">

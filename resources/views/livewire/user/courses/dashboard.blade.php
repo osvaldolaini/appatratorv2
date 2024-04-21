@@ -6,7 +6,7 @@
                     class="flex py-2 px-3 hover:text-white dark:hover:bg-gray-300
                     transition-colors hover:bg-gray-700 rounded-sm
                         duration-200 whitespace-nowrap">Voltar
-                    para o lobby
+                        para o lobby
                     <svg class="h-6 w-6 ml-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
                             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -42,7 +42,7 @@
                 <a href="" role="tab" class="text-gray-900 tab tab-active">Conteúdo</a>
             </div>
         </div>
-        <div class="mx-auto mt-5 w-full grid grid-cols-4 gap-2 h-full p-6">
+        <div class="mx-auto mt-5 w-full grid grid-col-1 sm:grid-cols-4 gap-2 h-full p-6">
             @foreach ($course->modules as $module)
                 <div class="col-span-1">
                     @if ($module->type == 1)

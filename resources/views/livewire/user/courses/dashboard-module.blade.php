@@ -96,10 +96,10 @@
         </div>
         <div class="drawer-side">
             <label for="my-drawer-3" class="drawer-overlay"></label>
-            <div class="flex flex-col mt-4 mr-3">
+            <div class="flex flex-col mt-20 lg:mt-4">
                 <!-- Navigation Rail -->
                 <button wire:click="back()"
-                    class="flex py-2 px-3 hover:text-white dark:hover:bg-gray-300
+                    class="hidden lg:flex py-2 px-3 hover:text-white dark:hover:bg-gray-300
                     transition-colors hover:bg-gray-700 rounded-sm
                         duration-200 whitespace-nowrap">Voltar
                     para o lobby do curso
