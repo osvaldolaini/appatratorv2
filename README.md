@@ -5,14 +5,15 @@
 </p>
 
 # ATRATOR ADMIN V2
-
+## V2 0.14 ADMIN 2024-04-21
+    Transferência da criação do curso do site para o sistema
 ## V2 0.13 APPS - 2024-04-17
     Visualização do aluno do curso
     Aba módulo
     Aba conteúdo
     Download
     Vídeo Youtube
-## V2 0.12 CURSOS
+## V2 0.12 ADMIN
     Criação do curso automática
     Criação de módulos
     Criação de aulas

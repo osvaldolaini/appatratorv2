@@ -8,19 +8,18 @@ use Livewire\Component;
 
 use Illuminate\Support\Facades\Http;
 
-class ApiCourses extends Component
+class AllCourses extends Component
 {
     public $breadcrumb = 'Cursos';
 
-    public $data;
+    public $courses;
     public function mount()
     {
-        $courses = Http::get('https://atratorconcursos.com.br/api/dados-cursos');
-        $this->data = json_encode($courses->json()['data']);
+        $this->courses = Course::where('active',1)->get();
     }
 
     public function render()
     {
-        return view('livewire.user.courses.api-courses');
+        return view('livewire.user.courses.all-courses');
     }
 }

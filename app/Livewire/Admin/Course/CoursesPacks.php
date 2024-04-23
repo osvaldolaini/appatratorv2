@@ -3,21 +3,22 @@
 namespace App\Livewire\Admin\Course;
 
 use App\Models\Admin\Course\Course;
+use App\Models\Admin\Course\PackPivotCourse;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\WithPagination;
 use Illuminate\Support\Str;
 
-class Courses extends Component
+class CoursesPacks extends Component
 {
     use WithPagination;
-    public Course $course;
-    public $breadcrumb = 'Cursos';
+    public PackPivotCourse $packPivotCourse;
 
     public $showJetModal = false;
     public $showModalView = false;
     public $showModalCreate = false;
+    public $showModalDescription = false;
     public $showModalEdit = false;
     public $alertSession = false;
     public $rules;
@@ -25,67 +26,104 @@ class Courses extends Component
     public $logs;
     public $model_id;
     public $registerId;
+    public $breadcrumb_title;
 
     //Dados da tabela
-    public $model = "App\Models\Admin\Course\Course"; //Model principal
+    public $model = "App\Models\Admin\Course\PackPivotCourse"; //Model principal
     public $modelId = "id"; //Ex: 'table.id' or 'id'
     public $search;
     public $relationTables; //Relacionamentos ( table , key , foreingKey )
     public $customSearch; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'title,active';
-    public $searchable = 'title'; //Colunas pesquisadas no banco de dados
-    public $sort = "title,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
+    public $columnsInclude = 'title,value,active,qtd_parcel,value_parcel';
+    public $searchable = 'title,value'; //Colunas pesquisadas no banco de dados
+    public $sort = "order,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
 
     //Campos
     public $active = 1;
+    public $id;
     public $title;
-    //API
-    public $courses;
-    public function mount()
-    {
-        // $courses = Http::get('https://atratorconcursos.com.br/api/dados-cursos');
-        // foreach ($courses->json()['data'] as $course) {
-        //     Course::updateOrCreate([
-        //         'api_course_id' => $course['id'],
-        //     ], [
-        //         'active'=>1,
-        //         'title'=> $course['title'],
-        //         'description'=> $course['description'],
-        //     ]);
-        // }
-    }
+    public $order;
+    public $highlighted;
+    public $description;
+    public $see_value;
+    public $price_id;
+    public $value;
+    public $qtd_parcel;
+    public $link_hotmart;
+    public $value_parcel;
+    public $courses_id;
 
+    public function mount(Course $course)
+    {
+        $this->courses_id       = $course->id;
+        $this->breadcrumb_title = $course->title;
+    }
     public function render()
     {
-        return view('livewire.admin.courses.course', [
-            'dataTable' => $this->getData(),
-        ]);
+        return view('livewire.admin.courses.courses-packs',
+            [
+                'dataTable' => $this->getData(),
+            ]
+        );
     }
     public function resetAll()
     {
         $this->reset(
             'title',
+            'order',
+            'highlighted',
+            'description',
+            'see_value',
+            'price_id',
+            'value',
+            'qtd_parcel',
+            'link_hotmart',
+            'value_parcel',
         );
     }
     //CREATE
     public function modalCreate()
     {
-        redirect()->route('new-course');
+        $this->resetAll();
+        $this->showModalCreate = true;
     }
 
-    //update
-    public function showModalUpdate(Course $course)
+    public function store()
     {
-        redirect()->route('edit-course', $course);
-    }
+        $this->rules = [
+            'title' => 'required',
+            'order' => 'required',
+            'value' => 'required',
+        ];
+        $this->validate();
 
+        PackPivotCourse::create([
+            'title'         => $this->title,
+            'active'        => 1,
+            'order'         => $this->order,
+            'highlighted'   => $this->highlighted,
+            'see_value'     => $this->see_value,
+            'price_id'      => $this->price_id,
+            'value'         => $this->value,
+            'qtd_parcel'    => $this->qtd_parcel,
+            'link_hotmart'  => $this->link_hotmart,
+            'value_parcel'  => $this->value_parcel,
+            'courses_id'    => $this->courses_id,
+            'created_by'    => Auth::user()->name,
+        ]);
+
+        $this->openAlert('success', 'Registro criado com sucesso.');
+
+        $this->showModalCreate = false;
+        $this->resetAll();
+    }
     //READ
     public function showModalRead($id)
     {
         $this->showModalView = true;
         if (isset($id)) {
-            $data = Course::where('id', $id)->first();
+            $data = PackPivotCourse::where('id', $id)->first();
             $this->detail = [
                 'Criada'            => $data->created,
                 'Criada por'        => $data->created_by,
@@ -97,7 +135,76 @@ class Courses extends Component
             $this->detail = '';
         }
     }
+    //UPDATE
+    public function showModalUpdate(PackPivotCourse $packPivotCourse)
+    {
+        $this->resetAll();
+        $this->model_id         = $packPivotCourse->id;
+        $this->title            = $packPivotCourse->title;
+        $this->order            = $packPivotCourse->order;
+        $this->highlighted      = $packPivotCourse->highlighted;
+        $this->description      = $packPivotCourse->description;
+        $this->see_value        = $packPivotCourse->see_value;
+        $this->price_id         = $packPivotCourse->price_id;
+        $this->value            = $packPivotCourse->value;
+        $this->qtd_parcel       = $packPivotCourse->qtd_parcel;
+        $this->link_hotmart     = $packPivotCourse->link_hotmart;
+        $this->value_parcel     = $packPivotCourse->value_parcel;
+        $this->showModalEdit    = true;
+    }
+    public function update()
+    {
+        $this->rules = [
+            'title' => 'required',
+            'order' => 'required',
+            'value' => 'required',
+        ];
 
+        $this->validate();
+
+        PackPivotCourse::updateOrCreate([
+            'id' => $this->model_id,
+        ], [
+            'title'         => $this->title,
+            'order'         => $this->order,
+            'highlighted'   => $this->highlighted,
+            'see_value'     => $this->see_value,
+            'price_id'      => $this->price_id,
+            'value'         => $this->value,
+            'qtd_parcel'    => $this->qtd_parcel,
+            'link_hotmart'  => $this->link_hotmart,
+            'value_parcel'  => $this->value_parcel,
+            'courses_id'    => $this->courses_id,
+            'updated_by' => Auth::user()->name,
+        ]);
+
+        $this->openAlert('success', 'Registro atualizado com sucesso.');
+
+        $this->showModalEdit = false;
+        $this->resetAll();
+    }
+    //UPDATEDESCRIPTION
+    public function modalDescription(PackPivotCourse $packPivotCourse)
+    {
+        $this->resetAll();
+        $this->model_id = $packPivotCourse->id;
+        $this->description = $packPivotCourse->description;
+        $this->showModalDescription    = true;
+    }
+    public function descriptionUpdate()
+    {
+        PackPivotCourse::updateOrCreate([
+            'id' => $this->model_id,
+        ], [
+            'description'   => $this->description,
+            'updated_by' => Auth::user()->name,
+        ]);
+
+        $this->openAlert('success', 'Registro atualizado com sucesso.');
+
+        $this->showModalDescription = false;
+        $this->resetAll();
+    }
     //DELETE
     public function showModalDelete($id)
     {
@@ -111,7 +218,7 @@ class Courses extends Component
     //ACTIVE
     public function buttonActive($id)
     {
-        $data = Course::where('id', $id)->first();
+        $data = PackPivotCourse::where('id', $id)->first();
         if ($data->active == 1) {
             $data->active = 0;
             $data->save();
@@ -123,7 +230,7 @@ class Courses extends Component
     }
     public function delete($id)
     {
-        $data = Course::where('id', $id)->first();
+        $data = PackPivotCourse::where('id', $id)->first();
         $data->active = 2;
         $data->save();
 
@@ -145,6 +252,7 @@ class Courses extends Component
         } else {
             $query = $this->model::query();
             $query = $query->where('active', '<=', 1);
+            $query = $query->where('courses_id', $this->courses_id);
         }
         $selects = array($this->modelId . ' as id');
         if ($this->columnsInclude) {

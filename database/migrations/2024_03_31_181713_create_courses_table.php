@@ -12,14 +12,32 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('courses', function (Blueprint $table) {
+           /*Config */
             $table->id();
-            $table->boolean('active')->nullable();
+            $table->string('slug')->nullable();
             $table->string('title')->nullable();
-            $table->longText('description')->nullable();
+            $table->boolean('active')->nullable();
+            $table->integer('views')->nullable();
+            /*End Config */
+            /*Custom */
             $table->string('code')->nullable();
-            $table->string('api_course_id')->unique()->nullable();
             $table->string('price_id')->unique()->nullable();
+            $table->boolean('highlighted')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->longText('large_description')->nullable();
+            $table->string('meta_tags')->nullable();
+            $table->string('link')->nullable();
+            $table->string('youtube_link')->nullable();
+            /*images */
+            $table->string('image')->nullable();
+            /*End Custom */
+            /*Log */
             $table->timestamps();
+            $table->string('updated_by', 50)->nullable();
+            $table->string('created_by', 50)->nullable();
+            /*Excluido */
+            $table->date('deleted_at')->nullable();
+            $table->string('deleted_by')->nullable();
         });
     }
 

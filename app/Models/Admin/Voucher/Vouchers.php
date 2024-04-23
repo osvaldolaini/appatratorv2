@@ -89,7 +89,12 @@ class Vouchers extends Model
                 $convert = 'Mentoria';
                 break;
             case 'courses':
-                $convert = $this->course->title;
+                if ($this->course) {
+                    $convert = $this->course->title;
+                }else{
+                    $convert = 'Cancelado';
+                }
+
                     break;
             default:
                 $convert = '';

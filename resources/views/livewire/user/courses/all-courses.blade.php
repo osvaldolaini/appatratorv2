@@ -9,17 +9,19 @@
     </div>
 
     <div class="grid grid-cols-4 gap-2 w-full h-full py-2">
-        @foreach (json_decode($data) as $course)
-            <div class="col-span-1 ">
-                <div class="card card-compact image-full shadow-xl bg-cover">
-                    <figure><img class="w-full "
-                            src="{{ 'https://atratorconcursos.com.br/storage/images/courses/' . $course->id . '/thumb.jpg' }}"
+        @foreach ($courses as $course)
+            <div class="col-span-1">
+                <div class="w-56 h-60 card card-compact image-full shadow-xl bg-cover">
+                    <figure><img class="w-full mx-auto"
+                            src="{{ url('storage/courses/' . $course->id . '/'.$course->image.'.webp') }}"
                             alt="{{ $course->slug }}">
                     </figure>
                     <div class="card-body">
-                        <p class="font-extrabold">{{ $course->title }}</p>
+                        <p class="font-extrabold text-[#F3FB04]">{{ $course->title }}</p>
                         <div class="card-actions justify-end">
-                            <a href="{{ $course->slug }}" class="btn btn-primary">Editar</a>
+                            <a href="https://atratorconcursos.com.br/cursos/{{ $course->slug }}" rel="noreferrer noopener"
+                                class="px-5 mt-4 lg:mt-0 py-3 font-bold rounded-md border block bg-[#F3FB04] text-gray-900 border-gray-400">Comprar</a>
+
                         </div>
                     </div>
                 </div>

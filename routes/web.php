@@ -1,10 +1,19 @@
 <?php
 
+use App\Http\Controllers\Api\CourseController;
 use App\Livewire\Admin\Question\Filter\Filters;
 use App\Livewire\Admin\Configuration;
+use App\Livewire\Admin\Course\CategoryCourses;
 use App\Livewire\Admin\Course\Courses;
 use App\Livewire\Admin\Course\Contents\ModuleContentEdit;
+use App\Livewire\Admin\Course\CourseCreate;
 use App\Livewire\Admin\Course\CourseDashboard;
+use App\Livewire\Admin\Course\CourseDescription;
+use App\Livewire\Admin\Course\CoursePivotCategories;
+use App\Livewire\Admin\Course\CourseUpdate;
+use App\Livewire\Admin\Course\CourseImage;
+use App\Livewire\Admin\Course\CoursePackDescription;
+use App\Livewire\Admin\Course\CoursesPacks;
 use App\Livewire\Admin\Course\Modules\ModuleEdit;
 use App\Livewire\Admin\Course\Modules\ModuleNew;
 use App\Livewire\Admin\Course\Modules\ModulesList;
@@ -85,6 +94,9 @@ use Illuminate\Support\Facades\Storage;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Api
+Route::get('/apiCourses', [CourseController::class, 'index']);
+Route::get('/apiCourses/destaques', [CourseController::class, 'highlighted']);
 
 Route::middleware([
     'auth:sanctum',
@@ -128,13 +140,23 @@ Route::middleware([
     Route::get('/vouchers', Voucher::class)
         ->name('vouchers');
     //Courses
-    Route::get('/cursos', Courses::class)->name('course');
+
     Route::get('/cursos/dashboard/{course}', CourseDashboard::class)->name('course-dashboard');
     Route::get('/cursos/modulo/{course}', ModulesList::class)->name('module');
     Route::get('/cursos/modulo-novo/{course}', ModuleNew::class)->name('new-module');
     Route::get('/cursos/modulo-editar/{module}', ModuleEdit::class)->name('edit-module');
-
     Route::get('/cursos/modulo/conteúdo/{moduleContent}', ModuleContentEdit::class)->name('content-module');
+
+        //Course Marketing
+        Route::get('/cursos', Courses::class)->name('course');
+        Route::get('/cursos/novo', CourseCreate::class)->name('new-course');
+        Route::get('/cursos/{course}', CourseUpdate::class)->name('edit-course');
+        Route::get('/cursos/descrição/{course}',CourseDescription::class)->name('course-descripition');
+        Route::get('/cursos/categorias/{course}',CoursePivotCategories::class)->name('category-course-pivot');
+        Route::get('/cursos/imagens/{course}',CourseImage::class)->name('course-images');
+        Route::get('/categorias-de-curso',CategoryCourses::class)->name('category-course');
+        Route::get('/cursos/valores/{course}',CoursesPacks::class)->name('course-values');
+        Route::get('/cursos/valores/descrição/{packPivotCourse}',CoursePackDescription::class)->name('course-pack-description');
 
 
     //Questions

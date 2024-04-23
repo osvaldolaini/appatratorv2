@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use Illuminate\Support\Str;
 
 class Course extends Model
 {
@@ -17,12 +18,15 @@ class Course extends Model
 
     protected $table = 'courses';
     protected $fillable = [
-        'id','active','title','description','price_id','api_course_id','code','updated_by','created_by'
+        'id', 'slug','active','see_value','title','nick','views','highlighted','meta_description',
+        'large_description','value','meta_tags','link','youtube_link','image',
+        'price_id','code','updated_by','created_by'
     ];
 
     public function setTitleAttribute($value)
     {
         $this->attributes['title']=mb_strtoupper($value);
+        $this->attributes['slug']='atrator-cursos-'.Str::slug($value);
     }
     public function vouchers()
     {
@@ -43,6 +47,20 @@ class Course extends Model
     public function getConcludedContentAttribute()
     {
         return  MyContentCheck::where('content_id', $this->id)->get();
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(CoursePivotCategory::class, 'courses_id','id');
+    }
+    public function category()
+    {
+        return $this->belongsTo(CoursePivotCategory::class,'id', 'courses_id');
+    }
+
+    public function packs()
+    {
+        return $this->hasMany(PackPivotCourse::class, 'courses_id','id');
     }
 
     public function getActivitylogOptions(): LogOptions

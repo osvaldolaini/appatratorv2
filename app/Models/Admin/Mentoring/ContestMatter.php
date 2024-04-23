@@ -36,7 +36,9 @@ class ContestMatter extends Model
     }
     public function getPerformanceAttribute()
     {
-        $contestQuestions = ContestQuestions::where('contest_matter_id',$this->id)->where('user_id',Auth::user()->id)->get();
+        $contestQuestions = ContestQuestions::where('contest_matter_id',$this->id)
+        ->where('user_id',Auth::user()->id)
+        ->get();
         if ($contestQuestions->count() > 0) {
             $tot=0;
             $hits=0;

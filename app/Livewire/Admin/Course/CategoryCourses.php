@@ -2,18 +2,18 @@
 
 namespace App\Livewire\Admin\Course;
 
-use App\Models\Admin\Course\Course;
+use App\Models\Admin\Course\CategoryCourse;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\WithPagination;
 use Illuminate\Support\Str;
 
-class Courses extends Component
+class CategoryCourses extends Component
 {
     use WithPagination;
-    public Course $course;
-    public $breadcrumb = 'Cursos';
+    public CategoryCourse $categoryCourse;
+    public $breadcrumb = 'Categorias';
 
     public $showJetModal = false;
     public $showModalView = false;
@@ -27,38 +27,27 @@ class Courses extends Component
     public $registerId;
 
     //Dados da tabela
-    public $model = "App\Models\Admin\Course\Course"; //Model principal
+    public $model = "App\Models\Admin\Course\CategoryCourse"; //Model principal
     public $modelId = "id"; //Ex: 'table.id' or 'id'
     public $search;
     public $relationTables; //Relacionamentos ( table , key , foreingKey )
     public $customSearch; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'title,active';
-    public $searchable = 'title'; //Colunas pesquisadas no banco de dados
+    public $columnsInclude = 'title,master,active';
+    public $searchable = 'title,master'; //Colunas pesquisadas no banco de dados
     public $sort = "title,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
 
     //Campos
     public $active = 1;
     public $title;
-    //API
-    public $courses;
-    public function mount()
-    {
-        // $courses = Http::get('https://atratorconcursos.com.br/api/dados-cursos');
-        // foreach ($courses->json()['data'] as $course) {
-        //     Course::updateOrCreate([
-        //         'api_course_id' => $course['id'],
-        //     ], [
-        //         'active'=>1,
-        //         'title'=> $course['title'],
-        //         'description'=> $course['description'],
-        //     ]);
-        // }
-    }
+    public $master = 'Outros';
+    public $nick;
+    public $acronym;
+    public $created_by;
 
     public function render()
     {
-        return view('livewire.admin.courses.course', [
+        return view('livewire.admin.courses.category-courses', [
             'dataTable' => $this->getData(),
         ]);
     }
@@ -66,26 +55,46 @@ class Courses extends Component
     {
         $this->reset(
             'title',
+            'active',
+            'master',
+            'nick',
+            'acronym',
         );
     }
     //CREATE
     public function modalCreate()
     {
-        redirect()->route('new-course');
+        $this->resetAll();
+        $this->showModalCreate = true;
     }
 
-    //update
-    public function showModalUpdate(Course $course)
+    public function store()
     {
-        redirect()->route('edit-course', $course);
-    }
+        $this->rules = [
+            'title' => 'required|unique:category_courses',
+        ];
+        $this->validate();
 
+        CategoryCourse::create([
+            'title'     => $this->title,
+            'active'    => 1,
+            'master'    => $this->master,
+            'nick'      => $this->nick,
+            'acronym'   => $this->acronym,
+            'created_by' => Auth::user()->name,
+        ]);
+
+        $this->openAlert('success', 'Registro criado com sucesso.');
+
+        $this->showModalCreate = false;
+        $this->resetAll();
+    }
     //READ
     public function showModalRead($id)
     {
         $this->showModalView = true;
         if (isset($id)) {
-            $data = Course::where('id', $id)->first();
+            $data = CategoryCourse::where('id', $id)->first();
             $this->detail = [
                 'Criada'            => $data->created,
                 'Criada por'        => $data->created_by,
@@ -97,7 +106,41 @@ class Courses extends Component
             $this->detail = '';
         }
     }
+    //UPDATE
+    public function showModalUpdate(CategoryCourse $categoryCourse)
+    {
+        $this->resetAll();
 
+        $this->model_id         = $categoryCourse->id;
+        $this->title            = $categoryCourse->title;
+        $this->master           = $categoryCourse->master;
+        $this->nick             = $categoryCourse->nick;
+        $this->acronym          = $categoryCourse->acronym;
+        $this->showModalEdit    = true;
+    }
+    public function update()
+    {
+        $this->rules = [
+            'title' => 'required',
+        ];
+
+        $this->validate();
+
+        CategoryCourse::updateOrCreate([
+            'id' => $this->model_id,
+        ], [
+            'title'     => $this->title,
+            'master'    => $this->master,
+            'nick'      => $this->nick,
+            'acronym'   => $this->acronym,
+            'updated_by' => Auth::user()->name,
+        ]);
+
+        $this->openAlert('success', 'Registro atualizado com sucesso.');
+
+        $this->showModalEdit = false;
+        $this->resetAll();
+    }
     //DELETE
     public function showModalDelete($id)
     {
@@ -111,7 +154,7 @@ class Courses extends Component
     //ACTIVE
     public function buttonActive($id)
     {
-        $data = Course::where('id', $id)->first();
+        $data = CategoryCourse::where('id', $id)->first();
         if ($data->active == 1) {
             $data->active = 0;
             $data->save();
@@ -123,7 +166,7 @@ class Courses extends Component
     }
     public function delete($id)
     {
-        $data = Course::where('id', $id)->first();
+        $data = CategoryCourse::where('id', $id)->first();
         $data->active = 2;
         $data->save();
 
