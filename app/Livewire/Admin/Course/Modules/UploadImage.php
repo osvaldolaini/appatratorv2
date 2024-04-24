@@ -69,7 +69,7 @@ class UploadImage extends Component
 
     public function excluirPhoto()
     {
-        Storage::deleteDirectory('modules/' . $this->module->id.'/thumb');
+        Storage::deleteDirectory('public/modules/' . $this->module->id.'/thumb');
         $this->openAlert('success', 'Imagem excluida com sucesso.');
     }
     //pega o status do registro
@@ -80,7 +80,7 @@ class UploadImage extends Component
     /**Thumb */
     public function reSize($image,$module)
     {
-        Storage::makeDirectory('modules/' . $this->module->id.'/thumb');
+        Storage::makeDirectory('public/modules/' . $this->module->id.'/thumb');
 
         // dd('storage/public/livewire-tmp/' . $image);
         $img = explode('.', $image);
