@@ -21,6 +21,8 @@ class CourseUpdate extends Component
     public $youtube_link;
     public $price_id;
     public $rules;
+    public $slug;
+
     public function mount(Course $course)
     {
         $this->id                   = $course->id;
@@ -33,6 +35,7 @@ class CourseUpdate extends Component
         $this->youtube_link         = $course->youtube_link;
         $this->price_id             = $course->price_id;
         $this->breadcrumb_title     = $course->title;
+        $this->slug                 = $course->slug;
     }
     public function render()
     {
