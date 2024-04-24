@@ -67,7 +67,7 @@ class CourseUploadImage extends Component
 
     public function excluirPhoto()
     {
-        Storage::deleteDirectory('courses/' . $this->course->id);
+        Storage::deleteDirectory('public/courses/' . $this->course->id);
         $this->course->image = '';
         $this->course->save();
         $this->openAlert('success', 'Imagem excluida com sucesso.');
