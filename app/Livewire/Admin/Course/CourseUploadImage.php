@@ -80,14 +80,14 @@ class CourseUploadImage extends Component
     /**Thumb */
     public function reSize($image)
     {
-        Storage::makeDirectory('courses/' . $this->course->id);
+        Storage::makeDirectory('public/courses/' . $this->course->id);
 
-        $logoWebp = Image::make('livewire-tmp/' . $image);
+        $logoWebp = Image::make('storage/livewire-tmp/' . $image);
         $logoWebp->encode('webp', 80);
-        $logoWebp->save('courses/' . $this->course->id . '/'.$this->course->image.'.webp');
+        $logoWebp->save('storage/courses/' . $this->course->id . '/'.$this->course->image.'.webp');
 
         $logoPng = Image::make('livewire-tmp/' . $image);
         $logoPng->encode('png', 80);
-        $logoPng->save('courses/' . $this->course->id . '/'.$this->course->image.'.jpg');
+        $logoPng->save('storage/courses/' . $this->course->id . '/'.$this->course->image.'.jpg');
     }
 }
