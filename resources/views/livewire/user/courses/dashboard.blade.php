@@ -81,7 +81,7 @@
                         @endif
 
                         <div class="card-body mt-6">
-                            <p class="font-extrabold">{{ $module->title }}</p>
+                            <p class="font-extrabold">{{ $module->image }}</p>
                             <x-mentoring-app-status-bar :progress="$module->progress"
                                 type="{{ $module->type }}"></x-mentoring-app-status-bar>
                         </div>
