@@ -55,7 +55,7 @@ class UploadImage extends Component
             if (isset($this->uploadimage)) {
                 // $ext = $this->uploadimage->getClientOriginalExtension();
                 $new_name = $this->module->code . '.jpg';
-                $this->module->image = $this->module->code;
+                $this->module->image_path = $this->module->code;
                 $this->module->save();
                 $this->uploadimage->storeAs('livewire-tmp', $new_name);
                 $this->valid = true;
@@ -72,7 +72,7 @@ class UploadImage extends Component
     public function excluirPhoto()
     {
         Storage::deleteDirectory('modules/' . $this->module->id.'/thumb');
-        $this->module->image = '';
+        $this->module->image_path = '';
         $this->openAlert('success', 'Imagem excluida com sucesso.');
     }
     //pega o status do registro

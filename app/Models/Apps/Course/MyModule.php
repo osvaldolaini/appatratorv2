@@ -19,7 +19,7 @@ class MyModule extends Model
     protected $table = 'modules';
     protected $fillable = [
         'id','active','title','type','order','description','course_id',
-        'image','code','updated_by','created_by'
+        'image_path','code','updated_by','created_by'
     ];
 
     public function course()
@@ -43,7 +43,7 @@ class MyModule extends Model
     }
     public function getImageAttribute()
     {
-        if (Storage::exists('public/modules/' . $this->id.'/thumb')) {
+        if (Storage::exists('modules/' . $this->id.'/thumb')) {
             return true;
         } else {
             return false;

@@ -15,7 +15,7 @@ class Module extends Model
     protected $table = 'modules';
     protected $fillable = [
         'id','active','title','type','order','description','course_id',
-        'image','code','updated_by','created_by'
+        'image_path','code','updated_by','created_by'
     ];
 
     public function setTitleAttribute($value)

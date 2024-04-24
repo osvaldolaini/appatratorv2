@@ -23,7 +23,7 @@ return new class extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->longText('description')->nullable();
-            $table->string('image')->nullable();
+            $table->string('image_path')->nullable();
             $table->string('code')->nullable();
             $table->timestamps();
             $table->string('created_by',50)->nullable();
