@@ -68,7 +68,7 @@
 
                     <a href="{{ route('dashboard-module', [$module->course->code, $module->code]) }}"
                         class="h-64 flex flex-col justify-center px-6 text-center card card-compact shadow-xl">
-                        @if ($module->image)
+                        @if ($module->code)
                             <figure>
                                 <img class="w-full mx-auto"
                                     src="{{ url('storage/modules/' . $module->id . '/thumb/' . $module->code . '.webp') }}"
@@ -81,7 +81,7 @@
                         @endif
 
                         <div class="card-body mt-6">
-                            <p class="font-extrabold">{{ $module->image }}</p>
+                            <p class="font-extrabold">{{ $module->title }}</p>
                             <x-mentoring-app-status-bar :progress="$module->progress"
                                 type="{{ $module->type }}"></x-mentoring-app-status-bar>
                         </div>
