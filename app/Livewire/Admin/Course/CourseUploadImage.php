@@ -82,12 +82,12 @@ class CourseUploadImage extends Component
     {
         Storage::makeDirectory('courses/' . $this->course->id);
 
-        $logoWebp = Image::make('storage/livewire-tmp/' . $image);
+        $logoWebp = Image::make('livewire-tmp/' . $image);
         $logoWebp->encode('webp', 80);
-        $logoWebp->save('storage/courses/' . $this->course->id . '/'.$this->course->image.'.webp');
+        $logoWebp->save('courses/' . $this->course->id . '/'.$this->course->image.'.webp');
 
-        $logoPng = Image::make('storage/livewire-tmp/' . $image);
+        $logoPng = Image::make('livewire-tmp/' . $image);
         $logoPng->encode('png', 80);
-        $logoPng->save('storage/courses/' . $this->course->id . '/'.$this->course->image.'.jpg');
+        $logoPng->save('courses/' . $this->course->id . '/'.$this->course->image.'.jpg');
     }
 }
