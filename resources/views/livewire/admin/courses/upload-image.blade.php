@@ -17,8 +17,8 @@
     <picture wire:model="photo">
         <source srcset="{{ url('storage/courses/' . $this->course->id . '/'.$this->course->image.'.webp') }}" />
         <source srcset="{{ url('storage/courses/' . $this->course->id . '/'.$this->course->image.'.jpg') }}" />
-        <img src="{{ url('storage/courses/' . $this->course->id . '/'.$this->course->image.'.webp') }}"
-        alt="atrator-{{ $this->course->slug }}">
+        {{-- <img src="{{ url('storage/courses/' . $this->course->id . '/'.$this->course->image.'.webp') }}"
+        alt="atrator-{{ $this->course->slug }}"> --}}
     </picture>
         <div class="flex justify-end space-x-1">
             <button wire:click="excluirPhoto()" type="button"
