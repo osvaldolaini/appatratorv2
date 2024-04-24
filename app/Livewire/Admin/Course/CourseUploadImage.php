@@ -70,7 +70,7 @@ class CourseUploadImage extends Component
         Storage::deleteDirectory('public/courses/' . $this->course->id);
         $this->course->image = '';
         $this->course->save();
-        $this->openAlert('success', 'Imagem excluida com sucesso.');
+        $this->openAlert('success', 'Imagem excluida com sucesso.'.$this->course->id);
     }
     //pega o status do registro
     public function openAlert($status, $msg)
