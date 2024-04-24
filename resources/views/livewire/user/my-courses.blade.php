@@ -17,7 +17,7 @@
 
                                     <figure>
                                         <img class="w-full mx-auto"
-                                            src="{{ 'https://atratorconcursos.com.br/storage/images/courses/' . $voucher->course->api_course_id . '/thumb.jpg' }}"
+                                            src="{{ 'https://atratorconcursos.com.br/storage/images/courses/' . $voucher->course->id . '/thumb.jpg' }}"
                                             alt="{{ $voucher->course->code }}">
                                     </figure>
                                     <div class="card-body">
