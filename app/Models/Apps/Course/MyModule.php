@@ -17,6 +17,10 @@ class MyModule extends Model
     use LogsActivity;
 
     protected $table = 'modules';
+    protected $fillable = [
+        'id','active','title','type','order','description','course_id',
+        'image','code','updated_by','created_by'
+    ];
 
     public function course()
     {
