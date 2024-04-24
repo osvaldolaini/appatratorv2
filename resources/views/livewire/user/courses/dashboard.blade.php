@@ -68,7 +68,7 @@
 
                     <a href="{{ route('dashboard-module', [$module->course->code, $module->code]) }}"
                         class="h-64 flex flex-col justify-center px-6 text-center card card-compact shadow-xl">
-                        @if ($module->code)
+                        @if ($module->image)
                             <figure>
                                 <img class="w-full mx-auto"
                                     src="{{ url('storage/modules/' . $module->id . '/thumb/' . $module->code . '.webp') }}"
