@@ -67,7 +67,7 @@ class CourseUploadImage extends Component
 
     public function excluirPhoto()
     {
-        Storage::deleteDirectory('public/courses/' . $this->course->id);
+        Storage::deleteDirectory('courses/' . $this->course->id);
         $this->course->image = '';
         $this->course->save();
         $this->openAlert('success', 'Imagem excluida com sucesso.');
@@ -80,7 +80,7 @@ class CourseUploadImage extends Component
     /**Thumb */
     public function reSize($image)
     {
-        Storage::makeDirectory('public/courses/' . $this->course->id);
+        Storage::makeDirectory('courses/' . $this->course->id);
 
         $logoWebp = Image::make('storage/livewire-tmp/' . $image);
         $logoWebp->encode('webp', 80);
