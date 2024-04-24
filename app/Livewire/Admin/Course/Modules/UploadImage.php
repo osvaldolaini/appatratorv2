@@ -28,7 +28,7 @@ class UploadImage extends Component
             $this->module = Module::find($id);
             $this->code = $this->module->code;
 
-            if (Storage::exists('public/modules/' . $this->module->id.'/thumb')) {
+            if (Storage::exists('modules/' . $this->module->id.'/thumb')) {
                 $this->photo = true;
             } else {
                 $this->photo = false;
@@ -69,7 +69,7 @@ class UploadImage extends Component
 
     public function excluirPhoto()
     {
-        Storage::deleteDirectory('public/modules/' . $this->module->id.'/thumb');
+        Storage::deleteDirectory('modules/' . $this->module->id.'/thumb');
         $this->openAlert('success', 'Imagem excluida com sucesso.');
     }
     //pega o status do registro
@@ -80,7 +80,7 @@ class UploadImage extends Component
     /**Thumb */
     public function reSize($image,$module)
     {
-        Storage::makeDirectory('public/modules/' . $this->module->id.'/thumb');
+        Storage::makeDirectory('modules/' . $this->module->id.'/thumb');
 
         // dd('storage/public/livewire-tmp/' . $image);
         $img = explode('.', $image);
