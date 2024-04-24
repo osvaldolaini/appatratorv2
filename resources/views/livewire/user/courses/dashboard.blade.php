@@ -31,7 +31,7 @@
             </div>
             <div class="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
                 <figure><img class="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
-                        src="{{ 'https://atratorconcursos.com.br/storage/images/courses/' . $course->api_course_id . '/thumb.jpg' }}"
+                        src="{{ 'https://atratorconcursos.com.br/storage/images/courses/' . $course->id . '/thumb.jpg' }}"
                         alt="{{ $course->code }}">
                 </figure>
             </div>
