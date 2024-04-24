@@ -53,7 +53,7 @@ class CourseUploadImage extends Component
                 $new_name = 'atrator-concursos-'.Str::uuid() . '.jpg';
                 $this->course->image = 'atrator-concursos-'.Str::uuid();
                 $this->course->save();
-                $this->uploadimage->storeAs('public/livewire-tmp', $new_name);
+                $this->uploadimage->storeAs('livewire-tmp', $new_name);
                 $this->valid = true;
                 $this->reSize($new_name);
                 $this->openAlert('success', 'Imagem validada com sucesso.');
@@ -67,7 +67,7 @@ class CourseUploadImage extends Component
 
     public function excluirPhoto()
     {
-        Storage::deleteDirectory('public/courses/' . $this->course->id);
+        Storage::deleteDirectory('courses/' . $this->course->id);
         $this->course->image = '';
         $this->course->save();
         $this->openAlert('success', 'Imagem excluida com sucesso.'.$this->course->id);
@@ -80,9 +80,9 @@ class CourseUploadImage extends Component
     /**Thumb */
     public function reSize($image)
     {
-        Storage::makeDirectory('public/courses/' . $this->course->id);
+        Storage::makeDirectory('courses/' . $this->course->id);
 
-        $logoWebp = Image::make('storage/livewire-tmp/' . $image);
+        $logoWebp = Image::make('livewire-tmp/' . $image);
         $logoWebp->encode('webp', 80);
         $logoWebp->save('storage/courses/' . $this->course->id . '/'.$this->course->image.'.webp');
 
