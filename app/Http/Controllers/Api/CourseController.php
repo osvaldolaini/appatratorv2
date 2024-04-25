@@ -118,10 +118,8 @@ class CourseController extends Controller
     {
         $courses = Course::select('id','title','slug','large_description',
         'youtube_link','meta_description','price_id','image')->with('categories')
-        ->where('highlighted',1)
         ->where('slug',$slug)
         ->where('active',1)
-        ->inRandomOrder()
         ->first();
 
         if(isset($apiCourse)){
