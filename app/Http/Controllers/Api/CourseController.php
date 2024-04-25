@@ -114,5 +114,32 @@ class CourseController extends Controller
             );
         }
     }
+    public function course($slug)
+    {
+        $courses = Course::select('id','title','slug','large_description',
+        'youtube_link','meta_description','price_id','image')->with('categories')
+        ->where('highlighted',1)
+        ->where('slug',$slug)
+        ->where('active',1)
+        ->inRandomOrder()
+        ->first();
+
+        if(isset($apiCourse)){
+            shuffle($apiCourse);
+            return response()->json(
+                [
+                    'success'=> true,
+                    'data'   => $courses,
+                ]
+            );
+        }else{
+            return response()->json(
+                [
+                    'success'=> false,
+                    'error'=> false,
+                ]
+            );
+        }
+    }
 
 }
