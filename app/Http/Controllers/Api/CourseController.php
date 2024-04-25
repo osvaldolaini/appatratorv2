@@ -134,7 +134,7 @@ class CourseController extends Controller
             return response()->json(
                 [
                     'success'=> false,
-                    'error'=> {{ $slug }},
+                    'error'=> $slug ,
                 ]
             );
         }
