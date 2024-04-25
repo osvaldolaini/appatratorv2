@@ -127,6 +127,7 @@ class CourseController extends Controller
                 'src'           => url('storage/courses/' . $course->id . '/'.$course->image.'.webp'),
                 'alt'           => $course->slug,
                 'description'   => $course->large_description,
+                'youtube_link'  => $course->youtube_link,
                 'prices'        => $course->packs->where('active',1),
                 'slug'          => 'https://atratorconcursos.com.br/nossos-cursos/'.$course->slug,
                 'title'         => $course->title,
