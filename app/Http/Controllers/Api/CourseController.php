@@ -117,13 +117,12 @@ class CourseController extends Controller
     public function course($slug)
     {
         $courses = Course::select('id','title','slug','large_description',
-        'youtube_link','meta_description','price_id','image')->with('categories')
+        'youtube_link','meta_description','price_id','image')
         ->where('slug',$slug)
         ->where('active',1)
         ->first();
 
-        if(isset($apiCourse)){
-            shuffle($apiCourse);
+        if(isset($courses)){
             return response()->json(
                 [
                     'success'=> true,
@@ -134,7 +133,7 @@ class CourseController extends Controller
             return response()->json(
                 [
                     'success'=> false,
-                    'error'=> $slug ,
+                    'error'=> false,
                 ]
             );
         }
