@@ -116,17 +116,25 @@ class CourseController extends Controller
     }
     public function course($slug)
     {
-        $courses = Course::select('id','title','slug','large_description',
+        $course = Course::select('id','title','slug','large_description',
         'youtube_link','meta_description','price_id','image')
         ->where('slug',$slug)
         ->where('active',1)
         ->first();
 
-        if(isset($courses)){
+        if(isset($course)){
+            $apiCourse=array(
+                'src'           => url('storage/courses/' . $course->id . '/'.$course->image.'.webp'),
+                'alt'           => $course->slug,
+                'description'   => $course->large_description,
+                'prices'        => $course->packs->where('active',1),
+                'slug'          => 'https://atratorconcursos.com.br/nossos-cursos/'.$course->slug,
+                'title'         => $course->title,
+            );
             return response()->json(
                 [
                     'success'=> true,
-                    'data'   => $courses,
+                    'data'   => $apiCourse,
                 ]
             );
         }else{
