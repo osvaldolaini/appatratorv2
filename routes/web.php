@@ -97,7 +97,7 @@ use Illuminate\Support\Facades\Storage;
 //Api
 Route::get('/apiCourses/{any}', [CourseController::class, 'course']);
 Route::get('/apiCourses', [CourseController::class, 'index']);
-Route::get('/apiCourses/destaques', [CourseController::class, 'highlighted']);
+Route::get('/apiCoursesDestaques', [CourseController::class, 'highlighted']);
 
 Route::middleware([
     'auth:sanctum',
