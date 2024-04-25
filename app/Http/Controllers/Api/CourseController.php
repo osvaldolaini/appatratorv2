@@ -19,8 +19,8 @@ class CourseController extends Controller
         $courses = Course::select('id','title','slug','meta_description','price_id','image')->with('categories')
         ->where('highlighted',1)
         ->where('active',1)
-        ->inRandomOrder()
         ->limit(4)
+        ->inRandomOrder()
         ->get();
 
         $allCategories = CategoryCourse::select('title','acronym','id','master')
@@ -41,6 +41,7 @@ class CourseController extends Controller
                 'alt'           => $course->slug,
                 'cat'           => $category,
                 'description'   => $course->meta_description,
+                'prices'        => $course->packs->where('active',1),
                 'slug'          => 'https://atratorconcursos.com.br/nossos-cursos/'.$course->slug,
                 'title'         => $course->title,
             );
