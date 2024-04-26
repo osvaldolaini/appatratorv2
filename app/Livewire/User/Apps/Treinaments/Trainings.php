@@ -19,7 +19,7 @@ class Trainings extends Component
     public function mount(Season $season)
     {
             $this->seasonTreinament = SeasonTreinament::create([
-                'day'           =>date('Y-m-d'),
+                'day'           =>date('d/m/Y'),
                 'season_id'     =>$season->id,
                 'user_id'       =>Auth::user()->id,
                 'status'        =>1,

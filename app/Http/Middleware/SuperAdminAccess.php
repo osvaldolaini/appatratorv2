@@ -16,7 +16,7 @@ class SuperAdminAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->group->level != 1) {
+        if (Auth::user()->group != 'super-admin') {
             return redirect()->route('dashboard');
         }
 

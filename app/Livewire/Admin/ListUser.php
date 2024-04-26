@@ -80,6 +80,7 @@ class ListUser extends Component
         $this->validate();
         User::create([
             'name'      => $this->name,
+            'active'    => 1,
             'email'     => $this->email,
             'password'  => Hash::make($this->password),
             'group'  => $this->group,
