@@ -55,6 +55,16 @@ class SeasonExercises extends Component
     {
         $this->unity = Exercise::where('id', $this->exercise_id)->first()->unity;
     }
+    public function resetAll()
+    {
+        $this->reset(
+            'time',
+            'repeat',
+            'distance',
+            'exercise_id',
+        );
+    }
+
 
     public function mount(Season $season)
     {
@@ -95,6 +105,7 @@ class SeasonExercises extends Component
             'exercise_id' => 'required',
         ];
         $this->validate();
+
         SeasonExercise::create([
             'time'          => $this->time,
             'repeat'        => $this->repeat,
@@ -105,6 +116,7 @@ class SeasonExercises extends Component
             'status'        => 1,
             'code'          => Str::uuid(),
         ]);
+        $this->resetAll();
 
         $this->modalCreate = false;
         $this->openAlert('success', 'Registro criado com sucesso.');
@@ -158,7 +170,7 @@ class SeasonExercises extends Component
 
         $this->openAlert('success', 'Registro atualizado com sucesso.');
         $this->modalEdit = false;
-        $this->reset('time', 'repeat', 'distance');
+        $this->resetAll();
     }
     //DELETE
     public function showModal($id)

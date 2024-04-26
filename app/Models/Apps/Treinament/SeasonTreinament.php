@@ -19,9 +19,7 @@ class SeasonTreinament extends Model
     protected $fillable = [
         'id','user_id','season_id','status','day'
     ];
-    protected $casts = [
-        'day' => 'datetime:Y-m-d h:i:s',
-    ];
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
@@ -30,7 +28,7 @@ class SeasonTreinament extends Model
     public function getDayAttribute($value)
     {
         if ($value != "") {
-            return Carbon::createFromFormat('Y-m-d h:i:s', $value)
+            return Carbon::createFromFormat('Y-m-d', $value)
                 ->format('d/m/Y');
         }
     }

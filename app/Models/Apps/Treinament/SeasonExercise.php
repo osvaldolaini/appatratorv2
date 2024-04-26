@@ -18,7 +18,7 @@ class SeasonExercise extends Model
     protected $table = 'season_exercises';
 
     protected $fillable = [
-        'id','user_id','season_id','exercise_id','repeat','time','distance','status'
+        'id', 'user_id', 'season_id', 'exercise_id', 'repeat', 'time', 'distance', 'status'
     ];
     protected $casts = [
         'time' => 'datetime:H:i:s',
@@ -31,15 +31,17 @@ class SeasonExercise extends Model
     public function setTimeAttribute($value)
     {
         if ($value != "") {
-            $this->attributes['time'] = '00:'.$value;
+            $this->attributes['time'] = '00:' . $value;
         } else {
             $this->attributes['time'] = NULL;
         }
     }
     public function getTimeAttribute($value)
     {
-        return Carbon::createFromFormat('H:i:s', $value)
-                    ->format('i:s');
+        if ($value) {
+            return Carbon::createFromFormat('H:i:s', $value)
+                ->format('i:s');
+        }
     }
 
     public function user()

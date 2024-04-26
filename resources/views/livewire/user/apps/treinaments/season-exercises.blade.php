@@ -44,7 +44,7 @@
                                                  flex dark:bg-gray-800 dark:border-gray-700  ">
                         <div class="card-title flex-auto">
                             {{ $item->exercise->title }}
-                            (@switch($item->exercise->unity)
+                            @switch($item->exercise->unity)
                                 @case('repeticao')
                                     {{ $item->repeat }} Repetições
                                 @break
@@ -70,7 +70,7 @@
                                 @break
 
                                 @default
-                            @endswitch)
+                            @endswitch
                         </div>
                         <div class="card-actions justify-end flex-nowarp">
                             <button wire:click="showModalEdit({{ $item->id }})"

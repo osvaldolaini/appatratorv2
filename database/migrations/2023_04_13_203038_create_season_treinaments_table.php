@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('season_treinaments', function (Blueprint $table) {
             $table->id();
             $table->boolean('status')->nullable();
-            $table->dateTime('day')->nullable();
+            $table->date('day')->nullable();
             $table->foreignId('user_id')
             ->constrained('users')
             ->onUpdate('cascade')
