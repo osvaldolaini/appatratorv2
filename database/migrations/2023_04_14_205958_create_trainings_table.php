@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('distance')->nullable();
             $table->time('time')->nullable();
             $table->timestamps();
+            $table->date('day')->nullable();
         });
     }
 

@@ -37,11 +37,14 @@ class TrainingUpdate extends Component
     public function updateDate()
     {
         SeasonTreinament::updateOrCreate([
-            'id'=> $this->season_treinament_id,
-        ],[
-            'day'  =>implode("-",array_reverse(explode("/",$this->day))),
+            'id' => $this->season_treinament_id,
+        ], [
+            'day'  => $this->day,
         ]);
+        return redirect()->to(
+            '/app-de-treinamento/concursos/editar-treino/' . $this->season_treinament_id,
+            'Data atualizada com sucesso.'
+        );
     }
-
 
 }

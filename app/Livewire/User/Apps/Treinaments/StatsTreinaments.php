@@ -14,7 +14,6 @@ class StatsTreinaments extends Component
 {
     // Define o layout a ser usado
     protected $layout = 'treinaments';
-    public $labels = [];
     public $days = [];
     public $hits = [];
     public $seasonTreinaments;
@@ -34,37 +33,35 @@ class StatsTreinaments extends Component
         $this->seasonTreinaments = SeasonTreinament::where('status', 1)
             ->where('season_id', $season->id)
             ->where('user_id', Auth::user()->id)
+            ->orderBy('day','asc')
             ->get();
 
-        $this->labels = $this->seasonTreinaments->map(
-            fn ($seasonTreinament) => [
-                'day' => $this->convert($seasonTreinament->day, 1),
-            ]
-        )->pluck('day')->toArray();
-
-        // dd($this->seasonTreinaments);
         foreach ($this->seasonTreinaments as $seasonTreinament) {
 
             // dd($seasonTreinament);
             $this->trainings = Training::where('season_treinament_id', $seasonTreinament->id)->get();
-            // dd($this->trainings);
+
 
             foreach ($this->trainings as $training) {
                 $exer[] = $training->exercise->id;
             }
-            // dd(count($exer));
+            // dd($exer);
             $exer = array_values(array_unique($exer));
-
             for ($i = 0; $i < count($exer); $i++) {
                 if ($exer[$i]) {
                     $e = Exercise::where('id', $exer[$i])->first();
-                    $trns = Training::where('exercise_id', $exer[$i])->get();
+                    $trns = Training::orderBy('day','asc')
+                    ->where('exercise_id', $exer[$i])
+                    ->get();
+
                     $d = $trns->map(
                         fn($trn)=>[
-                            'day' => SeasonTreinament::orderBy('day','desc')->where('id',$trn->season_treinament_id)
+                            'day' => SeasonTreinament::where('id',$trn->season_treinament_id)
                             ->first()->day,
                         ]
-                    )->pluck('day')->toArray();
+                    )->sortBy('day')->pluck('day')->toArray();
+
+                    // dd($d);
 
                     foreach ($trns as $training) {
                         if ($training->exercise->unity == 'repeticao') {
@@ -72,21 +69,19 @@ class StatsTreinaments extends Component
                                 fn ($trn) => [
                                     'repeat' => $trn->repeat,
                                 ]
-                            )->pluck('repeat')->toArray();
-                        }
-                        if ($training->exercise->unity == 'cm' or $training->exercise->unity == 'm' or $training->exercise->unity == 'km') {
+                            )->sortBy('day')->pluck('repeat')->toArray();
+                        }elseif($training->exercise->unity == 'cm' or $training->exercise->unity == 'm' or $training->exercise->unity == 'km') {
                             $qtd = $trns->map(
                                 fn ($trn) => [
                                     'distance' => $trn->distance,
                                 ]
-                            )->pluck('distance')->toArray();
-                        }
-                        if ($training->exercise->unity == 'min') {
+                            )->sortBy('day')->pluck('distance')->toArray();
+                        }elseif ($training->exercise->unity == 'min') {
                             $qtd = $trns->map(
                                 fn ($trn) => [
-                                    'time' => $trn->time,
+                                    'time' => $trn->timeChart,
                                 ]
-                            )->pluck('time')->toArray();
+                            )->sortBy('day')->pluck('time')->toArray();
                         }
                     }
                 }
@@ -103,7 +98,6 @@ class StatsTreinaments extends Component
                     $target = $objetive->distance;
                 }
 
-
                 $this->stats[$exer[$i]] = array(
                     'id'=>$e->id,
                     'title'=>$e->title,
@@ -114,11 +108,19 @@ class StatsTreinaments extends Component
                 );
             }
         }
+        //Limpara os resultado nulos
+        foreach ($this->stats as $chave => $valor) {
+            $this->stats[$chave]['qtd'] = array_filter($valor['qtd'], function($item) {
+                return !is_null($item);
+            });
+            $this->stats[$chave]['labels'] = array_filter($valor['qtd'], function($item) {
+                return !is_null($item);
+            });
+        }
     }
 
     public function render()
     {
-        // dd($this->stats);
         return view('livewire.user.apps.treinaments.stats')->layout('layouts.' . $this->layout);
     }
 }

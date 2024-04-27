@@ -17,15 +17,28 @@ class Training extends Model
     protected $table = 'trainings';
 
     protected $fillable = [
-        'id','exercise_id','repeat','time','distance','season_treinament_id'
+        'id', 'exercise_id', 'day','repeat', 'time', 'distance', 'season_treinament_id'
     ];
-    protected $casts = [
-        'time' => 'datetime:H:i:s',
-    ];
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
             ->logOnly($this->fillable);
+    }
+    public function getDayAttribute($value)
+    {
+        if ($value != "") {
+            return Carbon::createFromFormat('Y-m-d', $value)
+                ->format('d/m/Y');
+        }
+    }
+    public function setDayAttribute($value)
+    {
+        if ($value != "") {
+            $this->attributes['day'] = implode("-", array_reverse(explode("/", $value)));
+        } else {
+            $this->attributes['day'] = NULL;
+        }
     }
 
     public function setTimeAttribute($value)
@@ -40,9 +53,22 @@ class Training extends Model
     {
         if ($value) {
             return Carbon::createFromFormat('H:i:s', $value)
-                ->format('i:s');
+                ->format('H:i:s');
         }
     }
+    public function getTimeChartAttribute()
+    {
+        if ($this->time) {
+
+            $tempo = $this->time;
+            $tempo_em_segundos = strtotime($tempo) - strtotime('TODAY');
+            $tempo_em_minutos = $tempo_em_segundos / 60;
+
+            $tempo_em_minutos_formatado = number_format($tempo_em_minutos, 2);
+            return $tempo_em_minutos_formatado;
+        }
+    }
+
 
     public function exercise()
     {

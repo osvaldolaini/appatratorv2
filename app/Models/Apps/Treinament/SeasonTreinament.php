@@ -36,11 +36,17 @@ class SeasonTreinament extends Model
     {
         if ($value != "") {
             $this->attributes['day'] = implode("-", array_reverse(explode("/", $value)));
+            if($this->trainings)
+            {
+                foreach ($this->trainings as $training) {
+                    $training->day = implode("-", array_reverse(explode("/", $value)));
+                    $training->save();
+                }
+            }
         } else {
             $this->attributes['day'] = NULL;
         }
     }
-
 
     public function user()
     {
@@ -50,6 +56,10 @@ class SeasonTreinament extends Model
     public function season()
     {
         return $this->belongsTo(Season::class);
+    }
+    public function trainings()
+    {
+        return $this->hasMany(Training::class,'season_treinament_id','id');
     }
 
 }

@@ -1,4 +1,4 @@
-<div class="w-100">
+<div class="w-full" wire:ignore>
     <form action="#" wire:submit.prevent="update" wire.loading.attr='disable'>
         @if ($training->exercise->unity == 'repeticao')
             <div class="col-span-2 sm:col-span-1">
