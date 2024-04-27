@@ -122,8 +122,10 @@ class SeasonTreinaments extends Component
            ];
            $seasonExercises = Training::where('season_treinament_id',$data->id)
            ->get();
+
            if($seasonExercises){
                foreach ($seasonExercises as $key) {
+
                    if ($key->exercise->unity == 'repeticao'){
                        $this->exercises[$key->exercise->title] =
                        Training::where('exercise_id',$key->exercise_id)->where('season_treinament_id',$data->id)->orderBy('repeat','desc')->first()->repeat;
@@ -131,12 +133,12 @@ class SeasonTreinaments extends Component
                        $this->exercises[$key->exercise->title] =
                        Training::where('exercise_id',$key->exercise_id)->where('season_treinament_id',$data->id)->orderBy('distance','desc')->first()->distance;
                    }elseif ($key->exercise->unity == 'min'){
+
                        $this->exercises[$key->exercise->title] =
                        Training::where('exercise_id',$key->exercise_id)->where('season_treinament_id',$data->id)->orderBy('time','desc')->first()->time;
                    }
                }
            }
-
        }else{
            $this->exercises = '';
            $this->detail = '';
@@ -151,18 +153,17 @@ class SeasonTreinaments extends Component
         ->get();
         $this->showModalEdit= true;
     }
+
     public function update()
     {
         $this->day = implode("-",array_reverse(explode("/",$this->day)));
         SeasonTreinament::updateOrCreate([
-            'id'=>$this->model_id,
+            'id'  =>$this->model_id,
         ],[
-            'day'          =>$this->day,
+            'day' =>$this->day,
         ]);
 
-        session()->flash('success','Registro atualizado com sucesso');
-
-            $this->alertSession = true;
+        $this->openAlert('success', 'Registro excluido com sucesso.');
             $this->showModalEdit = false;
             $this->reset('day');
     }
@@ -179,13 +180,14 @@ class SeasonTreinaments extends Component
     public function delete($id)
     {
         $data = SeasonTreinament::where('id',$id)->first();
-        $data->status = '0';
-        $data->save();
-
-        session()->flash('success','Registro excluido com sucesso.');
-
-            $this->alertSession = true;
-            $this->showJetModal = false;
+        $data->delete();
+        $this->openAlert('success', 'Treino excluido com sucesso.');
+        $this->showJetModal = false;
+    }
+    //MESSAGE
+    public function openAlert($status, $msg)
+    {
+        $this->dispatch('openAlert', $status, $msg);
     }
 
 }

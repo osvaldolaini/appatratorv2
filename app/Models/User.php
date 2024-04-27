@@ -9,6 +9,7 @@ use App\Models\Admin\Voucher\Vouchers;
 use App\Models\Apps\Mentoring\ContestPlanningCyclesUser;
 use App\Models\Apps\Mentoring\ContestPlanningUser;
 use App\Models\Apps\Mentoring\ContestUser;
+use App\Models\Apps\Treinament\Season;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -106,6 +107,11 @@ class User extends Authenticatable
     public function cycle(): HasMany
     {
         return $this->HasMany(ContestPlanningCyclesUser::class,'user_id','id');
+    }
+
+    public function seasons(): HasMany
+    {
+        return $this->HasMany(Season::class,'user_id','id');
     }
 
 }

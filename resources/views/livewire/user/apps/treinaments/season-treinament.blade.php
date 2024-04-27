@@ -115,6 +115,7 @@
         <x-slot name="title">Resultados</x-slot>
         <x-slot name="content">
             <dl class="max-w text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+
                 @if ($detail)
                     @foreach ($detail as $item => $value)
                         @if ($value)

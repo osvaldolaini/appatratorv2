@@ -27,7 +27,7 @@
                             </x-link-simple>
                         </div>
                         <div class="py-1">
-                            <x-link-simple url="apps.essays" active="*app-de-redação">
+                            <x-link-simple url="apps.treinaments" active="*app-de-treinamento">
                                 <span class="text-left">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 2048 1792"
                                         xmlns="http://www.w3.org/2000/svg">

@@ -11,6 +11,7 @@ class TrainingsComponent extends Component
     public $training;
     public $repeat;
     public $distance;
+    public $time;
     public $exercise_id;
     public $model_id;
 
@@ -18,6 +19,7 @@ class TrainingsComponent extends Component
     {
         $this->model_id =  $training->id;
         $this->repeat = $training->repeat;
+        $this->time = $training->time;
         $this->distance = $training->distance;
         $this->exercise_id = $training->exercise_id;
         $this->training = $training;
@@ -34,6 +36,7 @@ class TrainingsComponent extends Component
             'id'=> $this->model_id,
         ],[
             'repeat'        =>$this->repeat,
+            'time'          =>$this->time,
             'distance'      =>$this->distance,
             'exercise_id'   =>$this->exercise_id,
         ]);

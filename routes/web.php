@@ -74,6 +74,7 @@ use App\Livewire\User\Apps\Mentoring\MentoringReviewsUser;
 use App\Livewire\User\Apps\Mentoring\MentoringSimulatedsUser;
 use App\Livewire\User\Apps\Questions\HomeQuestions;
 use App\Livewire\User\Apps\Questions\Stats;
+use App\Livewire\User\Apps\Treinaments\HomeTreinament;
 use App\Livewire\User\Courses\DashboardCourse;
 use App\Livewire\User\Courses\DashboardModule;
 use App\Livewire\User\MyApps;
@@ -232,7 +233,7 @@ Route::middleware([
     Route::get('/app-de-questões/home', Stats::class)->name('apps.stats');
 
     //treinamento físico
-    Route::get('/app-de-treinamento', SeasonUser::class)->name('apps.treinaments');
+    Route::get('/app-de-treinamento', HomeTreinament::class)->name('apps.treinaments');
     Route::get('/app-de-treinamento/concursos', SeasonUser::class)->name('apps.season');
     Route::get('/app-de-treinamento/concursos/exercicios/{season}', SeasonExercises::class)->name('apps.season.exercises');
     Route::get('/app-de-treinamento/meus-exercícios-propostos', ListExercises::class)->name('apps.user.exercises');

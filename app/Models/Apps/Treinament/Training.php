@@ -3,6 +3,7 @@
 namespace App\Models\Apps\Treinament;
 
 use App\Models\Admin\Treinament\Exercise;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -26,6 +27,23 @@ class Training extends Model
         return LogOptions::defaults()
             ->logOnly($this->fillable);
     }
+
+    public function setTimeAttribute($value)
+    {
+        if ($value != "") {
+            $this->attributes['time'] = '00:' . $value;
+        } else {
+            $this->attributes['time'] = NULL;
+        }
+    }
+    public function getTimeAttribute($value)
+    {
+        if ($value) {
+            return Carbon::createFromFormat('H:i:s', $value)
+                ->format('i:s');
+        }
+    }
+
     public function exercise()
     {
         return $this->belongsTo(Exercise::class);

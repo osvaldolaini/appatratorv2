@@ -185,10 +185,8 @@ class SeasonExercises extends Component
     public function delete($id)
     {
         $data = SeasonExercise::where('id', $id)->first();
-        $data->status = '0';
-        $data->save();
-
-        $this->openAlert('success', 'Registro excluido com sucesso.');
+        $data->delete();
+        $this->openAlert('success', 'Exercício excluido com sucesso.');
 
         $this->showJetModal = false;
         $this->reset('time', 'repeat', 'distance');
