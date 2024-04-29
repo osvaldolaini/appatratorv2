@@ -91,7 +91,12 @@
                                     <tr scope="col"
                                         class="py-3.5 px-4 text-sm font-normal text-left text-gray-500
                                         dark:text-gray-400">
-
+                                        <th scope="col"
+                                            class="py-3.5 px-4 text-sm font-normal
+                                                text-left text-gray-500
+                                                dark:text-gray-400">
+                                            Nome
+                                        </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
                                                     text-left text-gray-500
@@ -116,6 +121,12 @@
                                                 dark:text-gray-400">
                                             Descrição
                                         </th>
+                                        <th scope="col"
+                                            class="py-3.5 px-4 text-sm font-normal
+                                                text-center text-gray-500
+                                                dark:text-gray-400">
+                                            Pacote
+                                        </th>
 
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
@@ -138,12 +149,16 @@
                                             <tr>
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
-                                                    {{ $data->value }}
+                                                    {{ $data->title }}
                                                     @if ($data->active == 2)
                                                         <div class="badge badge-error gap-2 mx-1">
                                                             Excluido
                                                         </div>
                                                     @endif
+                                                </td>
+                                                <td
+                                                    class="py-1.5 px-4 text-sm font-normal  text-center text-gray-500 dark:text-gray-400">
+                                                    {{ $data->value }}
                                                 </td>
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
@@ -156,7 +171,7 @@
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
                                                     <div class="tooltip tooltip-top p-0" data-tip="Descrição">
-                                                        <a href="{{ route('course-pack-description',$data->id) }}"
+                                                        <a href="{{ route('course-pack-description', $data->id) }}"
                                                             class="py-2 px-3 flex
                                                             hover:text-white dark:hover:bg-gray-300 transition-colors hover:hover:bg-gray-300
                                                             duration-200 whitespace-nowrap">
@@ -166,28 +181,38 @@
                                                                     transform="translate(-1.588 -2.588)">
                                                                     <path id="primary" d="M7,4,4.33,7,3,5.5"
                                                                         fill="none" stroke="currentColor"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
                                                                         stroke-width="2" />
                                                                     <path id="primary-2" data-name="primary"
                                                                         d="M3,11.5,4.33,13,7,10" fill="none"
-                                                                        stroke="currentColor"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round"
-                                                                        stroke-width="2" />
+                                                                        stroke="currentColor" stroke-linecap="round"
+                                                                        stroke-linejoin="round" stroke-width="2" />
                                                                     <path id="primary-3" data-name="primary"
                                                                         d="M3,17.5,4.33,19,7,16" fill="none"
-                                                                        stroke="currentColor"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round"
-                                                                        stroke-width="2" />
+                                                                        stroke="currentColor" stroke-linecap="round"
+                                                                        stroke-linejoin="round" stroke-width="2" />
                                                                     <path id="primary-4" data-name="primary"
-                                                                        d="M11,6H21M11,12H21M11,18H21"
-                                                                        fill="none" stroke="currentColor"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round"
-                                                                        stroke-width="2" />
+                                                                        d="M11,6H21M11,12H21M11,18H21" fill="none"
+                                                                        stroke="currentColor" stroke-linecap="round"
+                                                                        stroke-linejoin="round" stroke-width="2" />
                                                                 </g>
+                                                            </svg>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td
+                                                    class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
+                                                    <div class="tooltip tooltip-top p-0" data-tip="Pacote">
+                                                        <a href="{{ route('course-pack-package', $data->id) }}"
+                                                            class="py-2 px-3 flex
+                                                            hover:text-white dark:hover:bg-gray-300 transition-colors hover:hover:bg-gray-300
+                                                            duration-200 whitespace-nowrap">
+                                                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M20.5 7.27783L12 12.0001M12 12.0001L3.49997 7.27783M12 12.0001L12 21.5001M14 20.889L12.777 21.5684C12.4934 21.726 12.3516 21.8047 12.2015 21.8356C12.0685 21.863 11.9315 21.863 11.7986 21.8356C11.6484 21.8047 11.5066 21.726 11.223 21.5684L3.82297 17.4573C3.52346 17.2909 3.37368 17.2077 3.26463 17.0893C3.16816 16.9847 3.09515 16.8606 3.05048 16.7254C3 16.5726 3 16.4013 3 16.0586V7.94153C3 7.59889 3 7.42757 3.05048 7.27477C3.09515 7.13959 3.16816 7.01551 3.26463 6.91082C3.37368 6.79248 3.52345 6.70928 3.82297 6.54288L11.223 2.43177C11.5066 2.27421 11.6484 2.19543 11.7986 2.16454C11.9315 2.13721 12.0685 2.13721 12.2015 2.16454C12.3516 2.19543 12.4934 2.27421 12.777 2.43177L20.177 6.54288C20.4766 6.70928 20.6263 6.79248 20.7354 6.91082C20.8318 7.01551 20.9049 7.13959 20.9495 7.27477C21 7.42757 21 7.59889 21 7.94153L21 12.5001M7.5 4.50008L16.5 9.50008M16 18.0001L18 20.0001L22 16.0001"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round" />
                                                             </svg>
                                                         </a>
                                                     </div>

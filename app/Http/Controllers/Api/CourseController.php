@@ -86,6 +86,7 @@ class CourseController extends Controller
                 }
             }
 
+
             $apiCourse[]=array(
                 'src'           => url('storage/courses/' . $course->id . '/'.$course->image.'.webp'),
                 'alt'           => $course->slug,

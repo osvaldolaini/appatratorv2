@@ -13,6 +13,7 @@ use App\Livewire\Admin\Course\CoursePivotCategories;
 use App\Livewire\Admin\Course\CourseUpdate;
 use App\Livewire\Admin\Course\CourseImage;
 use App\Livewire\Admin\Course\CoursePackDescription;
+use App\Livewire\Admin\Course\CoursePackPackage;
 use App\Livewire\Admin\Course\CoursesPacks;
 use App\Livewire\Admin\Course\Modules\ModuleEdit;
 use App\Livewire\Admin\Course\Modules\ModuleNew;
@@ -159,7 +160,7 @@ Route::middleware([
         Route::get('/categorias-de-curso',CategoryCourses::class)->name('category-course');
         Route::get('/cursos/valores/{course}',CoursesPacks::class)->name('course-values');
         Route::get('/cursos/valores/descrição/{packPivotCourse}',CoursePackDescription::class)->name('course-pack-description');
-
+        Route::get('/cursos/valores/pacote/{packPivotCourse}',CoursePackPackage::class)->name('course-pack-package');
 
     //Questions
     Route::get('/questões', Question::class)->name('question');

@@ -13,4 +13,3 @@ window.listPlugin = listPlugin;
 import multiMonthPlugin from '@fullcalendar/multimonth';
 window.multiMonthPlugin = multiMonthPlugin;
 
-

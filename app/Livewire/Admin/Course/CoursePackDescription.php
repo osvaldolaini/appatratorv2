@@ -26,7 +26,7 @@ class CoursePackDescription extends Component
 
     public function render()
     {
-        return view('livewire.admin.courses.course-description');
+        return view('livewire.admin.courses.course-pack-description');
     }
     public function save()
     {

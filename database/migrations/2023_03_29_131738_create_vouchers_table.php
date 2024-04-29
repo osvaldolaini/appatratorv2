@@ -18,10 +18,10 @@ return new class extends Migration
             $table->integer('qtd')->nullable();
             $table->string('application')->nullable();
             $table->foreignId('user_id')
-            ->nullable()
-            ->constrained('users')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+                ->nullable()
+                ->constrained('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreignId('plan_id')
             ->nullable()
             ->constrained('plans')
