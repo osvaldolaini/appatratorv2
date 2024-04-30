@@ -229,7 +229,7 @@ Route::middleware([
 
     Route::get('/checkout-prod/{course}', CheckoutProd::class)->name('checkout-prod');
     // Route::get('/inserir-vouchers', InsertVouchers::class)->name('home');
-    Route::post('/stripe/webhook', 'StripeWebhookController@handleWebhook')->name('home');
+    Route::get('/stripe/webhook', 'StripeWebhookController@handleWebhook')->name('home');
 
     //redação
     Route::get('/app-de-redação', HomeEssay::class)->name('apps.essays');
