@@ -15,7 +15,7 @@ class CoursePacks extends Component
     public $packs;
     public function mount(Course $course)
     {
-        $this->packs = $this->course->packs;
+        $this->packs = $course->packs;
     }
 
     public function render()
