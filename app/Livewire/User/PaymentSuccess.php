@@ -33,20 +33,10 @@ class PaymentSuccess extends Component
 
         $pack = PackPivotCourse::findOrFail($pack_id);
 
-        dd($pack);
+        dd($pack->package);
 
         return redirect()->to('/lobby')
             ->with('success', 'Curso adiquirido com sucesso.');
     }
-    // public function error()
-    // {
-    //     $sessionId = $request->get('session_id');
 
-    //     if ($sessionId === null) {
-    //         return;
-    //     }
-
-    //     $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
-    //     dd($session);
-    // }
 }

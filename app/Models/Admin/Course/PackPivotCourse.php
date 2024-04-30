@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin\Course;
 
+use App\Models\Admin\Voucher\Package;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -22,6 +23,10 @@ class PackPivotCourse extends Model
     public function course()
     {
         return $this->belongsTo(Course::class, 'courses_id','id');
+    }
+    public function package()
+    {
+        return $this->hasMany(Package::class,'pack_pivot_course_id','id');
     }
 
     public function getActivitylogOptions(): LogOptions
