@@ -30,6 +30,7 @@ class PaymentSuccess extends Component
         if ($session->payment_status !== 'paid') {
             return;
         }
+        dd($session);
 
         $pack_id = $session['metadata']['pack_id'] ?? null;
         if (User::where('email',$session['customer_details']['email'])->first()) {
@@ -40,7 +41,8 @@ class PaymentSuccess extends Component
                 'name' => $session['customer_details']['name'],
                 'email' => $session['customer_details']['email'],
                 'password' => Hash::make(123456789),
-                'group'=>'user'
+                'group'=>'user',
+                'stripe_id'=>
             ]);
             // dd($user);
         }
