@@ -22,7 +22,6 @@ class InsertVouchers extends Component
     public function render()
     {
         return redirect()->to('/lobby')
-            ->with('success', 'Curso adiquirido com sucesso.')
-            ->layout('layouts.' . $this->layout);
+            ->with('success', 'Curso adiquirido com sucesso.');
     }
 }
