@@ -76,8 +76,10 @@ use App\Livewire\User\Apps\Mentoring\MentoringSimulatedsUser;
 use App\Livewire\User\Apps\Questions\HomeQuestions;
 use App\Livewire\User\Apps\Questions\Stats;
 use App\Livewire\User\Apps\Treinaments\HomeTreinament;
+use App\Livewire\User\CheckoutProd;
 use App\Livewire\User\Courses\DashboardCourse;
 use App\Livewire\User\Courses\DashboardModule;
+use App\Livewire\User\InsertVouchers;
 use App\Livewire\User\MyApps;
 use App\Livewire\User\MyCourses;
 use App\Livewire\User\MyVouchers;
@@ -223,6 +225,9 @@ Route::middleware([
     Route::get('/meus-apps', MyApps::class)->name('user.apps');
     Route::get('/meus-cursos', MyCourses::class)->name('user.courses');
     Route::get('/meus-vouchers', MyVouchers::class)->name('user.vouchers');
+
+    Route::get('/checkout-prod/{course}', CheckoutProd::class)->name('checkout-prod');
+    Route::get('/inserir-vouchers', InsertVouchers::class)->name('home');
 
 
     //redação
