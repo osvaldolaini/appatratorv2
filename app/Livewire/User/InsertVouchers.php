@@ -12,9 +12,10 @@ class InsertVouchers extends Component
     // Define o layout a ser usado
     protected $layout = 'lobby';
 
-    public function success(Request $request)
+    public function success()
     {
-        $sessionId = $request->get('session_id');
+        $sessionId = $_GET['session_id'];
+        // $sessionId = $request->get('session_id');
 
         if ($sessionId === null) {
             return;
@@ -26,15 +27,15 @@ class InsertVouchers extends Component
         return redirect()->to('/lobby')
             ->with('success', 'Curso adiquirido com sucesso.');
     }
-    public function error(Request $request)
-    {
-        $sessionId = $request->get('session_id');
+    // public function error()
+    // {
+    //     $sessionId = $request->get('session_id');
 
-        if ($sessionId === null) {
-            return;
-        }
+    //     if ($sessionId === null) {
+    //         return;
+    //     }
 
-        $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
-        dd($session);
-    }
+    //     $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
+    //     dd($session);
+    // }
 }
