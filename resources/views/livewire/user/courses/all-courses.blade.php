@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-4 gap-2 w-full h-full py-2">
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 w-full h-full py-2">
         @foreach ($courses as $course)
             <div class="col-span-1">
                 <div class="w-56 h-60 card card-compact image-full shadow-xl bg-cover">
