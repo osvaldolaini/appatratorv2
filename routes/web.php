@@ -227,7 +227,7 @@ Route::middleware([
     Route::get('/meus-vouchers', MyVouchers::class)->name('user.vouchers');
 
     Route::get('/checkout-prod/{course}', CheckoutProd::class)->name('checkout-prod');
-    Route::get('/inserir-vouchers', InsertVouchers::class)->name('home');
+    Route::get('/inserir-vouchers', InsertVouchers::class)->name('checkout-success');
 
 
     //redação
