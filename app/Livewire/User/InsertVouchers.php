@@ -31,4 +31,8 @@ class InsertVouchers extends Component
         return redirect()->to('/lobby')
             ->with('success', 'Curso adiquirido com sucesso.');
     }
+    public function error(Request $request)
+    {
+        dd($request->get('session_id'));
+    }
 }

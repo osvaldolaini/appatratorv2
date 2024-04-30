@@ -228,6 +228,7 @@ Route::middleware([
 
     Route::get('/checkout-prod/{course}', CheckoutProd::class)->name('checkout-prod');
     Route::get('/inserir-vouchers', InsertVouchers::class)->name('checkout-success');
+    Route::get('/inserir-vouchers', InsertVouchers::class,'error')->name('checkout-cancel');
 
 
     //redação
