@@ -14,7 +14,7 @@ class CheckoutProd extends Component
         $user
         ->checkout($course->price_id, [
             'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('checkout-cancel'),
+            // 'cancel_url' => route('checkout-cancel'),
             'metadata' => ['course_id' => $course->id],
         ])->redirect();
     }

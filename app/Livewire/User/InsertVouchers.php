@@ -12,7 +12,7 @@ class InsertVouchers extends Component
     // Define o layout a ser usado
     protected $layout = 'lobby';
 
-    public function success()
+    public function mount()
     {
         $sessionId = $_GET['session_id'];
         // $sessionId = $request->get('session_id');
