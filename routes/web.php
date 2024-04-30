@@ -228,7 +228,7 @@ Route::middleware([
     Route::get('/meus-apps', MyApps::class)->name('user.apps');
     Route::get('/meus-cursos', MyCourses::class)->name('user.courses');
     Route::get('/meus-vouchers', MyVouchers::class)->name('user.vouchers');
-    Route::get('/pacotes-do-curso', CoursePacks::class)->name('course-pack');
+    Route::get('/pacotes-do-curso/{course}', CoursePacks::class)->name('course-pack');
 
     Route::get('/checkout-prod/{course}', CheckoutProd::class)->name('checkout-prod');
     Route::get('/inserir-vouchers/sucesso', PaymentSuccess::class)->name('checkout-success');
