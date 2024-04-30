@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\CourseController;
-use App\Http\Controllers\StripeWebhookController;
 use App\Livewire\Admin\Question\Filter\Filters;
 use App\Livewire\Admin\Configuration;
 use App\Livewire\Admin\Course\CategoryCourses;
@@ -103,8 +102,6 @@ use Illuminate\Support\Facades\Storage;
 Route::get('/apiCourses/{any}', [CourseController::class, 'course']);
 Route::get('/apiCourses', [CourseController::class, 'index']);
 Route::get('/apiCoursesDestaques', [CourseController::class, 'highlighted']);
-Route::post('/stripe/webhook', [StripeWebhookController::class,'handleWebhook'])
-->name('home');
 
 Route::middleware([
     'auth:sanctum',
@@ -230,7 +227,7 @@ Route::middleware([
     Route::get('/meus-vouchers', MyVouchers::class)->name('user.vouchers');
 
     Route::get('/checkout-prod/{course}', CheckoutProd::class)->name('checkout-prod');
-    // Route::get('/inserir-vouchers', InsertVouchers::class)->name('home');
+    Route::get('/inserir-vouchers', InsertVouchers::class)->name('home');
 
 
     //redação
