@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 
+use App\Models\Admin\Course\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Cashier\Cashier;
@@ -22,8 +23,15 @@ class PaymentSuccess extends Component
         }
 
         $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
-        dd($session);
 
+        if ($session->payment_status !== 'paid') {
+            return;
+        }
+
+        $course_id = $session['metadata']['order_id'] ?? null;
+
+        $course = Course::findOrFail($course_id);
+        dd($course);
         return redirect()->to('/lobby')
             ->with('success', 'Curso adiquirido com sucesso.');
     }
