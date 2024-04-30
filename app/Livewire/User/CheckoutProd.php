@@ -11,10 +11,6 @@ class CheckoutProd extends Component
     public function mount(Course $course)
     {
         $user = Auth::user();
-        // dd($user->createOrGetStripeCustomer());
-        // $user
-        // ->checkout($course->price_id)
-        // ->redirect();
         $user
         ->checkout($course->price_id, [
             'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
