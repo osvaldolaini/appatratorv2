@@ -16,7 +16,7 @@ class PaymentSuccess extends Component
     {
         // $sessionId = $_GET['session_id'];
         $sessionId = $request->get('session_id');
-        dd($sessionId);
+
         if ($sessionId === null) {
             return;
         }
