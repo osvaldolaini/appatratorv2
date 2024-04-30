@@ -11,6 +11,10 @@
                         @foreach ($packs as $pack)
                             <div class="col-span-1">
                                 <div class="w-56 h-60 card card-compact image-full shadow-xl bg-cover">
+                                    <figure><img class="w-full mx-auto"
+                                        src="{{ url('storage/courses/' . $pack->course->id . '/'.$pack->course->image.'.webp') }}"
+                                        alt="{{ $pack->course->slug }}">
+                                </figure>
                                     <div class="card-body">
                                         <p class="font-extrabold text-[#F3FB04]">{{ $pack->title }}</p>
                                         <div class="card-actions justify-end">
@@ -23,8 +27,6 @@
                             </div>
                         @endforeach
                     @endif
-
-
                 </h1>
             </div>
         </div>
