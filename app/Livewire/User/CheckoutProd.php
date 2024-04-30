@@ -11,7 +11,7 @@ class CheckoutProd extends Component
 {
     public function mount(PackPivotCourse $packPivotCourse)
     {
-        dd($packPivotCourse);
+        // dd($packPivotCourse);
         $user = Auth::user();
         $user
         ->checkout($packPivotCourse->price_id, [

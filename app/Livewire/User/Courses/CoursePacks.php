@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Http;
 
 class CoursePacks extends Component
 {
-    public $breadcrumb = 'Cursos';
-
+    public $breadcrumb = 'Pacotes';
+    // Define o layout a ser usado
+    protected $layout = 'lobby';
     public $packs;
     public function mount(Course $course)
     {
@@ -20,6 +21,7 @@ class CoursePacks extends Component
 
     public function render()
     {
-        return view('livewire.user.course-packs');
+        return view('livewire.user.course-packs')
+            ->layout('layouts.' . $this->layout);
     }
 }
