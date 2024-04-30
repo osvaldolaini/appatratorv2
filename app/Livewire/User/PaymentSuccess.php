@@ -34,9 +34,9 @@ class PaymentSuccess extends Component
         }
 
         $pack_id = $session['metadata']['pack_id'] ?? null;
-        $custumer = $session['customer_details'];
-        if (User::where('email',$custumer['email'])->get()) {
-            $user = User::where('email',$custumer['email'])->get();
+        if (User::where('email',$session['customer_details']['email'])->get()) {
+            $user = User::where('email',$session['customer_details']['email'])->get();
+            dd($user);
         }else{
             $user =  User::create([
                 'name' => $session['customer_details']['name'],
@@ -44,6 +44,7 @@ class PaymentSuccess extends Component
                 'password' => Hash::make(123456789),
                 'group'=>'user'
             ]);
+            dd($user);
         }
 
         $pack = PackPivotCourse::findOrFail($pack_id);
