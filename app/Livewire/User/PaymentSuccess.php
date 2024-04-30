@@ -4,10 +4,12 @@ namespace App\Livewire\User;
 
 use App\Models\Admin\Course\Course;
 use App\Models\Admin\Course\PackPivotCourse;
+use App\Models\Admin\Voucher\Vouchers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Cashier\Cashier;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class PaymentSuccess extends Component
 {
@@ -24,7 +26,7 @@ class PaymentSuccess extends Component
         }
 
         $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
-
+        dd($session);
         if ($session->payment_status !== 'paid') {
             return;
         }
@@ -33,7 +35,19 @@ class PaymentSuccess extends Component
 
         $pack = PackPivotCourse::findOrFail($pack_id);
 
-        dd($pack->package);
+        if ($pack->package) {
+            foreach ($pack->package as $voucher) {
+                Vouchers::create([
+                    'plan_id'       =>$voucher->plan_id,
+                    'user_id'       =>$this->user_id,
+                    'course_id'     =>$voucher->course_id,
+                    'application'   =>$voucher->application,
+                    'active'        => 1,
+                    'code'          =>Str::uuid(),
+                    'created_by'    =>Auth::user()->name,
+                ]);
+            }
+        }
 
         return redirect()->to('/lobby')
             ->with('success', 'Curso adiquirido com sucesso.');
