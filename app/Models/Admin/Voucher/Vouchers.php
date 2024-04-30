@@ -21,7 +21,9 @@ class Vouchers extends Model
     protected $table = 'vouchers';
 
     protected $fillable = [
-        'user_id', 'plan_id', 'active', 'code', 'updated_by', 'created_by', 'application','course_id', 'limit_access', 'send_date', 'send_email', 'sended_by'
+        'user_id', 'plan_id', 'active', 'code', 'package_id',
+        'updated_by', 'created_by', 'application','course_id',
+        'limit_access', 'send_date', 'send_email', 'sended_by'
     ];
     public function getActivitylogOptions(): LogOptions
     {
