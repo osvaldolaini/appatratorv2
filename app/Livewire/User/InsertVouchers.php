@@ -18,10 +18,7 @@ class InsertVouchers extends Component
             ->where('active', 1)
             ->where('limit_access', '>=', date('Y-m-d h:i:s'))
             ->unique('application');
-    }
-    public function render()
-    {
-        return redirect()->to('/lobby')
+            return redirect()->to('/lobby')
             ->with('success', 'Curso adiquirido com sucesso.');
     }
 }
