@@ -12,11 +12,8 @@ class InsertVouchers extends Component
     // Define o layout a ser usado
     protected $layout = 'lobby';
 
-    public $vouchers;
-    public function mount(Request $request)
+    public function success(Request $request)
     {
-
-
         $sessionId = $request->get('session_id');
 
         if ($sessionId === null) {
@@ -25,15 +22,19 @@ class InsertVouchers extends Component
 
         $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
         dd($session);
-        $this->vouchers = Auth::user()->vouchers
-            ->where('active', 1)
-            ->where('limit_access', '>=', date('Y-m-d h:i:s'))
-            ->unique('application');
+
         return redirect()->to('/lobby')
             ->with('success', 'Curso adiquirido com sucesso.');
     }
     public function error(Request $request)
     {
-        dd($request->get('session_id'));
+        $sessionId = $request->get('session_id');
+
+        if ($sessionId === null) {
+            return;
+        }
+
+        $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
+        dd($session);
     }
 }
