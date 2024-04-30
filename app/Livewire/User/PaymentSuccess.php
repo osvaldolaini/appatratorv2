@@ -42,7 +42,7 @@ class PaymentSuccess extends Component
                 'email' => $session['customer_details']['email'],
                 'password' => Hash::make(123456789),
                 'group'=>'user',
-                'stripe_id'=>
+                'stripe_id'=>,
             ]);
             // dd($user);
         }
