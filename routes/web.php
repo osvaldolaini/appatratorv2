@@ -83,6 +83,8 @@ use App\Livewire\User\InsertVouchers;
 use App\Livewire\User\MyApps;
 use App\Livewire\User\MyCourses;
 use App\Livewire\User\MyVouchers;
+use App\Livewire\User\PaymentError;
+use App\Livewire\User\PaymentSuccess;
 use App\Livewire\User\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -227,8 +229,8 @@ Route::middleware([
     Route::get('/meus-vouchers', MyVouchers::class)->name('user.vouchers');
 
     Route::get('/checkout-prod/{course}', CheckoutProd::class)->name('checkout-prod');
-    Route::get('/inserir-vouchers', InsertVouchers::class)->name('checkout-success');
-    // Route::get('/inserir-vouchers/erro', InsertVouchers::class,'error')->name('checkout-cancel');
+    Route::get('/inserir-vouchers/sucesso', PaymentSuccess::class)->name('checkout-success');
+    Route::get('/inserir-vouchers/erro', PaymentError::class)->name('checkout-cancel');
 
 
     //redação
