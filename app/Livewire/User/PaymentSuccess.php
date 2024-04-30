@@ -3,6 +3,7 @@
 namespace App\Livewire\User;
 
 use App\Models\Admin\Course\Course;
+use App\Models\Admin\Course\PackPivotCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Cashier\Cashier;
@@ -28,10 +29,11 @@ class PaymentSuccess extends Component
             return;
         }
 
-        $course_id = $session['metadata']['course_id'] ?? null;
+        $pack_id = $session['metadata']['pack_id'] ?? null;
 
-        $course = Course::findOrFail($course_id);
-        dd($course);
+        $pack = PackPivotCourse::findOrFail($pack_id);
+
+        dd($pack);
 
         return redirect()->to('/lobby')
             ->with('success', 'Curso adiquirido com sucesso.');
