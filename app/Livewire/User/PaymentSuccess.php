@@ -12,10 +12,10 @@ class PaymentSuccess extends Component
     // Define o layout a ser usado
     protected $layout = 'lobby';
 
-    public function mount()
+    public function mount(Request $request)
     {
-        $sessionId = $_GET['session_id'];
-        // $sessionId = $request->get('session_id');
+        // $sessionId = $_GET['session_id'];
+        $sessionId = $request->get('session_id');
         dd($sessionId);
         if ($sessionId === null) {
             return;
