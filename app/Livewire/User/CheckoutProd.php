@@ -7,6 +7,8 @@ use App\Models\Admin\Course\PackPivotCourse;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
+use Laravel\Cashier\Cashier;
+
 class CheckoutProd extends Component
 {
     public function mount(PackPivotCourse $packPivotCourse)
@@ -21,7 +23,7 @@ class CheckoutProd extends Component
             'cancel_url' => route('checkout-cancel'),
             'metadata' => [
                 'pack_id' => $packPivotCourse->id,
-                'stripe_id' => $user = Cashier::findBillable($stripeId);
+                'stripe_id' => $user->id,
             ],
         ])->redirect();
     }
