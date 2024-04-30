@@ -20,7 +20,7 @@ class CheckoutProd extends Component
             'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout-cancel'),
             'metadata' => ['course_id' => $course->id],
-        ]);
+        ])->redirect();
     }
 
 }
