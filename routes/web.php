@@ -103,7 +103,14 @@ use Illuminate\Support\Facades\Storage;
 Route::get('/apiCourses/{any}', [CourseController::class, 'course']);
 Route::get('/apiCourses', [CourseController::class, 'index']);
 Route::get('/apiCoursesDestaques', [CourseController::class, 'highlighted']);
-Route::get('/stripe/webhook', [StripeWebhookController::class,'handleWebhook'])->name('home');
+Route::get('/stripe/webhook', [StripeWebhookController::class,'handleWebhook'])
+->middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'registerLogging'
+])
+->name('home');
 
 Route::middleware([
     'auth:sanctum',
