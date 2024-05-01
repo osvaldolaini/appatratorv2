@@ -39,7 +39,7 @@
                                                 <p class="text-white">
                                                     &nbsp;
                                                 </p>
-                                                <a href="{{ route('checkout-prod', $pack->id) }}" rel="noreferrer noopener"
+                                                <a href="{{ route('checkout-app', $pack->id) }}" rel="noreferrer noopener"
                                                     class="text-sm px-5 mt-4 lg:mt-0 py-3 font-bold rounded-full
                                                      border block bg-[#F3FB04] text-gray-900 border-gray-400">
                                                     Comprar
