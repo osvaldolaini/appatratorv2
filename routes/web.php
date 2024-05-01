@@ -106,6 +106,8 @@ Route::get('/apiCourses/{any}', [CourseController::class, 'course']);
 Route::get('/apiCourses', [CourseController::class, 'index']);
 Route::get('/apiCoursesDestaques', [CourseController::class, 'highlighted']);
 
+// Route::get('/inserir-vouchers/sucesso', PaymentSuccessController::class)->name('checkout-success');
+// Route::get('/inserir-vouchers/erro', PaymentErrorController::class)->name('checkout-cancel');
 
 
 Route::middleware([
@@ -233,6 +235,7 @@ Route::middleware([
     Route::get('/pacotes-do-curso/{course}', CoursePacks::class)->name('course-pack');
 
     Route::get('/checkout-prod/{packPivotCourse}', CheckoutProd::class)->name('checkout-prod');
+
     Route::get('/inserir-vouchers/sucesso', PaymentSuccess::class)->name('checkout-success');
     Route::get('/inserir-vouchers/erro', PaymentError::class)->name('checkout-cancel');
 
