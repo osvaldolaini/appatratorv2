@@ -160,7 +160,6 @@ class AppPacks extends Component
     {
         $this->rules = [
             'title' => 'required',
-            'order' => 'required',
             'value' => 'required',
         ];
 
