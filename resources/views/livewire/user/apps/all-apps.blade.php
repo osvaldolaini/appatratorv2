@@ -78,7 +78,7 @@
                     <div class="w-48 h-48 sm:w-56 sm:h-56 p-2 bg-white drop-shadow-xl rounded-box">
                         <x-application-logo-mentoring class="m-auto h-16 sm:h-20"></x-application-logo-mentoring>
                         <div class="p-2 sm:p-3 bg-slate-200 rounded-lg">
-                            <p class="text-xl font-bold text-slate-500 ">
+                            <p class="text-md font-bold text-slate-500 ">
                                 Plataforma de Mentoria
                             </p>
                             <div class="flex items-center justify-between ">
