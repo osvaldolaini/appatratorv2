@@ -26,8 +26,7 @@ class CheckoutProd extends Component
         //     ],
         // ])->redirect();
         $user
-        ->newSubscription('default', $packPivotCourse->price_id)
-        ->checkout()
+        ->checkout($packPivotCourse->price_id)
         ->redirect();
     }
 
