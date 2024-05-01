@@ -20,10 +20,11 @@ class ResponseCheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function success()
+    public function success(Request $request)
     {
-        $sessionId = $_GET['session_id'];
-        // $sessionId = $request->get('session_id');
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        // $sessionId = $_GET['session_id'];
+        $sessionId = $request->get('session_id');
 
         if ($sessionId === null) {
             return;
