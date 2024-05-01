@@ -77,8 +77,10 @@ class User extends Authenticatable
     public function getCreatedAttribute()
     {
         $this->attributes['group']='user';
+
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)
             ->format('d/m/Y H:i:s');
+
     }
 
     public function getUpdatedAttribute()

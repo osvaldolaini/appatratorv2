@@ -33,7 +33,7 @@
                     </h1>
                 </div>
             </div>
-        </div>F
+        </div>
     @endif
 
 
