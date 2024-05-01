@@ -322,10 +322,10 @@
                         @enderror
                         <script>
                             // Receber o seletor do campo valor
-                            let inputValor = document.getElementById('value_parcel');
+                            let inputValor2 = document.getElementById('value_parcel');
 
                             // Aguardar o usuário digitar valor no campo
-                            inputValor.addEventListener('input', function() {
+                            inputValor2.addEventListener('input', function() {
                                 // Obter o valor atual removendo qualquer caractere que não seja número
                                 let valueValor = this.value.replace(/[^\d]/g, '');
 
@@ -449,10 +449,10 @@
                         @enderror
                         <script>
                             // Receber o seletor do campo valor
-                            let inputValor = document.getElementById('value_parcel');
+                            let inputValor2 = document.getElementById('value_parcel');
 
                             // Aguardar o usuário digitar valor no campo
-                            inputValor.addEventListener('input', function() {
+                            inputValor2.addEventListener('input', function() {
                                 // Obter o valor atual removendo qualquer caractere que não seja número
                                 let valueValor = this.value.replace(/[^\d]/g, '');
 
