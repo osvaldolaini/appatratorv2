@@ -107,9 +107,13 @@ Route::get('/apiCourses/{any}', [CourseController::class, 'course']);
 Route::get('/apiCourses', [CourseController::class, 'index']);
 Route::get('/apiCoursesDestaques', [CourseController::class, 'highlighted']);
 
-Route::middleware(['auth:sanctum','web'])->get('/inserir-vouchers/sucesso', [ResponseCheckoutController::class,'success'])
+// Route::middleware(['auth:sanctum','web'])->get('/inserir-vouchers/sucesso', [ResponseCheckoutController::class,'success'])
+// ->name('checkout-success');
+// Route::middleware(['auth:sanctum','web'])->get('/inserir-vouchers/erro', [ResponseCheckoutController::class,'error'])
+// ->name('checkout-cancel');
+Route::get('/inserir-vouchers/sucesso', [ResponseCheckoutController::class,'success'])
 ->name('checkout-success');
-Route::middleware(['auth:sanctum','web'])->get('/inserir-vouchers/erro', [ResponseCheckoutController::class,'error'])
+Route::get('/inserir-vouchers/erro', [ResponseCheckoutController::class,'error'])
 ->name('checkout-cancel');
 
 Route::middleware([
