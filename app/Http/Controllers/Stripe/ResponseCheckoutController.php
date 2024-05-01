@@ -20,10 +20,10 @@ class ResponseCheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function success(Request $request)
+    public function success()
     {
-        // $sessionId = $_GET['session_id'];
-        $sessionId = $request->get('session_id');
+        $sessionId = $_GET['session_id'];
+        // $sessionId = $request->get('session_id');
 
         if ($sessionId === null) {
             return;
