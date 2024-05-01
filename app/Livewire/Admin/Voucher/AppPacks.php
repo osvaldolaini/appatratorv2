@@ -42,7 +42,6 @@ class AppPacks extends Component
     public $active = 1;
     public $id;
     public $title;
-    public $order;
     public $description;
     public $see_value;
     public $price_id;
@@ -83,7 +82,6 @@ class AppPacks extends Component
     {
         $this->reset(
             'title',
-            'order',
             'description',
             'see_value',
             'price_id',
@@ -112,7 +110,6 @@ class AppPacks extends Component
         PackPivotApp::create([
             'title'         => $this->title,
             'active'        => 1,
-            'order'         => $this->order,
             'see_value'     => $this->see_value,
             'price_id'      => $this->price_id,
             'value'         => $this->value,
@@ -151,7 +148,6 @@ class AppPacks extends Component
         $this->resetAll();
         $this->model_id         = $packPivotApp->id;
         $this->title            = $packPivotApp->title;
-        $this->order            = $packPivotApp->order;
         $this->description      = $packPivotApp->description;
         $this->see_value        = $packPivotApp->see_value;
         $this->price_id         = $packPivotApp->price_id;
@@ -175,7 +171,6 @@ class AppPacks extends Component
             'id' => $this->model_id,
         ], [
             'title'         => $this->title,
-            'order'         => $this->order,
             'see_value'     => $this->see_value,
             'price_id'      => $this->price_id,
             'value'         => $this->value,

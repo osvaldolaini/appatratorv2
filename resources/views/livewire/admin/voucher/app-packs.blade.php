@@ -13,16 +13,17 @@
                         class="py-2 px-3 flex
                             hover:text-white dark:hover:bg-gray-300 transition-colors hover:hover:bg-gray-300
                             duration-200 whitespace-nowrap">
-                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
-                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                <path
-                                    d="M9.00002 15.3802H13.92C15.62 15.3802 17 14.0002 17 12.3002C17 10.6002 15.62 9.22021 13.92 9.22021H7.15002"
-                                    stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M8.57 10.7701L7 9.19012L8.57 7.62012" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
+                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path
+                                d="M9.00002 15.3802H13.92C15.62 15.3802 17 14.0002 17 12.3002C17 10.6002 15.62 9.22021 13.92 9.22021H7.15002"
+                                stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M8.57 10.7701L7 9.19012L8.57 7.62012" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -272,15 +273,6 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="ID preço STRIPE" wire:model="price_id" maxlength="100">
                     </div>
-
-                    <div class="col-span-3">
-                        <label class="block text-sm font-medium text-gray-900 dark:text-white"
-                            for="order">*Ordem</label>
-                        <input
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            type="number" data-wire:model="Ordem" placeholder="Ordem" wire:model="order"
-                            required="">
-                    </div>
                     <div class="col-span-3">
                         <label for="value"
                             class="block text-sm font-medium text-gray-900 dark:text-white">*Valor</label>
@@ -360,16 +352,7 @@
                             <option value="0">Não</option>
                         </select>
                     </div>
-                    <div class="col-span-3">
-                        <label class="block text-sm font-medium text-gray-900 dark:text-white" for="highlighted">Em
-                            destaque? </label>
-                        <select wire:model="highlighted"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 
-                            <option value="1">Sim</option>
-                            <option value="0">Não</option>
-                        </select>
-                    </div>
                 </div>
             </form>
         </x-slot>
@@ -416,15 +399,6 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="ID preço STRIPE" wire:model="price_id" maxlength="100">
                     </div>
-
-                    <div class="col-span-3">
-                        <label class="block text-sm font-medium text-gray-900 dark:text-white"
-                            for="order">*Ordem</label>
-                        <input
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            type="number" data-wire:model="Ordem" placeholder="Ordem" wire:model="order"
-                            required="">
-                    </div>
                     <div class="col-span-3">
                         <label for="value"
                             class="block text-sm font-medium text-gray-900 dark:text-white">*Valor</label>
@@ -504,16 +478,7 @@
                             <option value="0">Não</option>
                         </select>
                     </div>
-                    <div class="col-span-3">
-                        <label class="block text-sm font-medium text-gray-900 dark:text-white" for="highlighted">Em
-                            destaque? </label>
-                        <select wire:model="highlighted"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
 
-                            <option value="1">Sim</option>
-                            <option value="0">Não</option>
-                        </select>
-                    </div>
                 </div>
             </form>
         </x-slot>
