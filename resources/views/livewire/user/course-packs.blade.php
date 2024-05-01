@@ -35,4 +35,7 @@
     <div>
         @livewire('user.courses.all-courses')
     </div>
+    <div>
+        @livewire('user.apps.all-apps')
+    </div>
 </div>

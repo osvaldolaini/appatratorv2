@@ -15,15 +15,22 @@ return new class extends Migration
             $table->id();
             $table->boolean('active')->nullable();
             $table->foreignId('pack_pivot_course_id')
+                ->nullable()
                 ->constrained('pack_pivot_courses')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('application')->nullable();
             $table->foreignId('course_id')
                 ->nullable()
                 ->constrained('courses')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->foreignId('pack_pivot_app_id')
+                ->nullable()
+                ->constrained('pack_pivot_apps')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('application')->nullable();
+
             $table->foreignId('plan_id')
                 ->nullable()
                 ->constrained('plans')

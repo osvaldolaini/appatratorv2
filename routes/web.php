@@ -50,6 +50,10 @@ use App\Livewire\Admin\Question\QuestionCorrect;
 use App\Livewire\Admin\Question\QuestionCreate;
 use App\Livewire\Admin\Question\QuestionUpdate;
 use App\Livewire\Admin\Treinament\Exercises;
+use App\Livewire\Admin\Voucher\AppPackages;
+use App\Livewire\Admin\Voucher\AppPackDescription;
+use App\Livewire\Admin\Voucher\AppPacks;
+use App\Livewire\Admin\Voucher\Apps;
 use App\Livewire\Admin\Voucher\Plan;
 use App\Livewire\Admin\Voucher\Voucher;
 use App\Livewire\User\Apps\Essay\HomeEssay;
@@ -77,6 +81,7 @@ use App\Livewire\User\Apps\Mentoring\MentoringSimulatedsUser;
 use App\Livewire\User\Apps\Questions\HomeQuestions;
 use App\Livewire\User\Apps\Questions\Stats;
 use App\Livewire\User\Apps\Treinaments\HomeTreinament;
+use App\Livewire\User\Apps\UserAppPacks;
 use App\Livewire\User\CheckoutProd;
 use App\Livewire\User\Courses\CoursePacks;
 use App\Livewire\User\Courses\DashboardCourse;
@@ -111,10 +116,10 @@ Route::get('/apiCoursesDestaques', [CourseController::class, 'highlighted']);
 // ->name('checkout-success');
 // Route::middleware(['auth:sanctum','web'])->get('/inserir-vouchers/erro', [ResponseCheckoutController::class,'error'])
 // ->name('checkout-cancel');
-Route::get('/inserir-vouchers/sucesso', [ResponseCheckoutController::class,'success'])
-->name('checkout-success');
-Route::get('/inserir-vouchers/erro', [ResponseCheckoutController::class,'error'])
-->name('checkout-cancel');
+Route::get('/inserir-vouchers/sucesso', [ResponseCheckoutController::class, 'success'])
+    ->name('checkout-success');
+Route::get('/inserir-vouchers/erro', [ResponseCheckoutController::class, 'error'])
+    ->name('checkout-cancel');
 
 Route::middleware([
     'auth:sanctum',
@@ -157,25 +162,38 @@ Route::middleware([
         ->name('plans');
     Route::get('/vouchers', Voucher::class)
         ->name('vouchers');
-    //Courses
 
+    //APPS
+    Route::get('/aplicativos', Apps::class)
+        ->name('apps');
+    Route::get('/aplicativos/valores/{app}', AppPacks::class)
+        ->name('app-packs');
+
+    Route::get('/aplicativos/valores/descrição/{packPivotApp}', AppPackDescription::class)
+        ->name('app-pack-description');
+    Route::get('/aplicativos/valores/pacote/{packPivotApp}', AppPackages::class)
+    ->name('app-pack-package');
+
+    //Courses
     Route::get('/cursos/dashboard/{course}', CourseDashboard::class)->name('course-dashboard');
     Route::get('/cursos/modulo/{course}', ModulesList::class)->name('module');
     Route::get('/cursos/modulo-novo/{course}', ModuleNew::class)->name('new-module');
     Route::get('/cursos/modulo-editar/{module}', ModuleEdit::class)->name('edit-module');
     Route::get('/cursos/modulo/conteúdo/{moduleContent}', ModuleContentEdit::class)->name('content-module');
 
-        //Course Marketing
-        Route::get('/cursos', Courses::class)->name('course');
-        Route::get('/cursos/novo', CourseCreate::class)->name('new-course');
-        Route::get('/cursos/{course}', CourseUpdate::class)->name('edit-course');
-        Route::get('/cursos/descrição/{course}',CourseDescription::class)->name('course-descripition');
-        Route::get('/cursos/categorias/{course}',CoursePivotCategories::class)->name('category-course-pivot');
-        Route::get('/cursos/imagens/{course}',CourseImage::class)->name('course-images');
-        Route::get('/categorias-de-curso',CategoryCourses::class)->name('category-course');
-        Route::get('/cursos/valores/{course}',CoursesPacks::class)->name('course-values');
-        Route::get('/cursos/valores/descrição/{packPivotCourse}',CoursePackDescription::class)->name('course-pack-description');
-        Route::get('/cursos/valores/pacote/{packPivotCourse}',CoursePackPackage::class)->name('course-pack-package');
+    //Course Marketing
+    Route::get('/cursos', Courses::class)->name('course');
+    Route::get('/cursos/novo', CourseCreate::class)->name('new-course');
+    Route::get('/cursos/{course}', CourseUpdate::class)->name('edit-course');
+    Route::get('/cursos/descrição/{course}', CourseDescription::class)->name('course-descripition');
+    Route::get('/cursos/categorias/{course}', CoursePivotCategories::class)->name('category-course-pivot');
+    Route::get('/cursos/imagens/{course}', CourseImage::class)->name('course-images');
+    Route::get('/categorias-de-curso', CategoryCourses::class)->name('category-course');
+    Route::get('/cursos/valores/{course}', CoursesPacks::class)->name('course-values');
+    Route::get('/cursos/valores/descrição/{packPivotCourse}', CoursePackDescription::class)->name('course-pack-description');
+    Route::get('/cursos/valores/pacote/{packPivotCourse}', CoursePackPackage::class)->name('course-pack-package');
+
+    //APPS
 
     //Questions
     Route::get('/questões', Question::class)->name('question');
@@ -243,9 +261,8 @@ Route::middleware([
 
     Route::get('/checkout-prod/{packPivotCourse}', CheckoutProd::class)->name('checkout-prod');
 
-    // Route::get('/inserir-vouchers/sucesso', PaymentSuccess::class)->name('checkout-success');
-    // Route::get('/inserir-vouchers/erro', PaymentError::class)->name('checkout-cancel');
-
+    //Apps
+    Route::get('/pacotes-do-app/{app}', UserAppPacks::class)->name('app-pack');
     //redação
     Route::get('/app-de-redação', HomeEssay::class)->name('apps.essays');
     Route::get('/app-de-redação/minhas-redações', MyEssays::class)->name('apps.user-essay');

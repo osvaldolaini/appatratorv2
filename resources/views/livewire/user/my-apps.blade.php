@@ -26,7 +26,7 @@
             </x-app-carousel-cards>
         </div>
     </div>
-    {{-- <div>
-        @livewire('user.courses.api-courses')
-    </div> --}}
+    <div>
+        @livewire('user.apps.all-apps')
+    </div>
 </div>

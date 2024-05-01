@@ -22,7 +22,7 @@ class Package extends Model
 
     protected $fillable = [
        'id', 'pack_pivot_course_id', 'application', 'active', 'code',
-       'updated_by', 'created_by','course_id','plan_id'
+       'updated_by', 'created_by','course_id','plan_id','pack_pivot_app_id'
     ];
     public function getActivitylogOptions(): LogOptions
     {
