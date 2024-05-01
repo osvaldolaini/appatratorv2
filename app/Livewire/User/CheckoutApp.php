@@ -2,25 +2,25 @@
 
 namespace App\Livewire\User;
 
-use App\Models\Admin\Course\PackPivotCourse;
+use App\Models\Admin\Voucher\PackPivotApp;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 use Laravel\Cashier\Cashier;
 
-class CheckoutProd extends Component
+class CheckoutApp extends Component
 {
-    public function mount(PackPivotCourse $packPivotCourse)
+    public function mount(PackPivotApp $packPivotApp)
     {
         // dd($packPivotCourse);
         $user = Auth::user();
         $custumer = $user->createOrGetStripeCustomer();
         $user
-        ->checkout($packPivotCourse->price_id, [
+        ->checkout($packPivotApp->price_id, [
             'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout-cancel'),
             'metadata' => [
-                'pack_id' => $packPivotCourse->id,
+                'pack_id' => $packPivotApp->id,
                 'stripe_id' => $custumer->id,
             ],
         ])->redirect();

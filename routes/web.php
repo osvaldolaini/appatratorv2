@@ -82,7 +82,8 @@ use App\Livewire\User\Apps\Questions\HomeQuestions;
 use App\Livewire\User\Apps\Questions\Stats;
 use App\Livewire\User\Apps\Treinaments\HomeTreinament;
 use App\Livewire\User\Apps\UserAppPacks;
-use App\Livewire\User\CheckoutProd;
+use App\Livewire\User\CheckoutApp;
+use App\Livewire\User\CheckoutCourse;
 use App\Livewire\User\Courses\CoursePacks;
 use App\Livewire\User\Courses\DashboardCourse;
 use App\Livewire\User\Courses\DashboardModule;
@@ -259,7 +260,8 @@ Route::middleware([
     Route::get('/meus-vouchers', MyVouchers::class)->name('user.vouchers');
     Route::get('/pacotes-do-curso/{course}', CoursePacks::class)->name('course-pack');
 
-    Route::get('/checkout-prod/{packPivotCourse}', CheckoutProd::class)->name('checkout-prod');
+    Route::get('/checkout-course/{packPivotCourse}', CheckoutCourse::class)->name('checkout-course');
+    Route::get('/checkout-app/{packPivotApp}', CheckoutApp::class)->name('checkout-app');
 
     //Apps
     Route::get('/pacotes-do-app/{app}', UserAppPacks::class)->name('app-pack');

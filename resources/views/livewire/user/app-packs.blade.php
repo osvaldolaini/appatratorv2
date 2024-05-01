@@ -31,7 +31,6 @@
                                             @break
                                         @endswitch
 
-
                                         <div class="p-2 sm:p-3 bg-black rounded-lg">
                                             <p class="text-sm font-bold text-[#F3FB04] ">
                                                 {{ $pack->title }}
