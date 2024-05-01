@@ -33,7 +33,7 @@
 
 
                                         <div class="p-2 sm:p-3 bg-black rounded-lg">
-                                            <p class="text-xl font-bold text-[#F3FB04] ">
+                                            <p class="text-md font-bold text-[#F3FB04] ">
                                                 {{ $pack->title }}
                                             </p>
                                             <div class="flex items-center justify-between ">
