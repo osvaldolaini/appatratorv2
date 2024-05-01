@@ -2,7 +2,6 @@
 
 namespace App\Livewire\User;
 
-use App\Models\Admin\Course\Course;
 use App\Models\Admin\Course\PackPivotCourse;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -16,7 +15,7 @@ class CheckoutProd extends Component
         // dd($packPivotCourse);
         $user = Auth::user();
         $custumer = $user->createOrGetStripeCustomer();
-        $custumer
+        $user
         ->checkout($packPivotCourse->price_id, [
             'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout-cancel'),
