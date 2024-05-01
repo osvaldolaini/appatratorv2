@@ -124,7 +124,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', Panel::class)->name('dashboard');
     Route::get('/', Panel::class)->name('dashboard');
-    Route::get('', Panel::class)->name('home');
+    Route::get('', Panel::class)->name('dashboard');
 });
 
 //UPLOADS EDITOR DE TEXTO
@@ -234,6 +234,7 @@ Route::middleware([
 ])->group(function () {
     //lobby
     Route::get('/lobby', Lobby::class)->name('lobby');
+    Route::get('/lobby', Lobby::class)->name('home');
     Route::get('/meus-dados', UserProfile::class)->name('profile.user');
     Route::get('/meus-apps', MyApps::class)->name('user.apps');
     Route::get('/meus-cursos', MyCourses::class)->name('user.courses');
