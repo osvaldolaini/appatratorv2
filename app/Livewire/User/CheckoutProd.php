@@ -16,7 +16,7 @@ class CheckoutProd extends Component
         // dd($packPivotCourse);
         $user = Auth::user();
         $custumer = $user->createOrGetStripeCustomer();
-        $user
+        $custumer
         ->checkout($packPivotCourse->price_id, [
             'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout-cancel'),
