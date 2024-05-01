@@ -3,8 +3,7 @@
         <div class="flex flex-col lg:flex-row items-center justify-between">
             <h2 class="text-center text-6xl tracki font-bold">Nosso cursos
             </h2>
-            <a href="https://atratorconcursos.com.br/nossos-cursos" rel="noreferrer noopener"
-                class="px-5 mt-4 lg:mt-0 py-3 rounded-md border block dark:bg-gray-50 dark:text-gray-900 dark:border-gray-400">Comprar</a>
+
         </div>
     </div>
 

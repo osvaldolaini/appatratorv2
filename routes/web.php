@@ -93,6 +93,7 @@ use App\Livewire\User\MyCourses;
 use App\Livewire\User\MyVouchers;
 use App\Livewire\User\PaymentError;
 use App\Livewire\User\PaymentSuccess;
+use App\Livewire\User\Shopping;
 use App\Livewire\User\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -253,6 +254,7 @@ Route::middleware([
 ])->group(function () {
     //lobby
     Route::get('/lobby', Lobby::class)->name('lobby');
+    Route::get('/shopping', Shopping::class)->name('shopping');
     // Route::get('/lobby', Lobby::class)->name('home');
     Route::get('/meus-dados', UserProfile::class)->name('profile.user');
     Route::get('/meus-apps', MyApps::class)->name('user.apps');
