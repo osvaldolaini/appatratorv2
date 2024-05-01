@@ -124,7 +124,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', Panel::class)->name('dashboard');
     Route::get('/', Panel::class)->name('dashboard');
-    Route::get('', Panel::class)->name('dashboard');
+    Route::get('', Panel::class)->name('home');
 });
 
 //UPLOADS EDITOR DE TEXTO
