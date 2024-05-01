@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Stripe\ResponseCheckoutController;
 use App\Livewire\Admin\Question\Filter\Filters;
 use App\Livewire\Admin\Configuration;
 use App\Livewire\Admin\Course\CategoryCourses;
@@ -106,9 +107,8 @@ Route::get('/apiCourses/{any}', [CourseController::class, 'course']);
 Route::get('/apiCourses', [CourseController::class, 'index']);
 Route::get('/apiCoursesDestaques', [CourseController::class, 'highlighted']);
 
-// Route::get('/inserir-vouchers/sucesso', PaymentSuccessController::class)->name('checkout-success');
-// Route::get('/inserir-vouchers/erro', PaymentErrorController::class)->name('checkout-cancel');
-
+Route::get('/inserir-vouchers/sucesso', ResponseCheckoutController::class,'success')->name('checkout-success');
+Route::get('/inserir-vouchers/erro', ResponseCheckoutController::class,'error')->name('checkout-cancel');
 
 Route::middleware([
     'auth:sanctum',
@@ -236,8 +236,8 @@ Route::middleware([
 
     Route::get('/checkout-prod/{packPivotCourse}', CheckoutProd::class)->name('checkout-prod');
 
-    Route::get('/inserir-vouchers/sucesso', PaymentSuccess::class)->name('checkout-success');
-    Route::get('/inserir-vouchers/erro', PaymentError::class)->name('checkout-cancel');
+    // Route::get('/inserir-vouchers/sucesso', PaymentSuccess::class)->name('checkout-success');
+    // Route::get('/inserir-vouchers/erro', PaymentError::class)->name('checkout-cancel');
 
 
     //redação

@@ -2,152 +2,123 @@
 
 namespace App\Http\Controllers\Stripe;
 
-use App\Models\Admin\Course\CategoryCourse;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Course\Course;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+use App\Models\Admin\Course\PackPivotCourse;
+use App\Models\Admin\Voucher\Vouchers;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Cashier\Cashier;
+use Illuminate\Support\Str;
+
+class ResponseCheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function highlighted()
+    public function success(Request $request)
     {
-        $courses = Course::select('id','title','slug','meta_description','price_id','image')->with('categories')
-        ->where('highlighted',1)
-        ->where('active',1)
-        ->limit(4)
-        ->inRandomOrder()
-        ->get();
+        // $sessionId = $_GET['session_id'];
+        $sessionId = $request->get('session_id');
 
-        $allCategories = CategoryCourse::select('title','acronym','id','master')
-        ->where('active',1)
-        ->get();
+        if ($sessionId === null) {
+            return;
+        }
 
-        $apiCourse= array();
-        foreach ($courses as $course) {
-            $category = '';
-            if ($course->categories) {
-                foreach ($course->categories as $key) {
-                    $category .= ' filter-'.$key->category->master;
-                }
+        $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
+        if ($session->payment_status !== 'paid') {
+            return;
+        }
+        dd($session);
+
+        $pack_id = $session['metadata']['pack_id'] ?? null;
+        if (User::where('email',$session['customer_details']['email'])->first()) {
+            $user = User::where('email',$session['customer_details']['email'])->first();
+            // dd($user);
+        }else{
+            $user =  User::create([
+                'name' => $session['customer_details']['name'],
+                'email' => $session['customer_details']['email'],
+                'password' => Hash::make(123456789),
+                'group'=>'user',
+                'stripe_id'=>$session['metadata']['stripe_id'],
+            ]);
+            // dd($user);
+        }
+
+        $pack = PackPivotCourse::findOrFail($pack_id);
+
+        if ($pack->package) {
+            foreach ($pack->package as $voucher) {
+                Vouchers::create([
+                    'plan_id'       =>$voucher->plan_id,
+                    'user_id'       =>$user->id,
+                    'package_id'    =>$voucher->id,
+                    'course_id'     =>$voucher->course_id,
+                    'application'   =>($voucher->application == '' ? 'courses':$voucher->application),
+                    'active'        => 1,
+                    'code'          =>Str::uuid(),
+                    'created_by'    =>Auth::user()->name,
+                ]);
             }
+        }
 
-            $apiCourse[]=array(
-                'src'           => url('storage/courses/' . $course->id . '/'.$course->image.'.webp'),
-                'alt'           => $course->slug,
-                'cat'           => $category,
-                'description'   => $course->meta_description,
-                'prices'        => $course->packs->where('active',1),
-                'slug'          => 'https://atratorconcursos.com.br/nossos-cursos/'.$course->slug,
-                'title'         => $course->title,
-            );
-        }
-        if(isset($apiCourse)){
-            shuffle($apiCourse);
-            return response()->json(
-                [
-                    'success'=> true,
-                    'data'   => $apiCourse,
-                    'allCat' => $allCategories,
-                    'more'   => 'https://atratorconcursos.com.br/nossos-cursos',
-                ]
-            );
-        }else{
-            return response()->json(
-                [
-                    'success'=> false,
-                    'error'=> false,
-                ]
-            );
-        }
+        return redirect()->to('/lobby')
+            ->with('success', 'Curso adiquirido com sucesso.');
     }
-    public function index()
+    public function error()
     {
-        $courses = Course::select('id','title','slug','meta_description','price_id','image')->with('categories')
-        ->where('highlighted',1)
-        ->where('active',1)
-        ->inRandomOrder()
-        ->get();
+        // $sessionId = $_GET['session_id'];
+        $sessionId = $request->get('session_id');
 
-        $allCategories = CategoryCourse::select('title','acronym','id','master')
-        ->where('active',1)
-        ->get();
+        if ($sessionId === null) {
+            return;
+        }
 
-        $apiCourse= array();
-        foreach ($courses as $course) {
-            $category = '';
-            if ($course->categories) {
-                foreach ($course->categories as $key) {
-                    $category .= ' filter-'.$key->category->master;
-                }
+        $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
+        if ($session->payment_status !== 'paid') {
+            return;
+        }
+        dd($session);
+
+        $pack_id = $session['metadata']['pack_id'] ?? null;
+        if (User::where('email',$session['customer_details']['email'])->first()) {
+            $user = User::where('email',$session['customer_details']['email'])->first();
+            // dd($user);
+        }else{
+            $user =  User::create([
+                'name' => $session['customer_details']['name'],
+                'email' => $session['customer_details']['email'],
+                'password' => Hash::make(123456789),
+                'group'=>'user',
+                'stripe_id'=>$session['metadata']['stripe_id'],
+            ]);
+            // dd($user);
+        }
+
+        $pack = PackPivotCourse::findOrFail($pack_id);
+
+        if ($pack->package) {
+            foreach ($pack->package as $voucher) {
+                Vouchers::create([
+                    'plan_id'       =>$voucher->plan_id,
+                    'user_id'       =>$user->id,
+                    'package_id'    =>$voucher->id,
+                    'course_id'     =>$voucher->course_id,
+                    'application'   =>($voucher->application == '' ? 'courses':$voucher->application),
+                    'active'        => 1,
+                    'code'          =>Str::uuid(),
+                    'created_by'    =>Auth::user()->name,
+                ]);
             }
-
-
-            $apiCourse[]=array(
-                'src'           => url('storage/courses/' . $course->id . '/'.$course->image.'.webp'),
-                'alt'           => $course->slug,
-                'cat'           => $category,
-                'description'   => $course->meta_description,
-                'prices'        => $course->packs->where('active',1),
-                'slug'          => 'https://atratorconcursos.com.br/nossos-cursos/'.$course->slug,
-                'title'         => $course->title,
-            );
         }
-        if(isset($apiCourse)){
-            shuffle($apiCourse);
-            return response()->json(
-                [
-                    'success'=> true,
-                    'data'   => $apiCourse,
-                    'allCat' => $allCategories,
-                    'more'   => 'https://atratorconcursos.com.br/nossos-cursos',
-                ]
-            );
-        }else{
-            return response()->json(
-                [
-                    'success'=> false,
-                    'error'=> false,
-                ]
-            );
-        }
-    }
-    public function course($slug)
-    {
-        $course = Course::select('id','title','slug','large_description',
-        'youtube_link','meta_description','price_id','image')
-        ->where('slug',$slug)
-        ->where('active',1)
-        ->first();
 
-        if(isset($course)){
-            $apiCourse=array(
-                'src'           => url('storage/courses/' . $course->id . '/'.$course->image.'.webp'),
-                'alt'           => $course->slug,
-                'description'   => $course->large_description,
-                'youtube_link'  => $course->youtube_link,
-                'prices'        => $course->packs->where('active',1),
-                'slug'          => 'https://atratorconcursos.com.br/nossos-cursos/'.$course->slug,
-                'title'         => $course->title,
-            );
-            return response()->json(
-                [
-                    'success'=> true,
-                    'data'   => $apiCourse,
-                ]
-            );
-        }else{
-            return response()->json(
-                [
-                    'success'=> false,
-                    'error'=> false,
-                ]
-            );
-        }
+        return redirect()->to('/lobby')
+            ->with('success', 'Curso adiquirido com sucesso.');
     }
 
 }
