@@ -1,4 +1,4 @@
-<div class="w-100 p-10 sm:rounded-lg">
+<div class="w-100 pt-3 sm:rounded-lg">
     <div class="flex flex-wrap sm:justify-around">
         <div class="w-full ">
             <div class="py-4 space-x-4 ">
