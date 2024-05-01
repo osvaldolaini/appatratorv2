@@ -34,7 +34,7 @@ class UserAppPacks extends Component
                 break;
             }
             $this->packs = PackPivotApp::where('application', $this->application)->where('active',1)->get();
-            dd($this->packs);
+
     }
 
     public function render()
