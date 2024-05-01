@@ -1,6 +1,6 @@
-<div class="w-100 pt-3 sm:rounded-lg">
+<div class="w-100 p-10 sm:rounded-lg">
     <div class="flex flex-wrap sm:justify-around">
-        <div class="w-full">
+        <div class="w-full ">
             <div class="py-4 space-x-4 ">
                 <h1
                     class="grid grid-cols-1 sm:grid-cols-4 space-x-1 text-5xl font-extrabold dark:text-white text-center">

@@ -22,6 +22,7 @@ class ResponseCheckoutController extends Controller
      */
     public function success(Request $request)
     {
+
         // \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         // $sessionId = $_GET['session_id'];
