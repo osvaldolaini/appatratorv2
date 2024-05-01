@@ -234,7 +234,7 @@ Route::middleware([
 ])->group(function () {
     //lobby
     Route::get('/lobby', Lobby::class)->name('lobby');
-    Route::get('/lobby', Lobby::class)->name('home');
+    // Route::get('/lobby', Lobby::class)->name('home');
     Route::get('/meus-dados', UserProfile::class)->name('profile.user');
     Route::get('/meus-apps', MyApps::class)->name('user.apps');
     Route::get('/meus-cursos', MyCourses::class)->name('user.courses');
@@ -245,7 +245,6 @@ Route::middleware([
 
     // Route::get('/inserir-vouchers/sucesso', PaymentSuccess::class)->name('checkout-success');
     // Route::get('/inserir-vouchers/erro', PaymentError::class)->name('checkout-cancel');
-
 
     //redação
     Route::get('/app-de-redação', HomeEssay::class)->name('apps.essays');

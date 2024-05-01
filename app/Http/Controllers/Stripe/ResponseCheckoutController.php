@@ -22,7 +22,8 @@ class ResponseCheckoutController extends Controller
      */
     public function success(Request $request)
     {
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        // \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
         // $sessionId = $_GET['session_id'];
         $sessionId = $request->get('session_id');
 
@@ -71,8 +72,9 @@ class ResponseCheckoutController extends Controller
         return redirect()->to('/lobby')
             ->with('success', 'Curso adiquirido com sucesso.');
     }
-    public function error()
+    public function error(Request $request)
     {
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         // $sessionId = $_GET['session_id'];
         $sessionId = $request->get('session_id');
 
