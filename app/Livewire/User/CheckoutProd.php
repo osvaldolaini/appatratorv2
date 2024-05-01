@@ -16,18 +16,18 @@ class CheckoutProd extends Component
         // dd($packPivotCourse);
         $user = Auth::user();
         $custumer = $user->createOrGetStripeCustomer();
-        // $user
-        // ->checkout($packPivotCourse->price_id, [
-        //     'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
-        //     'cancel_url' => route('checkout-cancel'),
-        //     'metadata' => [
-        //         'pack_id' => $packPivotCourse->id,
-        //         'stripe_id' => $custumer->id,
-        //     ],
-        // ])->redirect();
         $user
-        ->checkout($packPivotCourse->price_id)
-        ->redirect();
+        ->checkout($packPivotCourse->price_id, [
+            'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('checkout-cancel'),
+            'metadata' => [
+                'pack_id' => $packPivotCourse->id,
+                'stripe_id' => $custumer->id,
+            ],
+        ])->redirect();
+        // $user
+        // ->checkout($packPivotCourse->price_id)
+        // ->redirect();
     }
 
 }
