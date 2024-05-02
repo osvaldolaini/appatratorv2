@@ -1,11 +1,13 @@
 <div class="w-100 pt-3 sm:rounded-lg">
     @if ($vouchers->count() > 0)
-        <div class="flex flex-wrap sm:justify-around">
-            <div class="w-full ">
-                <div class="py-4 space-x-4 ">
+        <div class="flex flex-wrap sm:justify-center">
+            <div class="w-full">
+                <div class="py-4 space-x-4 w-full">
                     <h1
-                        class="grid grid-cols-1 sm:grid-cols-4 space-x-1 text-5xl font-extrabold dark:text-white text-center">
-                        <small class="col-span-full ml-2 font-semibold text-gray-500 dark:text-gray-400">
+                        class="grid grid-cols-1 sm:grid-cols-4 space-x-1
+                        text-5xl font-extrabold dark:text-white text-center">
+                        <small class="col-span-full ml-2 font-semibold
+                        text-gray-500 dark:text-gray-400">
                             Meus Cursos
                         </small>
                         @foreach ($vouchers as $voucher)

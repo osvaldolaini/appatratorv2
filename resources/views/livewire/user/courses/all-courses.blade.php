@@ -1,4 +1,4 @@
-<div class="p-10 dark:bg-violet-400 dark:text-gray-900">
+<div class="py-10 px-2 sm:p-10 dark:bg-violet-400 dark:text-gray-900">
     <div class="container mx-auto">
         <div class="flex flex-col lg:flex-row items-center justify-between">
             <h2 class="text-center text-6xl tracki font-bold">Nosso cursos
@@ -7,10 +7,10 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 w-full h-full py-2">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full max-h-screen py-2">
         @foreach ($courses as $course)
             <div class="col-span-1">
-                <div class="w-56 h-60 card card-compact image-full shadow-xl bg-cover">
+                <div class="h-48 sm:w-56 sm:h-56 card card-compact image-full shadow-xl bg-cover">
                     <figure><img class="w-full mx-auto"
                             src="{{ url('storage/courses/' . $course->id . '/'.$course->image.'.webp') }}"
                             alt="{{ $course->slug }}">
