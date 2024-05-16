@@ -99,6 +99,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
+
+use Stripe\Checkout\Session;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -118,6 +121,7 @@ Route::get('/apiCoursesDestaques', [CourseController::class, 'highlighted']);
 // ->name('checkout-success');
 // Route::middleware(['auth:sanctum','web'])->get('/inserir-vouchers/erro', [ResponseCheckoutController::class,'error'])
 // ->name('checkout-cancel');
+
 Route::get('/inserir-vouchers/sucesso', [ResponseCheckoutController::class, 'success'])
     ->name('checkout-success');
 Route::get('/inserir-vouchers/erro', [ResponseCheckoutController::class, 'error'])

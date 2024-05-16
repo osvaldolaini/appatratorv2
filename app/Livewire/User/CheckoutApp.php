@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 use Laravel\Cashier\Cashier;
+use Stripe\Checkout\Session;
+use Stripe\Customer;
 
 class CheckoutApp extends Component
 {

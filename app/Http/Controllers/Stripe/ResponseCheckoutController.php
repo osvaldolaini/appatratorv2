@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Cashier\Cashier;
 use Illuminate\Support\Str;
 
+
+use Stripe\Checkout\Session;
+use Stripe\Customer;
+
 class ResponseCheckoutController extends Controller
 {
     /**
@@ -41,7 +45,6 @@ class ResponseCheckoutController extends Controller
         $pack_id = $session['metadata']['pack_id'] ?? null;
         if (User::where('email',$session['customer_details']['email'])->first()) {
             $user = User::where('email',$session['customer_details']['email'])->first();
-            // dd($user);
         }else{
             $user =  User::create([
                 'name' => $session['customer_details']['name'],
@@ -50,7 +53,6 @@ class ResponseCheckoutController extends Controller
                 'group'=>'user',
                 'stripe_id'=>$session['metadata']['stripe_id'],
             ]);
-            // dd($user);
         }
 
         $pack = PackPivotCourse::findOrFail($pack_id);
