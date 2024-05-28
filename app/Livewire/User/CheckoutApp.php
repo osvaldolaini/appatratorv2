@@ -50,7 +50,8 @@ class CheckoutApp extends Component
             ]
         ];
         $payment = $gateway->payment()->create($data);
-        return redirect()->to($payment['invoiceUrl']);
+        dd($payment);
+        // return redirect()->to($payment['invoiceUrl']);
     }
 
 }

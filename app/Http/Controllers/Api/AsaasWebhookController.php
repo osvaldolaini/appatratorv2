@@ -57,6 +57,6 @@ class AsaasWebhookController extends Controller
             }
         }
 
-        return response()->json(['message' => $custumer], 200);
+        return response()->json(['message' => 'Processo concluido com sucesso'], 200);
     }
 }
