@@ -39,7 +39,6 @@ class AsaasWebhookController extends Controller
             ]);
         }
 
-        return response()->json(['message' => $payment['externalReference']], 200);
         //Pega os dados do pacote
         $pack_id = $payment['externalReference']['pack_id'] ?? null;
         $pack = PackPivotCourse::findOrFail($pack_id);
