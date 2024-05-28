@@ -14,6 +14,7 @@ class AsaasWebhookController extends Controller
 {
     public function index(Request $request)
     {
+        'ola';
         // $adapter = new AsaasConnector();
         // $gateway = new Gateway($adapter);
 
@@ -25,7 +26,7 @@ class AsaasWebhookController extends Controller
         // $payment = $gateway->payment()->get($sessionId);
 
         // dd($payment);
-        return response($request, 200);
+        return response('OK', 200);
     }
     // public function __invoke(Request $request)
     // {
