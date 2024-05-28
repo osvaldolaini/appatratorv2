@@ -22,7 +22,7 @@ class AsaasWebhookController extends Controller
         $sessionId = $request->payment['id'];
 
         $payment = $gateway->payment()->get($sessionId);
-        // return response()->json(['message' => $payment], 200);
+        return response()->json(['message' => $payment['status']], 200);
         if ($payment['status'] !== 'PENDING') {
             return response()->json(['message' => 'Não foi pago'], 200);
         }
