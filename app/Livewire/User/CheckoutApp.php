@@ -19,11 +19,12 @@ class CheckoutApp extends Component
     public function mount(PackPivotApp $packPivotApp)
     {
         $user = Auth::user();
-        // dd($packPivotCourse);
-        if ($user->cpfCnpj) {
-            redirect()->route('profile.user');
+        if (!$user->cpfCnpj) {
+            return redirect()->route('profile.user');
         }
-
+        if (!$user->mobilePhone) {
+            return redirect()->route('profile.user');
+        }
         // $custumer = $user->createOrGetStripeCustomer();
         $custumer = $user->createOrGetAsaasCustomer();
         // $user
