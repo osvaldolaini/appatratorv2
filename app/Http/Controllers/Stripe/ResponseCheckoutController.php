@@ -33,12 +33,12 @@ class ResponseCheckoutController extends Controller
         if ($sessionId === null) {
             return;
         }
-
+        dd($sessionId);
         $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
         if ($session->payment_status !== 'paid') {
             return;
         }
-        dd($session);
+
 
         $pack_id = $session['metadata']['pack_id'] ?? null;
         if (User::where('email',$session['customer_details']['email'])->first()) {

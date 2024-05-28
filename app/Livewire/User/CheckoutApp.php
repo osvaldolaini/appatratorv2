@@ -58,7 +58,7 @@ class CheckoutApp extends Component
                 'asaas_id' => $user->asaas_id,
             ],
             'callback' => [
-                "successUrl" => route('checkout-success').'?session_id={ID}',
+                "successUrl" => route('checkout-success'),
                 "autoRedirect" => true
             ]
         ];
