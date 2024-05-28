@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CourseController;
-use App\Http\Controllers\AsaasWebhookController;
+use App\Http\Controllers\Api\AsaasWebhookController;
 use App\Http\Controllers\Stripe\ResponseCheckoutController;
 use App\Livewire\Admin\Question\Filter\Filters;
 use App\Livewire\Admin\Configuration;
@@ -125,7 +125,7 @@ Route::get('/apiCoursesDestaques', [CourseController::class, 'highlighted']);
 
 Route::get('/inserir-vouchers/sucesso', [ResponseCheckoutController::class, 'success'])
     ->name('checkout-success');
-Route::get('/inserir-vouchers/test', [AsaasWebhookController::class, 'test'])
+Route::get('/inserir-vouchers/test', [AsaasWebhookController::class, 'index'])
     ->name('checkout-success');
 Route::get('/inserir-vouchers/erro', [ResponseCheckoutController::class, 'error'])
     ->name('checkout-cancel');
