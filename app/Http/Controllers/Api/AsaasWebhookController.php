@@ -12,12 +12,9 @@ use Illuminate\Support\Facades\DB;
 
 class AsaasWebhookController extends Controller
 {
-    public function __invoke(Request $request)
+    public function index(Request $request)
     {
-        // $data = $request->all();
-
-        // try {
-        //     $adapter = new AsaasConnector();
+        // $adapter = new AsaasConnector();
         // $gateway = new Gateway($adapter);
 
         // $sessionId = $request['id'];
@@ -27,13 +24,35 @@ class AsaasWebhookController extends Controller
         // }
         // $payment = $gateway->payment()->get($sessionId);
 
-        // return response($payment, 200);
-
-        // } catch (Throwable $th) {
-        //     DB::rollBack(); // deu algo errado "desfazemos"
-        // }
-
-
-        return response('OK', 200);
+        // dd($payment);
+        return response($request, 200);
     }
+    // public function __invoke(Request $request)
+    // {
+    //     $data = $request->all();
+
+    //     try {
+    //         $adapter = new AsaasConnector();
+    //     $gateway = new Gateway($adapter);
+
+    //     $sessionId = $request['id'];
+
+    //     if ($sessionId === null) {
+    //         return;
+    //     }
+    //     $payment = $gateway->payment()->get($sessionId);
+
+    //     dd($payment);
+    //     return response('OK', 200);
+
+
+    //         DB::commit(); // tudo deu certo, "commitamos"
+
+    //     } catch (Throwable $th) {
+    //         DB::rollBack(); // deu algo errado "desfazemos"
+    //     }
+
+
+    //     return response('OK', 200);
+    // }
 }
