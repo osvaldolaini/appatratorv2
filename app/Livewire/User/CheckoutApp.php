@@ -25,22 +25,9 @@ class CheckoutApp extends Component
         if (!$user->mobilePhone) {
             return redirect()->route('profile.user');
         }
-        // $custumer = $user->createOrGetStripeCustomer();
-        $custumer = $user->createOrGetAsaasCustomer();
-        // $user
-        // ->checkout($packPivotApp->price_id, [
-        //     'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
-        //     'cancel_url' => route('checkout-cancel'),
-        //     'metadata' => [
-        //         'pack_id' => $packPivotApp->id,
-        //         'stripe_id' => $custumer->id,
-        //     ],
-        // ])->redirect();
-        // $user
-        // ->checkout($packPivotCourse->price_id)
-        // ->redirect();
+        $user->createOrGetAsaasCustomer();
+
         $this->packPivotApp = $packPivotApp;
-        // dd($this->packPivotApp->packageApp);
         $this->user_name = $user->name . ' (' . $user->email . ')';
 
         $adapter = new AsaasConnector();
@@ -58,19 +45,12 @@ class CheckoutApp extends Component
                 'asaas_id' => $user->asaas_id,
             ],
             'callback' => [
-                "successUrl" => route('checkout-success'),
+                "successUrl" => route('lobby'),
                 "autoRedirect" => true
             ]
         ];
-        // dd($data);
-        // if (!isset($this->asaas_id)) {
         $payment = $gateway->payment()->create($data);
-        dd($payment);
         return redirect()->to($payment['invoiceUrl']);
     }
-    // public function render()
-    // {
-    //     return view('livewire.user.checkout.checkout-app')
-    //     ->layout('layouts.'.$this->layout);
-    // }
+
 }

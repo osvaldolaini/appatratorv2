@@ -20,42 +20,42 @@ class AsaasWebhookController extends Controller
         $adapter = new AsaasConnector();
         $gateway = new Gateway($adapter);
         $sessionId = $request->payment['id'];
-
+        //Pega os dados do pagamento
         $payment = $gateway->payment()->get($sessionId);
-        // return response()->json(['message' => $payment['status']], 200);
         if ($payment['status'] == 'PENDING') {
             return response()->json(['message' => 'Não foi pago'], 200);
         }
+        //Pega os dados do cliente
         $custumer = $gateway->customer()->list(['id' => $payment['customer']]);
-        // $pack_id = $payment['externalReference']['pack_id'] ?? null;
-        // if (User::where('email',$payment['customer_details']['email'])->first()) {
-        //     $user = User::where('email',$payment['customer_details']['email'])->first();
-        // }else{
-        //     $user =  User::create([
-        //         'name' => $payment['customer_details']['name'],
-        //         'email' => $payment['customer_details']['email'],
-        //         'password' => Hash::make(123456789),
-        //         'group'=>'user',
-        //         'stripe_id'=>$payment['metadata']['stripe_id'],
-        //     ]);
-        // }
+        if (User::where('email',$custumer['email'])->first()) {
+            $user = User::where('email',$custumer['email'])->first();
+        }else{
+            $user =  User::create([
+                'name' => $custumer['name'],
+                'email' => $custumer['email'],
+                'password' => Hash::make(123456789),
+                'group'=>'user',
+                'asaas_id'=>$custumer['externalReference']['asaas_id'],
+            ]);
+        }
+        //Pega os dados do pacote
+        $pack_id = $payment['externalReference']['pack_id'] ?? null;
+        $pack = PackPivotCourse::findOrFail($pack_id);
 
-        // $pack = PackPivotCourse::findOrFail($pack_id);
-
-        // if ($pack->package) {
-        //     foreach ($pack->package as $voucher) {
-        //         Vouchers::create([
-        //             'plan_id'       =>$voucher->plan_id,
-        //             'user_id'       =>$user->id,
-        //             'package_id'    =>$voucher->id,
-        //             'course_id'     =>$voucher->course_id,
-        //             'application'   =>($voucher->application == '' ? 'courses':$voucher->application),
-        //             'active'        => 1,
-        //             'code'          =>Str::uuid(),
-        //             'created_by'    =>Auth::user()->name,
-        //         ]);
-        //     }
-        // }
+        if ($pack->package) {
+            foreach ($pack->package as $voucher) {
+                Vouchers::create([
+                    'plan_id'       =>$voucher->plan_id,
+                    'user_id'       =>$user->id,
+                    'package_id'    =>$voucher->id,
+                    'course_id'     =>$voucher->course_id,
+                    'application'   =>($voucher->application == '' ? 'courses':$voucher->application),
+                    'active'        => 1,
+                    'code'          =>Str::uuid(),
+                    'created_by'    =>Auth::user()->name,
+                ]);
+            }
+        }
 
         return response()->json(['message' => $custumer], 200);
     }
