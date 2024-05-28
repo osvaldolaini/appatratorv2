@@ -16,6 +16,6 @@ class AsaasWebhookController extends Controller
     public function handleWebhook(Request $request)
     {
 
-        return response()->json(['message' => $request->payment->id], 200);
+        return response()->json(['message' => $request->payment], 200);
     }
 }
