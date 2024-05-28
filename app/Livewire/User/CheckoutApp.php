@@ -51,11 +51,11 @@ class CheckoutApp extends Component
             'externalReference' => [
                 'pack_id' => $packPivotApp->id,
                 'asaas_id' => $user->asaas_id,
+            ],
+            'callback' => [
+                "successUrl" => route('checkout-success'),
+                "autoRedirect" => false
             ]
-            // 'callback' => [
-            //     "successUrl" => route('checkout-success'),
-            //     "autoRedirect" => false
-            // ]
         ];
         dd($data);
         // if (!isset($this->asaas_id)) {
