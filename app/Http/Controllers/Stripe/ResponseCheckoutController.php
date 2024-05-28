@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Course\PackPivotCourse;
 use App\Models\Admin\Voucher\Vouchers;
 use App\Models\User;
+use App\Services\PaymentGateway\Connectors\AsaasConnector;
+use App\Services\PaymentGateway\Gateway;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Cashier\Cashier;
@@ -24,7 +26,8 @@ class ResponseCheckoutController extends Controller
      */
     public function success(Request $request)
     {
-
+        $adapter = new AsaasConnector();
+        $gateway = new Gateway($adapter);
         // \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         // $sessionId = $_GET['session_id'];
@@ -33,7 +36,9 @@ class ResponseCheckoutController extends Controller
         if ($sessionId === null) {
             return;
         }
-        dd($sessionId);
+        $payment = $gateway->payment()->get($sessionId);
+
+        dd($payment);
         $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
         if ($session->payment_status !== 'paid') {
             return;
