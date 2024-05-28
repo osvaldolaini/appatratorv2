@@ -41,8 +41,9 @@ class CheckoutApp extends Component
             'dueDate' => date('Y-m-d'),
             'description' => $packPivotApp->description,
             'externalReference' => [
-                'pack_id' => $packPivotApp->id,
-                'asaas_id' => $user->asaas_id,
+                "pack_id" => $packPivotApp->id,
+                "pack_type" => 'application',
+                "asaas_id" => $user->asaas_id,
             ],
             'callback' => [
                 "successUrl" => route('lobby'),
@@ -50,8 +51,8 @@ class CheckoutApp extends Component
             ]
         ];
         $payment = $gateway->payment()->create($data);
-        dd($payment);
-        // return redirect()->to($payment['invoiceUrl']);
+        // dd($payment);
+        return redirect()->to($payment['invoiceUrl']);
     }
 
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Course\PackPivotCourse;
+use App\Models\Admin\Voucher\PackPivotApp;
 use App\Models\Admin\Voucher\Vouchers;
 use App\Models\User;
 use App\Services\PaymentGateway\Connectors\AsaasConnector;
@@ -19,7 +20,8 @@ class AsaasWebhookController extends Controller
     {
         $adapter = new AsaasConnector();
         $gateway = new Gateway($adapter);
-        $sessionId = $request->payment['id'];
+        // $sessionId = $request->payment['id'];
+        $sessionId = 'pay_xwmb11yawecbwou2';
         //Pega os dados do pagamento
         $payment = $gateway->payment()->get($sessionId);
         if ($payment['status'] == 'PENDING') {
@@ -35,13 +37,18 @@ class AsaasWebhookController extends Controller
                 'email' => $custumer['email'],
                 'password' => Hash::make(123456789),
                 'group'=>'user',
-                'asaas_id'=>$custumer['externalReference']['asaas_id'],
+                'asaas_id'=>$payment['customer'],
             ]);
         }
 
         //Pega os dados do pacote
-        $pack_id = $payment['externalReference']['pack_id'] ?? null;
-        $pack = PackPivotCourse::findOrFail($pack_id);
+        $externalReferenceObject = json_decode( $payment['externalReference'], true);
+        $pack_id = $externalReferenceObject['pack_id'];
+        if ($externalReferenceObject['pack_id']=='application') {
+            $pack = PackPivotApp::find($pack_id);
+        } else {
+            $pack = PackPivotCourse::find($pack_id);
+        }
 
         if ($pack->package) {
             foreach ($pack->package as $voucher) {
@@ -50,7 +57,7 @@ class AsaasWebhookController extends Controller
                     'user_id'       =>$user->id,
                     'package_id'    =>$voucher->id,
                     'course_id'     =>$voucher->course_id,
-                    'application'   =>($voucher->application == '' ? 'courses':$voucher->application),
+                    'application'   =>($voucher->application == '' ? 'courses': $voucher->application),
                     'active'        => 1,
                     'code'          =>Str::uuid(),
                     'created_by'    =>Auth::user()->name,
