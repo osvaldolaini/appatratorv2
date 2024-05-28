@@ -20,7 +20,6 @@ class AsaasWebhookController extends Controller
         $adapter = new AsaasConnector();
         $gateway = new Gateway($adapter);
         $sessionId = $request->payment['id'];
-        return response()->json(['message' => 'Não foi pago'], 200);
         //Pega os dados do pagamento
         $payment = $gateway->payment()->get($sessionId);
         if ($payment['status'] == 'PENDING') {
@@ -39,6 +38,8 @@ class AsaasWebhookController extends Controller
                 'asaas_id'=>$custumer['externalReference']['asaas_id'],
             ]);
         }
+
+        return response()->json(['message' => $payment['externalReference']], 200);
         //Pega os dados do pacote
         $pack_id = $payment['externalReference']['pack_id'] ?? null;
         $pack = PackPivotCourse::findOrFail($pack_id);
