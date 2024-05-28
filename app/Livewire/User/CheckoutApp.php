@@ -65,7 +65,7 @@ class CheckoutApp extends Component
         // dd($data);
         // if (!isset($this->asaas_id)) {
         $payment = $gateway->payment()->create($data);
-        dd($payment);
+        // dd($payment);
         redirect()->to($payment['invoiceUrl']);
     }
     // public function render()
