@@ -15,7 +15,7 @@ class AsaasWebhookController extends Controller
 {
     public function handleWebhook(Request $request)
     {
-        Log::info('Webhook recebido do Asaas:', $request->all());
-        return response()->json(['message' => 'Webhook recebido com sucesso'], 200);
+
+        return response()->json(['message' => $request->event], 200);
     }
 }
