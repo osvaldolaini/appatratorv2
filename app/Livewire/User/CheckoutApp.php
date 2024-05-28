@@ -57,9 +57,10 @@ class CheckoutApp extends Component
                 "autoRedirect" => false
             ]
         ];
-        dd($data);
+        // dd($data);
         // if (!isset($this->asaas_id)) {
         $payment = $gateway->payment()->create($data);
+        dd($payment);
         redirect()->to($payment['invoiceUrl']);
     }
     // public function render()
