@@ -44,7 +44,6 @@ class ResponseCheckoutController extends Controller
             return;
         }
 
-
         $pack_id = $session['metadata']['pack_id'] ?? null;
         if (User::where('email',$session['customer_details']['email'])->first()) {
             $user = User::where('email',$session['customer_details']['email'])->first();
