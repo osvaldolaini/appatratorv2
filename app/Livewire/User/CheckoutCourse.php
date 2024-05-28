@@ -6,10 +6,6 @@ use App\Models\Admin\Course\PackPivotCourse;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-use Laravel\Cashier\Cashier;
-use Stripe\Checkout\Session;
-use Stripe\Customer;
-
 class CheckoutCourse extends Component
 {
     public function mount(PackPivotCourse $packPivotCourse)

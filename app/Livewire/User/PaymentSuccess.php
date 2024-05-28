@@ -5,6 +5,8 @@ namespace App\Livewire\User;
 use App\Models\Admin\Course\PackPivotCourse;
 use App\Models\Admin\Voucher\Vouchers;
 use App\Models\User;
+use App\Services\PaymentGateway\Connectors\AsaasConnector;
+use App\Services\PaymentGateway\Gateway;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,14 +21,18 @@ class PaymentSuccess extends Component
 
     public function mount(Request $request)
     {
+        $adapter = new AsaasConnector();
+        $gateway = new Gateway($adapter);
+
         // $sessionId = $_GET['session_id'];
         $sessionId = $request->get('session_id');
 
         if ($sessionId === null) {
             return;
         }
-
-        $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
+        $session = $gateway->payment()->get($sessionId);
+        // $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
+        dd($session);
         if ($session->payment_status !== 'paid') {
             return;
         }

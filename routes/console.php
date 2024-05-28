@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
+
+use App\Services\PaymentGateway\Connectors\AsaasConnector;
+use App\Services\PaymentGateway\Gateway;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -17,3 +20,13 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('play', function () {
+    // $customers = App\Services\AsaasPhp\Customer\CustomerList2::list();
+    $adapter = app(AsaasConnector::class);
+
+    $gateway = new Gateway($adapter);
+
+    $customers = $gateway->customer()->list();
+    dd($customers);
+});

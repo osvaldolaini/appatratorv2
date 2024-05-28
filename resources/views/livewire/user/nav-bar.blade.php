@@ -51,7 +51,7 @@ border-b border-gray-900 dark:border-gray-700">
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-dropdown-link href="{{ route('profile.show') }}">
+                            <x-dropdown-link href="{{ route('profile.user') }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 

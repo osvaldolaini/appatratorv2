@@ -20,9 +20,13 @@ class PackPivotApp extends Model
 
     ];
 
-    public function package()
+    public function packageCourse()
     {
         return $this->hasMany(Package::class,'pack_pivot_course_id','id');
+    }
+    public function packageApp()
+    {
+        return $this->hasMany(Package::class,'pack_pivot_app_id','id');
     }
 
     public function getActivitylogOptions(): LogOptions

@@ -34,6 +34,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->forceFill([
                 'name' => $input['name'],
                 'email' => $input['email'],
+                'cpfCnpj' => $input['cpfCnpj'],
+                'mobilePhone' => $input['mobilePhone'],
             ])->save();
         }
     }
@@ -48,6 +50,8 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         $user->forceFill([
             'name' => $input['name'],
             'email' => $input['email'],
+            'cpfCnpj' => $input['cpfCnpj'],
+            'mobilePhone' => $input['mobilePhone'],
             'email_verified_at' => null,
         ])->save();
 

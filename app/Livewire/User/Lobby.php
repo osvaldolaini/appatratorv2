@@ -14,7 +14,9 @@ class Lobby extends Component
     public function mount()
     {
         $user = Auth::user();
+        $user->createOrGetAsaasCustomer();
         $user->createOrGetStripeCustomer();
+
         $this->vouchers = Auth::user()->vouchers
                         ->where('active',1)
                         ->where('limit_access','>=', date('Y-m-d h:i:s'))

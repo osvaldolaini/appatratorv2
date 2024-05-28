@@ -14,8 +14,6 @@ use Laravel\Cashier\Cashier;
 use Illuminate\Support\Str;
 
 
-use Stripe\Checkout\Session;
-use Stripe\Customer;
 
 class ResponseCheckoutController extends Controller
 {

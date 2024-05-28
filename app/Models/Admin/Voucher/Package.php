@@ -24,6 +24,7 @@ class Package extends Model
        'id', 'pack_pivot_course_id', 'application', 'active', 'code',
        'updated_by', 'created_by','course_id','plan_id','pack_pivot_app_id'
     ];
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
@@ -37,6 +38,35 @@ class Package extends Model
     public function plan()
     {
         return $this->belongsTo(Plans::class, 'plan_id', 'id');
+    }
+    public function getAppAttribute()
+    {
+        switch ($this->application) {
+            case 'questions':
+                $convert = 'Questões';
+                break;
+            case 'treinament':
+                $convert = 'Treinamento';
+                break;
+            case 'essay':
+                $convert = 'Redação';
+                break;
+            case 'mentoring':
+                $convert = 'Mentoria';
+                break;
+            case 'courses':
+                if ($this->course) {
+                    $convert = $this->course->title;
+                }else{
+                    $convert = 'Cancelado';
+                }
+
+                    break;
+            default:
+                $convert = '';
+                break;
+            }
+            return mb_strtoupper($convert);
     }
 
 

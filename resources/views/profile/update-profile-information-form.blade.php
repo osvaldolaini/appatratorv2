@@ -5,7 +5,11 @@
 
     <x-slot name="description">
         {{ __('Update your account\'s profile information and email address.') }}
+        <div class="my-2 text-red-600">
+            *Dados obrigatórios para compras
+        </div>
     </x-slot>
+
 
     <x-slot name="form">
         <!-- Profile Photo -->
@@ -54,14 +58,14 @@
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ __('Name') }}" />
+            <x-label for="name" value="*{{ __('Name') }}" />
             <x-input id="name" type="text" class="mt-1 block w-full" wire:model="state.name" required autocomplete="name" />
             <x-input-error for="name" class="mt-2" />
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="email" value="{{ __('Email') }}" />
+            <x-label for="email" value="*{{ __('Email') }}" />
             <x-input id="email" type="email" class="mt-1 block w-full" wire:model="state.email" required autocomplete="username" />
             <x-input-error for="email" class="mt-2" />
 
@@ -80,6 +84,20 @@
                     </p>
                 @endif
             @endif
+        </div>
+
+        <!-- CpfCnpj -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="cpfCnpj" value="*{{ __('CPF') }}" />
+            <x-input id="cpfCnpj" type="text" class="mt-1 block w-full" wire:model="state.cpfCnpj" required autocomplete="cpfCnpj" />
+            <x-input-error for="cpfCnpj" class="mt-2" />
+        </div>
+
+        <!-- Mobile Phone -->
+        <div class="col-span-6 sm:col-span-4">
+            <x-label for="mobilePhone" value="*{{ __('Contato') }}" />
+            <x-input id="mobilePhone" type="text" class="mt-1 block w-full" wire:model="state.mobilePhone" required autocomplete="mobilePhone" />
+            <x-input-error for="mobilePhone" class="mt-2" />
         </div>
     </x-slot>
 

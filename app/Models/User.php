@@ -10,6 +10,8 @@ use App\Models\Apps\Mentoring\ContestPlanningCyclesUser;
 use App\Models\Apps\Mentoring\ContestPlanningUser;
 use App\Models\Apps\Mentoring\ContestUser;
 use App\Models\Apps\Treinament\Season;
+use App\Services\PaymentGateway\Connectors\AsaasConnector;
+use App\Services\PaymentGateway\Gateway;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -42,6 +44,9 @@ class User extends Authenticatable
         'password',
         'group',
         'nick',
+        'cpfCnpj',
+        'mobilePhone',
+        'asaas_id',
     ];
 
     /**
@@ -80,7 +85,27 @@ class User extends Authenticatable
 
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)
             ->format('d/m/Y H:i:s');
+    }
 
+    public function createOrGetAsaasCustomer()
+    {
+            $adapter = new AsaasConnector();
+            $gateway = new Gateway($adapter);
+
+            $data = [
+                'name' => $this->name,
+                'cpfCnpj' => $this->cpfCnpj,
+                'email' => $this->email,
+                'mobilePhone' => $this->mobilePhone,
+                'id' => $this->asaas_id
+            ];
+            // if (!isset($this->asaas_id)) {
+                $customer = $gateway->customer()->create($data);
+                // dd($customer);
+                $this->asaas_id = $customer['id'];
+                $this->save();
+            // }
+            return json_encode($customer);
     }
 
     public function getUpdatedAttribute()
