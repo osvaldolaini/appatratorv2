@@ -125,8 +125,8 @@ Route::get('/apiCoursesDestaques', [CourseController::class, 'highlighted']);
 
 Route::get('/inserir-vouchers/sucesso', [ResponseCheckoutController::class, 'success'])
     ->name('checkout-success');
-Route::get('/inserir-vouchers/test', [AsaasWebhookController::class, 'index'])
-    ->name('checkout-success');
+
+    Route::post('/inserir-vouchers/test', [AsaasWebhookController::class, 'index']);
 Route::get('/inserir-vouchers/erro', [ResponseCheckoutController::class, 'error'])
     ->name('checkout-cancel');
 
