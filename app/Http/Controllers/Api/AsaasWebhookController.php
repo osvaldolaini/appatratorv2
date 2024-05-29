@@ -28,47 +28,54 @@ class AsaasWebhookController extends Controller
         if ($payment['status'] == 'PENDING') {
             return response()->json(['message' => 'Não foi pago'], 200);
         }
-        //Pega os dados do cliente
-        $custumer = $gateway->customer()->list(['id' => $payment['customer']]);
-        if (User::where('email',$custumer['email'])->first()) {
-            $user = User::where('email',$custumer['email'])->first();
-        }else{
-            $user =  User::create([
-                'name' => $custumer['name'],
-                'email' => $custumer['email'],
-                'password' => Hash::make(123456789),
-                'group'=>'user',
-                'asaas_id'=>$payment['customer'],
-            ]);
+        if ($payment['status'] == 'PAYMENT_RECEIVED') {
+            return response()->json(['message' => 'Já sei'], 200);
+        }
+        if ($payment['status'] == 'PAYMENT_CONFIRMED') {
+            //Pega os dados do cliente
+            $custumer = $gateway->customer()->list(['id' => $payment['customer']]);
+            if (User::where('email', $custumer['email'])->first()) {
+                $user = User::where('email', $custumer['email'])->first();
+            } else {
+                $user =  User::create([
+                    'name' => $custumer['name'],
+                    'email' => $custumer['email'],
+                    'password' => Hash::make(123456789),
+                    'group' => 'user',
+                    'asaas_id' => $payment['customer'],
+                ]);
+            }
+
+            //Pega os dados do pacote
+            $externalReferenceObject = json_decode($payment['externalReference'], true);
+            $pack_id = $externalReferenceObject['pack_id'];
+
+            if ($externalReferenceObject['pack_type'] == 'application') {
+                $pack = PackPivotApp::find($pack_id);
+            } else {
+                $pack = PackPivotCourse::find($pack_id);
+            }
+            // dd($pack->package);
+            if ($pack->package) {
+                foreach ($pack->package as $voucher) {
+
+                    $rt = Vouchers::create([
+                        'plan_id'       =>$voucher->plan_id,
+                        'user_id'       =>$user->id,
+                        'package_id'    =>$voucher->id,
+                        'course_id'     =>$voucher->course_id,
+                        'application'   =>($voucher->application == '' ? 'courses': $voucher->application),
+                        'active'        => 1,
+                        'code'          =>Str::uuid(),
+                        'created_by'    =>Auth::user()->name,
+                    ]);
+                    // dd($rt);
+                }
+            }
+            return response()->json(['message' => 'Processo concluido com sucesso'], 200);
         }
 
-        //Pega os dados do pacote
-        $externalReferenceObject = json_decode( $payment['externalReference'], true);
-        $pack_id = $externalReferenceObject['pack_id'];
 
-        if ($externalReferenceObject['pack_type'] == 'application') {
-            $pack = PackPivotApp::find($pack_id);
-        } else {
-            $pack = PackPivotCourse::find($pack_id);
-        }
-// dd($pack->package);
-        // if ($pack->package) {
-        //     foreach ($pack->package as $voucher) {
-
-        //         $rt = Vouchers::create([
-        //             'plan_id'       =>$voucher->plan_id,
-        //             'user_id'       =>$user->id,
-        //             'package_id'    =>$voucher->id,
-        //             'course_id'     =>$voucher->course_id,
-        //             'application'   =>($voucher->application == '' ? 'courses': $voucher->application),
-        //             'active'        => 1,
-        //             'code'          =>Str::uuid(),
-        //             'created_by'    =>Auth::user()->name,
-        //         ]);
-        //         // dd($rt);
-        //     }
-        // }
-
-        return response()->json(['message' => 'Processo concluido com sucesso'], 200);
+        // return response()->json(['message' => 'Processo concluido com sucesso'], 200);
     }
 }
