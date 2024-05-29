@@ -55,9 +55,10 @@ class AsaasWebhookController extends Controller
             } else {
                 $pack = PackPivotCourse::find($pack_id);
             }
-            return response()->json(['message' => $pack], 200);
+
             // dd($pack->package);
             if ($pack->package) {
+                return response()->json(['message' => $pack->package], 200);
                 foreach ($pack->package as $voucher) {
 
                     $rt = Vouchers::create([
@@ -73,7 +74,7 @@ class AsaasWebhookController extends Controller
                     // dd($rt);
                 }
             }
-            return response()->json(['message' => $payment], 200);
+            return response()->json(['message' => 'Vouchers criados com sucesso'], 200);
         }
 
 
