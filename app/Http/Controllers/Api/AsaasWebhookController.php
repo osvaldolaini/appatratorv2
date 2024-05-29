@@ -52,22 +52,22 @@ class AsaasWebhookController extends Controller
             $pack = PackPivotCourse::find($pack_id);
         }
 // dd($pack->package);
-        if ($pack->package) {
-            foreach ($pack->package as $voucher) {
+        // if ($pack->package) {
+        //     foreach ($pack->package as $voucher) {
 
-                $rt = Vouchers::create([
-                    'plan_id'       =>$voucher->plan_id,
-                    'user_id'       =>$user->id,
-                    'package_id'    =>$voucher->id,
-                    'course_id'     =>$voucher->course_id,
-                    'application'   =>($voucher->application == '' ? 'courses': $voucher->application),
-                    'active'        => 1,
-                    'code'          =>Str::uuid(),
-                    'created_by'    =>Auth::user()->name,
-                ]);
-                // dd($rt);
-            }
-        }
+        //         $rt = Vouchers::create([
+        //             'plan_id'       =>$voucher->plan_id,
+        //             'user_id'       =>$user->id,
+        //             'package_id'    =>$voucher->id,
+        //             'course_id'     =>$voucher->course_id,
+        //             'application'   =>($voucher->application == '' ? 'courses': $voucher->application),
+        //             'active'        => 1,
+        //             'code'          =>Str::uuid(),
+        //             'created_by'    =>Auth::user()->name,
+        //         ]);
+        //         // dd($rt);
+        //     }
+        // }
 
         return response()->json(['message' => 'Processo concluido com sucesso'], 200);
     }
