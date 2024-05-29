@@ -72,7 +72,7 @@ class AsaasWebhookController extends Controller
                     // dd($rt);
                 }
             }
-            return response()->json(['message' => 'Vouchers criados com sucesso'], 200);
+            return response()->json(['message' => $payment], 200);
         }
 
 
