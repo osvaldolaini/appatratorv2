@@ -29,10 +29,10 @@ class AsaasWebhookController extends Controller
         if ($payment['status'] == 'PENDING') {
             return response()->json(['message' => 'Não foi pago'], 200);
         }
-        if ($payment['event'] == 'PAYMENT_RECEIVED') {
+        if ($request->event == 'PAYMENT_RECEIVED') {
             return response()->json(['message' => 'Já sei'], 200);
         }
-        if ($payment['event'] == 'PAYMENT_CONFIRMED') {
+        if ($request->event == 'PAYMENT_CONFIRMED') {
             //Pega os dados do cliente
             return response()->json(['message' => $request->payment['id'] ], 200);
             $custumer = $gateway->customer()->list(['id' => $payment['customer']]);
