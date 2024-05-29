@@ -68,7 +68,7 @@ class AsaasWebhookController extends Controller
                         'application'   =>($voucher->application == '' ? 'courses': $voucher->application),
                         'active'        => 1,
                         'code'          =>Str::uuid(),
-                        'created_by'    =>Auth::user()->name,
+                        'created_by'    =>$user->name,
                     ]);
                     // return response()->json(['message' => $rt], 200);
                     // dd($rt);
