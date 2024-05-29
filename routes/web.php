@@ -124,8 +124,8 @@ Route::get('/apiCoursesDestaques', [CourseController::class, 'highlighted']);
 // Route::get('/inserir-vouchers/erro', [ResponseCheckoutController::class, 'error'])
 //     ->name('checkout-cancel');
 
-Route::post('/webhook/asaas', [AsaasWebhookController::class, 'handleWebhook']);
-// Route::get('/webhook/asaas', [AsaasWebhookController::class, 'handleWebhook']);
+// Route::post('/webhook/asaas', [AsaasWebhookController::class, 'handleWebhook']);
+Route::get('/webhook/asaas', [AsaasWebhookController::class, 'handleWebhook']);
 
 Route::middleware([
     'auth:sanctum',

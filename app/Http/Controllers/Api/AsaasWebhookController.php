@@ -20,9 +20,9 @@ class AsaasWebhookController extends Controller
     {
         $adapter = new AsaasConnector();
         $gateway = new Gateway($adapter);
-        $sessionId = $request->payment['id'];
+        // $sessionId = $request->payment['id'];
         //teste
-        // $sessionId = 'pay_uh2lygkcomdd1f2g';
+        $sessionId = 'pay_b6qq5cxouug44dir';
         //Pega os dados do pagamento
         $payment = $gateway->payment()->get($sessionId);
         if ($payment['status'] == 'PENDING') {
@@ -51,7 +51,7 @@ class AsaasWebhookController extends Controller
         } else {
             $pack = PackPivotCourse::find($pack_id);
         }
-// dd($pack->package);
+dd($pack->package);
         if ($pack->package) {
             foreach ($pack->package as $voucher) {
                 Vouchers::create([
