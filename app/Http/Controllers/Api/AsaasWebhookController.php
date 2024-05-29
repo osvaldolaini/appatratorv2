@@ -51,7 +51,7 @@ class AsaasWebhookController extends Controller
         } else {
             $pack = PackPivotCourse::find($pack_id);
         }
-dd($pack->package);
+// dd($pack->package);
         if ($pack->package) {
             foreach ($pack->package as $voucher) {
                 Vouchers::create([
