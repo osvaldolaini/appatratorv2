@@ -14,9 +14,8 @@ class CheckoutCourse extends Component
     public $email;
     public $user_name;
 
-    public function mount(PackPivotCourse $packPivotCourse)
+    public function mount($price_asaas_id)
     {
-
         $user = Auth::user();
         if (!$user->cpfCnpj) {
             return redirect()->route('profile.user');
@@ -26,7 +25,7 @@ class CheckoutCourse extends Component
         }
         $user->createOrGetAsaasCustomer();
 
-        $this->packPivotCourse = $packPivotCourse;
+        $this->packPivotCourse = PackPivotCourse::where('price_asaas_id',$price_asaas_id)->first();
         $this->user_name = $user->name . ' (' . $user->email . ')';
 
         $adapter = new AsaasConnector();
@@ -36,11 +35,11 @@ class CheckoutCourse extends Component
             'customer' => $user->asaas_id,
             'billingType' =>  "UNDEFINED",
             'chargeType' => "DETACHED",
-            'value' => valueDB($packPivotCourse->value),
+            'value' => valueDB($this->packPivotCourse->value),
             'dueDate' => date('Y-m-d'),
-            'description' => $packPivotCourse->description,
+            'description' => $this->packPivotCourse->description,
             'externalReference' => [
-                "pack_id" => $packPivotCourse->id,
+                "pack_id" => $this->packPivotCourse->id,
                 "pack_type" => 'application',
                 "asaas_id" => $user->asaas_id,
             ],
