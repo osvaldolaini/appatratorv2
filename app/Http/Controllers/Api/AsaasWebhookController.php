@@ -34,7 +34,7 @@ class AsaasWebhookController extends Controller
         if ($payment['event'] == 'PAYMENT_CONFIRMED') {
             //Pega os dados do cliente
             $custumer = $gateway->customer()->list(['id' => $payment['customer']]);
-            return response()->json(['message' => $custumer], 200);
+            return response()->json(['message' => '$custumer'], 200);
             if (User::where('email', $custumer['email'])->first()) {
                 $user = User::where('email', $custumer['email'])->first();
             } else {
