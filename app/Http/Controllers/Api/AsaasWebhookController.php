@@ -20,10 +20,10 @@ class AsaasWebhookController extends Controller
     {
         $adapter = new AsaasConnector();
         $gateway = new Gateway($adapter);
-        // $sessionId = $request->payment['id'];
+        $sessionId = $request->payment['id'];
         //teste
 
-        $sessionId = 'pay_2u24nwrrradcj35g';
+        // $sessionId = 'pay_2u24nwrrradcj35g';
         //Pega os dados do pagamento
         $payment = $gateway->payment()->get($sessionId);
         if ($payment['status'] == 'PENDING') {
@@ -32,7 +32,7 @@ class AsaasWebhookController extends Controller
         if ($request->event == 'PAYMENT_RECEIVED') {
             return response()->json(['message' => 'Já sei'], 200);
         }
-        // if ($request->event == 'PAYMENT_CONFIRMED') {
+        if ($request->event == 'PAYMENT_CONFIRMED') {
             //Pega os dados do cliente
             $custumer = $gateway->customer()->list(['id' => $payment['customer']]);
             if (User::where('email', $custumer['email'])->first()) {
@@ -60,7 +60,6 @@ class AsaasWebhookController extends Controller
             if ($pack->package) {
                 // return response()->json(['message' => $pack->package], 200);
                 foreach ($pack->package as $voucher) {
-
                     $rt = Vouchers::create([
                         'plan_id'       =>$voucher->plan_id,
                         'user_id'       =>$user->id,
@@ -76,6 +75,6 @@ class AsaasWebhookController extends Controller
                 }
             }
             return response()->json(['message' => 'Vouchers criados com sucesso'], 200);
-        // }
+        }
     }
 }
