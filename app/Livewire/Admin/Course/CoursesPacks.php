@@ -173,7 +173,7 @@ class CoursesPacks extends Component
             'highlighted'   => $this->highlighted,
             'see_value'     => $this->see_value,
             'price_id'      => $this->price_id,
-            'price_asaas_id'=> ($this->price_asaas_id ? $this->price_asaas_id : 'price_asaas_'.Str::uuid()),
+            'price_asaas_id'=> ($this->price_asaas_id != "" ? $this->price_asaas_id : 'price_asaas_'.Str::uuid()),
             'value'         => $this->value,
             'qtd_parcel'    => $this->qtd_parcel,
             'link_hotmart'  => $this->link_hotmart,
