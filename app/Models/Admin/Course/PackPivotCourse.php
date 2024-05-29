@@ -17,7 +17,7 @@ class PackPivotCourse extends Model
     protected $fillable = [
         'id','active','title','order','highlighted','description','see_value',
         'price_id','value','qtd_parcel','link_hotmart','value_parcel','updated_by','created_by',
-        'courses_id'
+        'courses_id','price_asaas_id'
     ];
 
     public function course()
