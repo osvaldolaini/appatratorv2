@@ -128,7 +128,7 @@ Route::get('/inserir-vouchers/sucesso', [ResponseCheckoutController::class, 'suc
 Route::get('/inserir-vouchers/erro', [ResponseCheckoutController::class, 'error'])
     ->name('checkout-cancel');
 
-Route::post('/webhook/asaas', [AsaasWebhookController::class, 'handleWebhook']);
+Route::get('/webhook/asaas', [AsaasWebhookController::class, 'handleWebhook']);
 
 Route::middleware([
     'auth:sanctum',
