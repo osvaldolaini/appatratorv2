@@ -26,7 +26,7 @@ class CheckoutCourse extends Component
         $user->createOrGetAsaasCustomer();
 
         $this->packPivotCourse = PackPivotCourse::where('price_asaas_id',$price_asaas_id)->first();
-        dd($this->packPivotCourse);
+        // dd($this->packPivotCourse);
         $this->user_name = $user->name . ' (' . $user->email . ')';
 
         $adapter = new AsaasConnector();
@@ -41,7 +41,7 @@ class CheckoutCourse extends Component
             'description' => $this->packPivotCourse->description,
             'externalReference' => [
                 "pack_id" => $this->packPivotCourse->id,
-                "pack_type" => 'application',
+                "pack_type" => 'courses',
                 "asaas_id" => $user->asaas_id,
             ],
             'callback' => [
@@ -55,7 +55,7 @@ class CheckoutCourse extends Component
 
         ];
         $payment = $gateway->payment()->create($data);
-        // dd($payment);
+        dd($payment);
         return redirect()->to($payment['invoiceUrl']);
     }
 
