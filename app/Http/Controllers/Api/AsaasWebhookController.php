@@ -45,7 +45,7 @@ class AsaasWebhookController extends Controller
                     'asaas_id' => $payment['customer'],
                 ]);
             }
-
+            return response()->json(['message' => $user], 200);
             //Pega os dados do pacote
             $externalReferenceObject = json_decode($payment['externalReference'], true);
             $pack_id = $externalReferenceObject['pack_id'];
