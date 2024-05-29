@@ -55,7 +55,7 @@ class CheckoutCourse extends Component
 
         ];
         $payment = $gateway->payment()->create($data);
-        dd($payment);
+        // dd($payment);
         return redirect()->to($payment['invoiceUrl']);
     }
 
