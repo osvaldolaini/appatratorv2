@@ -71,6 +71,7 @@ class AsaasWebhookController extends Controller
                         'code'          =>Str::uuid(),
                         'created_by'    =>Auth::user()->name,
                     ]);
+                    return response()->json(['message' => $rt], 200);
                     // dd($rt);
                 }
             }
