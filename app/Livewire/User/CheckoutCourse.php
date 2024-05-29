@@ -47,11 +47,11 @@ class CheckoutCourse extends Component
             'callback' => [
                 "successUrl" => route('lobby'),
                 "autoRedirect" => true
+            ],
+            'split' => [
+                "walletId" => "6ff70a66-6f2c-41e5-a54c-08bab078415e",
+                "percentualValue" => 20.00
             ]
-            // 'split' => [
-            //     "walletId" => "6ff70a66-6f2c-41e5-a54c-08bab078415e",
-            //     "percentualValue" => 20.00
-            // ]
 
         ];
         $payment = $gateway->payment()->create($data);
