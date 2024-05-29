@@ -55,6 +55,7 @@ class AsaasWebhookController extends Controller
             } else {
                 $pack = PackPivotCourse::find($pack_id);
             }
+            return response()->json(['message' => $pack], 200);
             // dd($pack->package);
             if ($pack->package) {
                 foreach ($pack->package as $voucher) {
