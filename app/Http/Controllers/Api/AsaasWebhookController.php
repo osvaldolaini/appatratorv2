@@ -22,17 +22,17 @@ class AsaasWebhookController extends Controller
         $gateway = new Gateway($adapter);
         // $sessionId = $request->payment['id'];
         //teste
+
         $sessionId = 'pay_2u24nwrrradcj35g';
         //Pega os dados do pagamento
         $payment = $gateway->payment()->get($sessionId);
-dd($request->event);
         if ($payment['status'] == 'PENDING') {
             return response()->json(['message' => 'Não foi pago'], 200);
         }
         if ($request->event == 'PAYMENT_RECEIVED') {
             return response()->json(['message' => 'Já sei'], 200);
         }
-        if ($request->event == 'PAYMENT_CONFIRMED') {
+        // if ($request->event == 'PAYMENT_CONFIRMED') {
             //Pega os dados do cliente
             $custumer = $gateway->customer()->list(['id' => $payment['customer']]);
             if (User::where('email', $custumer['email'])->first()) {
@@ -76,6 +76,6 @@ dd($request->event);
                 }
             }
             return response()->json(['message' => 'Vouchers criados com sucesso'], 200);
-        }
+        // }
     }
 }
