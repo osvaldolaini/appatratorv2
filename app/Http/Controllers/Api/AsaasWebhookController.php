@@ -34,9 +34,7 @@ class AsaasWebhookController extends Controller
         }
         if ($request->event == 'PAYMENT_CONFIRMED') {
             //Pega os dados do cliente
-            return response()->json(['message' => $request->payment['id'] ], 200);
             $custumer = $gateway->customer()->list(['id' => $payment['customer']]);
-            return response()->json(['message' => '$custumer'], 200);
             if (User::where('email', $custumer['email'])->first()) {
                 $user = User::where('email', $custumer['email'])->first();
             } else {
@@ -48,7 +46,6 @@ class AsaasWebhookController extends Controller
                     'asaas_id' => $payment['customer'],
                 ]);
             }
-            return response()->json(['message' => $user], 200);
             //Pega os dados do pacote
             $externalReferenceObject = json_decode($payment['externalReference'], true);
             $pack_id = $externalReferenceObject['pack_id'];
@@ -59,22 +56,22 @@ class AsaasWebhookController extends Controller
                 $pack = PackPivotCourse::find($pack_id);
             }
             // dd($pack->package);
-            // if ($pack->package) {
-            //     foreach ($pack->package as $voucher) {
+            if ($pack->package) {
+                foreach ($pack->package as $voucher) {
 
-            //         $rt = Vouchers::create([
-            //             'plan_id'       =>$voucher->plan_id,
-            //             'user_id'       =>$user->id,
-            //             'package_id'    =>$voucher->id,
-            //             'course_id'     =>$voucher->course_id,
-            //             'application'   =>($voucher->application == '' ? 'courses': $voucher->application),
-            //             'active'        => 1,
-            //             'code'          =>Str::uuid(),
-            //             'created_by'    =>Auth::user()->name,
-            //         ]);
-            //         // dd($rt);
-            //     }
-            // }
+                    $rt = Vouchers::create([
+                        'plan_id'       =>$voucher->plan_id,
+                        'user_id'       =>$user->id,
+                        'package_id'    =>$voucher->id,
+                        'course_id'     =>$voucher->course_id,
+                        'application'   =>($voucher->application == '' ? 'courses': $voucher->application),
+                        'active'        => 1,
+                        'code'          =>Str::uuid(),
+                        'created_by'    =>Auth::user()->name,
+                    ]);
+                    // dd($rt);
+                }
+            }
             return response()->json(['message' => $payment], 200);
         }
 
