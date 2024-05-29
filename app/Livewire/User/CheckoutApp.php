@@ -36,6 +36,8 @@ class CheckoutApp extends Component
             'billingType' =>  "UNDEFINED",
             'chargeType' => "DETACHED",
             'value' => valueDB($packPivotApp->value),
+            'installmentCount' => $packPivotApp->qtd_parcel,
+            'installmentValue' => valueDB($packPivotApp->value_parcel),
             'dueDate' => date('Y-m-d'),
             'description' => $packPivotApp->description,
             'externalReference' => [

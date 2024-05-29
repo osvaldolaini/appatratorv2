@@ -37,6 +37,8 @@ class CheckoutCourse extends Component
             'billingType' =>  "UNDEFINED",
             'chargeType' => "DETACHED",
             'value' => valueDB($this->packPivotCourse->value),
+            'installmentCount' => $this->packPivotCourse->qtd_parcel,
+            'installmentValue' => valueDB($this->packPivotCourse->value_parcel),
             'dueDate' => date('Y-m-d'),
             'description' => $this->packPivotCourse->description,
             'externalReference' => [
