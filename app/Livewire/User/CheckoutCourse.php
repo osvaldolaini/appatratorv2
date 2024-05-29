@@ -26,6 +26,7 @@ class CheckoutCourse extends Component
         $user->createOrGetAsaasCustomer();
 
         $this->packPivotCourse = PackPivotCourse::where('price_asaas_id',$price_asaas_id)->first();
+        dd($this->packPivotCourse);
         $this->user_name = $user->name . ' (' . $user->email . ')';
 
         $adapter = new AsaasConnector();
