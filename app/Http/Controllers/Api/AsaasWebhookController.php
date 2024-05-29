@@ -20,9 +20,9 @@ class AsaasWebhookController extends Controller
     {
         $adapter = new AsaasConnector();
         $gateway = new Gateway($adapter);
-        $sessionId = $request->payment['id'];
+        // $sessionId = $request->payment['id'];
         //teste
-        // $sessionId = 'pay_b6qq5cxouug44dir';
+        $sessionId = 'pay_2u24nwrrradcj35g';
         //Pega os dados do pagamento
         $payment = $gateway->payment()->get($sessionId);
 
