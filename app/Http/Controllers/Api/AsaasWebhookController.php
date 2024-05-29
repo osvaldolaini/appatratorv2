@@ -25,7 +25,7 @@ class AsaasWebhookController extends Controller
         // $sessionId = 'pay_b6qq5cxouug44dir';
         //Pega os dados do pagamento
         $payment = $gateway->payment()->get($sessionId);
-        return response()->json(['message' => $request->payment['id'] ], 200);
+
         if ($payment['status'] == 'PENDING') {
             return response()->json(['message' => 'Não foi pago'], 200);
         }
@@ -34,7 +34,7 @@ class AsaasWebhookController extends Controller
         }
         if ($payment['event'] == 'PAYMENT_CONFIRMED') {
             //Pega os dados do cliente
-            return response()->json(['message' => '$custumer'], 200);
+            return response()->json(['message' => $request->payment['id'] ], 200);
             $custumer = $gateway->customer()->list(['id' => $payment['customer']]);
             return response()->json(['message' => '$custumer'], 200);
             if (User::where('email', $custumer['email'])->first()) {
