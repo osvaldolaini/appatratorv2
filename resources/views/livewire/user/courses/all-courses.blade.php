@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <p class="font-extrabold text-[#F3FB04]">{{ $course->title }}</p>
                         <div class="card-actions justify-end">
-                            <a href="{{ route('course-pack',$course->id) }}" rel="noreferrer noopener"
+                            <a href="{{ route('course-pack',$course->price_asaas_id) }}" rel="noreferrer noopener"
                                 class="px-5 mt-4 lg:mt-0 py-3 font-bold rounded-md border block bg-[#F3FB04] text-gray-900 border-gray-400">Comprar</a>
 
                         </div>
