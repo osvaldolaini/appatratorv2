@@ -25,7 +25,7 @@ class CheckoutCourse extends Component
         }
         $user->createOrGetAsaasCustomer();
 
-        $this->packPivotCourse = PackPivotCourse::where('price_asaas_id',$price_asaas_id)->first();
+        $this->packPivotCourse = PackPivotCourse::where('price_asaas_id', $price_asaas_id)->first();
         // dd($this->packPivotCourse);
         $this->user_name = $user->name . ' (' . $user->email . ')';
 
@@ -47,16 +47,17 @@ class CheckoutCourse extends Component
             'callback' => [
                 "successUrl" => route('lobby'),
                 "autoRedirect" => true
+            ],
+            "split" => [
+                [
+                    "walletId" => "6ff70a66-6f2c-41e5-a54c-08bab078415e",
+                    "percentualValue" => 20
+                ]
             ]
-            // 'split' => [
-            //     "walletId" => "6ff70a66-6f2c-41e5-a54c-08bab078415e",
-            //     "percentualValue" => 20.00
-            // ]
 
         ];
         $payment = $gateway->payment()->create($data);
         dd($payment);
         return redirect()->to($payment['invoiceUrl']);
     }
-
 }
