@@ -29,6 +29,7 @@ class PackPivotCourse extends Model
         return $this->hasMany(Package::class,'pack_pivot_course_id','id');
     }
 
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

@@ -20,11 +20,11 @@ class PackPivotApp extends Model
 
     ];
 
-    public function packageCourse()
-    {
-        return $this->hasMany(Package::class,'pack_pivot_course_id','id');
-    }
-    public function packageApp()
+    // public function packageCourse()
+    // {
+    //     return $this->hasMany(Package::class,'pack_pivot_course_id','id');
+    // }
+    public function package()
     {
         return $this->hasMany(Package::class,'pack_pivot_app_id','id');
     }
