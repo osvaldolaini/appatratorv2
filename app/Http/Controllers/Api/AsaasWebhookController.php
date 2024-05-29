@@ -58,7 +58,7 @@ class AsaasWebhookController extends Controller
 
             // dd($pack->package);
             if ($pack->package) {
-                return response()->json(['message' => $pack->package], 200);
+                // return response()->json(['message' => $pack->package], 200);
                 foreach ($pack->package as $voucher) {
 
                     $rt = Vouchers::create([
