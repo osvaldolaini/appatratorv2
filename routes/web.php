@@ -264,9 +264,9 @@ Route::middleware([
     Route::get('/meus-apps', MyApps::class)->name('user.apps');
     Route::get('/meus-cursos', MyCourses::class)->name('user.courses');
     Route::get('/meus-vouchers', MyVouchers::class)->name('user.vouchers');
-    Route::get('/pacotes-do-curso/{course}', CoursePacks::class)->name('course-pack');
+    Route::get('/pacotes-do-curso/{price_asaas_id}', CoursePacks::class)->name('course-pack');
 
-    Route::get('/checkout-course/{price_asaas_id}', CheckoutCourse::class)->name('checkout-course');
+    Route::get('/checkout-course/{packPivotCourse}', CheckoutCourse::class)->name('checkout-course');
     Route::get('/checkout-app/{packPivotApp}', CheckoutApp::class)->name('checkout-app');
 
     //Apps
