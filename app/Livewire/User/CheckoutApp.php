@@ -10,8 +10,6 @@ use Livewire\Component;
 
 class CheckoutApp extends Component
 {
-    // Define o layout a ser usado
-    protected $layout = 'checkout';
     public $packPivotApp;
     public $email;
     public $user_name;
@@ -48,7 +46,12 @@ class CheckoutApp extends Component
             'callback' => [
                 "successUrl" => route('lobby'),
                 "autoRedirect" => true
+            ],
+            'split' => [
+                "walletId" => "6ff70a66-6f2c-41e5-a54c-08bab078415e",
+                "percentualValue" => 20.00
             ]
+
         ];
         $payment = $gateway->payment()->create($data);
         // dd($payment);

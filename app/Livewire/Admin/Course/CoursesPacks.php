@@ -48,6 +48,7 @@ class CoursesPacks extends Component
     public $description;
     public $see_value;
     public $price_id;
+    public $price_asaas_id;
     public $value;
     public $qtd_parcel;
     public $link_hotmart;
@@ -105,6 +106,7 @@ class CoursesPacks extends Component
             'highlighted'   => $this->highlighted,
             'see_value'     => $this->see_value,
             'price_id'      => $this->price_id,
+            'price_asaas_id'=> 'price_asaas_'.Str::uuid(),
             'value'         => $this->value,
             'qtd_parcel'    => $this->qtd_parcel,
             'link_hotmart'  => $this->link_hotmart,
@@ -150,6 +152,7 @@ class CoursesPacks extends Component
         $this->qtd_parcel       = $packPivotCourse->qtd_parcel;
         $this->link_hotmart     = $packPivotCourse->link_hotmart;
         $this->value_parcel     = $packPivotCourse->value_parcel;
+        $this->price_asaas_id   = $packPivotCourse->price_asaas_id;
         $this->showModalEdit    = true;
     }
     public function update()
@@ -170,6 +173,7 @@ class CoursesPacks extends Component
             'highlighted'   => $this->highlighted,
             'see_value'     => $this->see_value,
             'price_id'      => $this->price_id,
+            'price_asaas_id'=> ($this->price_asaas_id ? $this->price_asaas_id : 'price_asaas_'.Str::uuid()),
             'value'         => $this->value,
             'qtd_parcel'    => $this->qtd_parcel,
             'link_hotmart'  => $this->link_hotmart,
