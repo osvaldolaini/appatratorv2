@@ -54,8 +54,8 @@ class AsaasWebhookController extends Controller
 // dd($pack->package);
         if ($pack->package) {
             foreach ($pack->package as $voucher) {
-                dd($voucher,$user);
-                Vouchers::create([
+
+                $rt = Vouchers::create([
                     'plan_id'       =>$voucher->plan_id,
                     'user_id'       =>$user->id,
                     'package_id'    =>$voucher->id,
@@ -65,6 +65,7 @@ class AsaasWebhookController extends Controller
                     'code'          =>Str::uuid(),
                     'created_by'    =>Auth::user()->name,
                 ]);
+                dd($rt);
             }
         }
 
