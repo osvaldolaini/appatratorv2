@@ -40,7 +40,7 @@ class CheckoutCourse extends Component
             'installmentCount' => $this->packPivotCourse->qtd_parcel,
             'installmentValue' => valueDB($this->packPivotCourse->value_parcel),
             'dueDate' => date('Y-m-d'),
-            'description' => $this->packPivotCourse->course->large_description,
+            'description' => $this->packPivotCourse->course->meta_description,
             'externalReference' => [
                 "pack_id" => $this->packPivotCourse->id,
                 "pack_type" => 'courses',
